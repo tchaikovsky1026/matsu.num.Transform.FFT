@@ -8,6 +8,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.Test.None;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
@@ -26,6 +27,19 @@ import matsu.num.transform.fft.fftmodule.RawDFTExecutor;
 public class GenericIDFTExecutorTest {
 
     public static final Class<?> TEST_CLASS = GenericIDFTExecutor.class;
+
+    public static class 入力サイズの検証 {
+
+        @Test(expected = IllegalArgumentException.class)
+        public void test_入力サイズが0でIAEx() {
+            GenericIDFTExecutor.instance().apply(ComplexNumberArrayDTO.zeroFilledOf(0));
+        }
+
+        @Test(expected = None.class)
+        public void test_入力サイズが1で正常() {
+            GenericIDFTExecutor.instance().apply(ComplexNumberArrayDTO.zeroFilledOf(1));
+        }
+    }
 
     public static class IDFTの実行を検証_サイズ100 {
 

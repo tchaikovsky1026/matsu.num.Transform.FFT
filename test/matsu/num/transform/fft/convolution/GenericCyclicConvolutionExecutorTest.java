@@ -47,4 +47,13 @@ public class GenericCyclicConvolutionExecutorTest {
         }
     }
 
+    public static class toString表示の検証 {
+
+        @Test
+        public void test_toString表示() {
+            System.out.println(TEST_CLASS.getName() + ":");
+            System.out.println(GenericCyclicConvolutionExecutor.instance());
+            System.out.println();
+        }
+    }
 }

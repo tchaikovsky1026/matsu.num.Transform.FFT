@@ -1,10 +1,11 @@
 /**
- * 2023.9.30
+ * 2023.12.5
  */
 package matsu.num.transform.fft.convolution;
 
 import matsu.num.transform.fft.component.ComplexNumber;
 import matsu.num.transform.fft.fftmodule.CyclicConvolutionModule;
+import matsu.num.transform.fft.scaling.AbstractScalingRealBiLinear;
 
 /**
  * 汎用的に使える巡回畳み込みの実行手段を提供する.
@@ -15,15 +16,17 @@ import matsu.num.transform.fft.fftmodule.CyclicConvolutionModule;
  * </p>
  * 
  * <p>
- * {@linkplain RealNumbersCyclicConvolution#apply(double[], double[])} メソッドで追加でスローされる条件は次のとおりである.
+ * {@linkplain RealNumbersCyclicConvolution#apply(double[], double[])}
+ * メソッドで追加でスローされる条件は次のとおりである.
  * </p>
  * 
  * <ul>
- * <li>{@code IllegalArgumentException 入力データの長さが} {@linkplain #MAX_DATA_SIZE} {@code を超える場合} </li>
+ * <li>{@code IllegalArgumentException 入力データの長さが} {@linkplain #MAX_DATA_SIZE}
+ * {@code を超える場合}</li>
  * </ul>
  * 
  * @author Matsuura Y.
- * @version 12.8
+ * @version 17.0
  */
 public final class GenericCyclicConvolutionExecutor {
 
@@ -48,13 +51,21 @@ public final class GenericCyclicConvolutionExecutor {
         return INSTANCE;
     }
 
-    private static final class CyclicConvImpl extends ScalingRealNumbersCyclicConvolution
+    private static final class CyclicConvImpl
+            extends AbstractScalingRealBiLinear
             implements RealNumbersCyclicConvolution {
 
         private static final String CLASS_STRING = "Generic-CyclicConvolution";
 
         private final CyclicConvolutionModule module = CyclicConvolutionModule.instance();
 
+        CyclicConvImpl() {
+            super();
+        }
+
+        /**
+         * @throws IllegalArgumentException サイズが{@link #MAX_DATA_SIZE}を超える場合
+         */
         @Override
         protected double[] applyInner(double[] f, double[] g) {
             int size = f.length;
@@ -72,17 +83,17 @@ public final class GenericCyclicConvolutionExecutor {
         }
 
         /**
-         * このインスタンスの文字列表現を提供する. 
+         * このインスタンスの文字列表現を提供する.
          * 
          * <p>
-         * おそらく次の形式が適切であろうが, 確実ではなく, 
+         * おそらく次の形式が適切であろうが, 確実ではなく,
          * バージョン間の整合性も担保されていない. <br>
-         * {@code [変換名]}
+         * {@code %変換名}
          * </p>
          */
         @Override
         public String toString() {
-            return String.format("[%s]", CLASS_STRING);
+            return CLASS_STRING;
         }
 
     }

@@ -7,7 +7,7 @@ import java.util.Arrays;
 import java.util.Objects;
 
 import matsu.num.commons.ArraysUtil;
-import matsu.num.transform.fft.ComplexNumbersLinearBijectiveTransform;
+import matsu.num.transform.fft.ComplexNumbersLinearTransform;
 import matsu.num.transform.fft.dto.ComplexNumberArrayDTO;
 
 /**
@@ -26,12 +26,14 @@ import matsu.num.transform.fft.dto.ComplexNumberArrayDTO;
  * 
  * @author Matsuura Y.
  * @version 12.7
+ * @deprecated 抽象クラスによるテンプレートメソッドによる代替({@linkplain AbstractScalingComplexLinear})
  */
-public final class ScalingComplexNumberTransform implements ComplexNumbersLinearBijectiveTransform {
+@Deprecated
+public final class ScalingComplexNumberTransform implements ComplexNumbersLinearTransform {
 
-    private final ComplexNumbersLinearBijectiveTransform transform;
+    private final ComplexNumbersLinearTransform transform;
 
-    private ScalingComplexNumberTransform(ComplexNumbersLinearBijectiveTransform transform) {
+    private ScalingComplexNumberTransform(ComplexNumbersLinearTransform transform) {
         this.transform = Objects.requireNonNull(transform);
     }
 
@@ -85,7 +87,7 @@ public final class ScalingComplexNumberTransform implements ComplexNumbersLinear
      * @param transform 元の線形変換
      * @return 計算安定性を高めた線形変換
      */
-    public static ComplexNumbersLinearBijectiveTransform decorate(ComplexNumbersLinearBijectiveTransform transform) {
+    public static ComplexNumbersLinearTransform decorate(ComplexNumbersLinearTransform transform) {
         return new ScalingComplexNumberTransform(transform);
     }
 

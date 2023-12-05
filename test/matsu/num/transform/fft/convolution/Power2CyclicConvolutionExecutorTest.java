@@ -73,4 +73,14 @@ public class Power2CyclicConvolutionExecutorTest {
         }
     }
 
+    public static class toString表示の検証 {
+
+        @Test
+        public void test_toString表示() {
+            System.out.println(TEST_CLASS.getName() + ":");
+            System.out.println(Power2CyclicConvolutionExecutor.instance());
+            System.out.println();
+        }
+    }
+
 }

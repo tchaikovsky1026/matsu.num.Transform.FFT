@@ -1,5 +1,5 @@
 /**
- * 2023.9.29
+ * 2023.12.4
  */
 package matsu.num.transform.fft.dto;
 
@@ -13,7 +13,7 @@ package matsu.num.transform.fft.dto;
  * </p>
  * 
  * @author Matsuura Y.
- * @version 12.6
+ * @version 17.0
  */
 public final class ComplexNumberArrayDTO {
 
@@ -26,7 +26,7 @@ public final class ComplexNumberArrayDTO {
      * この複素数列の実部を表す配列.
      */
     public final double[] realPart;
-    
+
     /**
      * この複素数列の虚部を表す配列.
      */
@@ -36,12 +36,26 @@ public final class ComplexNumberArrayDTO {
      * @throws IllegalArgumentException sizeが0以上でない場合
      */
     private ComplexNumberArrayDTO(int size) {
-        if(size < 0) {
+        if (size < 0) {
             throw new IllegalArgumentException("sizeが0以上でない");
         }
         this.size = size;
         this.realPart = new double[size];
         this.imaginaryPart = new double[size];
+    }
+
+    /**
+     * このオブジェクトの文字列表現を提供する.
+     * 
+     * <p>
+     * 明確に定まっておらず, バージョン間の互換性も保証されていない.
+     * </p>
+     * 
+     * @return 文字列表現
+     */
+    @Override
+    public String toString() {
+        return String.format("ComplexNumbers(%s)", this.size);
     }
 
     /**

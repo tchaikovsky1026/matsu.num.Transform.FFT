@@ -8,6 +8,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.Test.None;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
@@ -28,6 +29,7 @@ public class GenericDCT3ExecutorTest {
             GenericDCT3Executor.instance().apply(new double[0]);
         }
 
+        @Test(expected = None.class)
         public void test_入力サイズが1で正常() {
             GenericDCT3Executor.instance().apply(new double[1]);
         }

@@ -1,15 +1,15 @@
 /**
- * 2023.9.22
+ * 2023.12.5
  */
 package matsu.num.transform.fft;
 
 /**
- * 全単射の実数列の線形変換を扱う. <br>
+ * 実数列の線形変換を扱う. <br>
  * 例えば離散cosine変換や離散sine変換である.
  * 
  * <p>
  * {@linkplain #apply(double[])} メソッドにより変換を実行する. <br>
- * このとき, 出力の長さは入力の長さと必ず同一値になる. <br>
+ * このとき, 出力の長さは入力の長さと等しい. <br>
  * 実数列に無限大や非数 (NaN) を含む場合, 戻り値は全て {@code Double.NaN} となる.
  * </p>
  * 
@@ -24,8 +24,8 @@ package matsu.num.transform.fft;
  * </p>
  * 
  * <ul>
- * <li>例: 入力データの長さが大きすぎて, アルゴリズムが対応できない. </li>
- * <li>例: 入力データの長さは2の累乗でなければならない. </li>
+ * <li>例: 入力データの長さが大きすぎて, アルゴリズムが対応できない.</li>
+ * <li>例: 入力データの長さは2の累乗でなければならない.</li>
  * </ul>
  * 
  * <p>
@@ -34,20 +34,18 @@ package matsu.num.transform.fft;
  * </p>
  * 
  * @author Matsuura Y.
- * @version 12.7
+ * @version 17.0
  */
-@SuppressWarnings("removal")
-public interface RealNumbersLinearBijectiveTransform extends RealNumbersBijectiveTransform {
+public interface RealNumbersLinearTransform {
 
     /**
      * 与えた実数列に対し, 線形変換を実行する.
      * 
      * @param data 実数列
-     * @return 変換後の実数列(入力と同じ長さである)
-     * @throws IllegalArgumentException 引数の長さが0の場合, サブタイプで記載される条件の場合
+     * @return 変換後の実数列(入力とサイズが等しい)
+     * @throws IllegalArgumentException 引数の長さが0の場合, サブタイプで記載される条件に違反する場合
      * @throws NullPointerException 引数にnullが含まれる場合
      */
-    @Override
     public abstract double[] apply(double[] data);
 
 }

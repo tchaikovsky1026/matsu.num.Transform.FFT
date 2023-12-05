@@ -1,23 +1,22 @@
 /**
- * 2023.9.29
+ * 2023.12.4
  */
 package matsu.num.transform.fft.dctdst;
 
-import matsu.num.transform.fft.RealNumbersLinearBijectiveTransform;
 import matsu.num.transform.fft.component.ComplexNumber;
 import matsu.num.transform.fft.component.FourierBasis;
 import matsu.num.transform.fft.component.FourierBasisComputer;
 import matsu.num.transform.fft.component.FourierType;
 import matsu.num.transform.fft.fftmodule.GenericInnerFFTExecutor;
 import matsu.num.transform.fft.fftmodule.InnerDFTExecutor;
-import matsu.num.transform.fft.scaling.ScalingRealNumberTransform;
+import matsu.num.transform.fft.scaling.AbstractScalingRealLinear;
 
 /**
- * 汎用的に使えるDST-3の実行手段を提供する. 
+ * 汎用的に使えるDST-3の実行手段を提供する.
  * 
  * <p>
- * このクラスが提供する {@linkplain DST3Executor} は, 
- * 任意のデータサイズのDST-3に対応する. 
+ * このクラスが提供する {@linkplain DST3Executor} は,
+ * 任意のデータサイズのDST-3に対応する.
  * </p>
  * 
  * <p>
@@ -25,11 +24,12 @@ import matsu.num.transform.fft.scaling.ScalingRealNumberTransform;
  * </p>
  * 
  * <ul>
- * <li>{@code IllegalArgumentException 入力データの長さが} {@linkplain #MAX_DATA_SIZE} {@code を超える場合} </li>
+ * <li>{@code IllegalArgumentException 入力データの長さが} {@linkplain #MAX_DATA_SIZE}
+ * {@code を超える場合}</li>
  * </ul>
  * 
  * @author Matsuura Y.
- * @version 12.7
+ * @version 17.0
  */
 public final class GenericDST3Executor {
 
@@ -46,22 +46,7 @@ public final class GenericDST3Executor {
     }
 
     /**
-     * DST-3の実行インスタンスを返す. 
-     * 
-     * @return DST-3実行インスタンス
-     * @deprecated バージョン 12.4 までは新しいインスタンスを返していたが,
-     * 現在のバージョンはnewしていないかもしれない.
-     * {@code new***}というメソッド名は実体に合っていない可能性があるので非推奨.
-     * バージョン 13 以降で削除
-     * @see #instance()
-     */
-    @Deprecated(forRemoval = true)
-    public static DST3Executor newInstance() {
-        return INSTANCE;
-    }
-
-    /**
-     * DST-3の実行インスタンスを返す. 
+     * DST-3の実行インスタンスを返す.
      * 
      * @return DST-3実行インスタンス
      */
@@ -72,103 +57,83 @@ public final class GenericDST3Executor {
     /**
      * Generic DST-3の実装.
      */
-    private static final class GenericDST3ExecutorImpl implements DST3Executor {
+    private static final class GenericDST3ExecutorImpl
+            extends AbstractScalingRealLinear implements DST3Executor {
 
         private static final String CLASS_STRING = "Generic-DST-3";
 
-        private final RealNumbersLinearBijectiveTransform dst3 =
-                ScalingRealNumberTransform.decorate(new NonScalingDST3());
+        private final InnerDFTExecutor fftExecutor = GenericInnerFFTExecutor.instance();
 
         /**
          * Generic DST-3を生成する.
          */
         GenericDST3ExecutorImpl() {
+            super();
         }
 
         /**
-         * @throws IllegalArgumentException サイズが0の場合, 
-         * サイズが{@link #MAX_DATA_SIZE}を超える場合
-         * @throws NullPointerException 引数にnullが含まれる場合
+         * @throws IllegalArgumentException サイズが{@link #MAX_DATA_SIZE}を超える場合
          */
         @Override
-        public double[] apply(double[] data) {
-
-            if (data.length == 1) {
-                throw new IllegalArgumentException("データサイズが0である");
-            }
-            if (data.length > MAX_DATA_SIZE) {
+        protected double[] applyInner(double[] data) {
+            int size = data.length;
+            if (size > MAX_DATA_SIZE) {
                 throw new IllegalArgumentException("サイズが大きすぎる");
             }
 
-            return this.dst3.apply(data);
+            /*
+             * DST-3は2N個の実数データ点a,
+             * a[0] = 0;
+             * a[j + 1] = x[j]exp[-i * 2pi * (j + 1) / (4N)] (j=0,...,N-1)
+             * a[2N - 1 - j] = x[j]exp[-i * 2pi * (2N - 1 - j) / (4N)]
+             * (j=0,...,N-2)
+             * に対してFFTを実行し,
+             * X[k] = (i/2) * A[k]
+             * とすればよい.
+             */
+
+            int fftSize = size * 2;
+            FourierBasisComputer dftBasisComputer =
+                    FourierBasisComputer.covering(2 * fftSize, FourierType.DFT);
+
+            /* FFT用のデータ作成 */
+            //exp[-i*2pi*j/(4N)]型の計算をするため, 4NサイズのDFT基底を得る
+            FourierBasis dftBasis_4N = dftBasisComputer.getBasis(2 * fftSize);
+            //fftSizeの上限が　FFTExecutor.MAX_DATA_SIZE　になっている
+            ComplexNumber[] a = new ComplexNumber[fftSize];
+            a[0] = ComplexNumber.ZERO;
+            for (int j = 0; j < size; j++) {
+                a[j + 1] = dftBasis_4N.valueAt(j + 1).timesReal(data[j]);
+            }
+            for (int j = 0; j < size - 1; j++) {
+                a[fftSize - 1 - j] = dftBasis_4N.valueAt(fftSize - 1 - j).timesReal(data[j]);
+            }
+
+            /* FFT実行 */
+            //前処理/後処理のための係数を得るために必要.
+            ComplexNumber[] A = this.fftExecutor.compute(a, dftBasisComputer);
+
+            /* 結果をDST-3に変換 */
+            double[] result = new double[size];
+            for (int k = 0; k < size; k++) {
+                result[k] = -0.5 * A[k].imaginary();
+            }
+
+            return result;
         }
 
         /**
-         * このインスタンスの文字列表現を提供する. 
+         * このインスタンスの文字列表現を提供する.
          * 
          * <p>
-         * おそらく次の形式が適切であろうが, 確実ではなく, 
+         * おそらく次の形式が適切であろうが, 確実ではなく,
          * バージョン間の整合性も担保されていない. <br>
-         * {@code [変換名]}
+         * {@code %変換名}
          * </p>
          */
         @Override
         public String toString() {
-            return String.format("[%s]", CLASS_STRING);
-        }
-
-        /**
-         * スケーリング, 事前条件チェック, 防御的コピーのないのDST3.
-         */
-        private static final class NonScalingDST3 implements DST3Executor {
-
-            private final InnerDFTExecutor fftExecutor = GenericInnerFFTExecutor.instance();
-
-            NonScalingDST3() {
-            }
-
-            @Override
-            public double[] apply(double[] data) {
-                int size = data.length;
-
-                int fftSize = size * 2;
-                FourierBasisComputer dftBasisComputer =
-                        FourierBasisComputer.covering(2 * fftSize, FourierType.DFT);
-
-                /* DST-3は2N個の実数データ点a,
-                 * a[0] = 0; 
-                 * a[j + 1] = x[j]exp[-i * 2pi * (j + 1) / (4N)] (j=0,...,N-1)
-                 * a[2N - 1 - j] = x[j]exp[-i * 2pi * (2N - 1 - j) / (4N)] (j=0,...,N-2)
-                 * に対してFFTを実行し, 
-                 * X[k] = (i/2) * A[k]
-                 * とすればよい.
-                 * */
-
-                /* FFT用のデータ作成 */
-                //exp[-i*2pi*j/(4N)]型の計算をするため, 4NサイズのDFT基底を得る
-                FourierBasis dftBasis_4N = dftBasisComputer.getBasis(2 * fftSize);
-                //fftSizeの上限が　FFTExecutor.MAX_DATA_SIZE　になっている
-                ComplexNumber[] a = new ComplexNumber[fftSize];
-                a[0] = ComplexNumber.ZERO;
-                for (int j = 0; j < size; j++) {
-                    a[j + 1] = dftBasis_4N.valueAt(j + 1).timesReal(data[j]);
-                }
-                for (int j = 0; j < size - 1; j++) {
-                    a[fftSize - 1 - j] = dftBasis_4N.valueAt(fftSize - 1 - j).timesReal(data[j]);
-                }
-
-                /* FFT実行 */
-                //前処理/後処理のための係数を得るために必要.
-                ComplexNumber[] A = this.fftExecutor.compute(a, dftBasisComputer);
-
-                /* 結果をDST-3に変換 */
-                double[] result = new double[size];
-                for (int k = 0; k < size; k++) {
-                    result[k] = -0.5 * A[k].imaginary();
-                }
-
-                return result;
-            }
+            return CLASS_STRING;
         }
     }
 }

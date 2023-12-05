@@ -7,7 +7,7 @@ import java.util.Arrays;
 import java.util.Objects;
 
 import matsu.num.commons.ArraysUtil;
-import matsu.num.transform.fft.RealNumbersLinearBijectiveTransform;
+import matsu.num.transform.fft.RealNumbersLinearTransform;
 
 /**
  * 引数をスケーリングすることで計算安定性を高めるデコレータ.
@@ -25,12 +25,14 @@ import matsu.num.transform.fft.RealNumbersLinearBijectiveTransform;
  * 
  * @author Matsuura Y.
  * @version 12.7
+ * @deprecated 抽象クラスによるテンプレートメソッドによる代替({@linkplain AbstractScalingRealLinear})
  */
-public final class ScalingRealNumberTransform implements RealNumbersLinearBijectiveTransform {
+@Deprecated
+public final class ScalingRealNumberTransform implements RealNumbersLinearTransform {
 
-    private final RealNumbersLinearBijectiveTransform transform;
+    private final RealNumbersLinearTransform transform;
 
-    private ScalingRealNumberTransform(RealNumbersLinearBijectiveTransform transform) {
+    private ScalingRealNumberTransform(RealNumbersLinearTransform transform) {
         this.transform = Objects.requireNonNull(transform);
     }
 
@@ -71,7 +73,7 @@ public final class ScalingRealNumberTransform implements RealNumbersLinearBiject
      * @param transform 元の線形変換
      * @return 計算安定性を高めた線形変換
      */
-    public static RealNumbersLinearBijectiveTransform decorate(RealNumbersLinearBijectiveTransform transform) {
+    public static RealNumbersLinearTransform decorate(RealNumbersLinearTransform transform) {
         return new ScalingRealNumberTransform(transform);
     }
 

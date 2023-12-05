@@ -8,11 +8,12 @@ import java.util.concurrent.ThreadLocalRandom;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.Test.None;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
 /**
- * {@link GenericDCT1Executor}クラスのテスト. 
+ * {@link GenericDCT1Executor}クラスのテスト.
  * 
  * @author Matsuura Y.
  */
@@ -33,6 +34,7 @@ public class GenericDCT1ExecutorTest {
             GenericDCT1Executor.instance().apply(new double[1]);
         }
 
+        @Test(expected = None.class)
         public void test_入力サイズが2で正常() {
             GenericDCT1Executor.instance().apply(new double[2]);
         }
