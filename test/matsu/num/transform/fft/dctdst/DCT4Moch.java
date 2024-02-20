@@ -1,20 +1,31 @@
 /**
- * 2023.9.25
+ * 2024.2.18
  */
 package matsu.num.transform.fft.dctdst;
 
-import matsu.num.commons.Trigonometry;
+import org.junit.Ignore;
+
+import matsu.num.transform.fft.lib.Trigonometry;
+import matsu.num.transform.fft.service.CommonLib;
+import matsu.num.transform.fft.skeletal.LinearByScalingStability;
 
 /**
  * 実用的でない(低速な)DCT-4.
  * 
  * @author Matsuura Y.
- * @version 12.3
+ * @version 18.0
  */
-public final class DCT4Moch implements DCT4Executor {
+@Ignore
+public final class DCT4Moch extends LinearByScalingStability implements DCT4Executor {
+
+    private static final Trigonometry TRIGONOMETRY = CommonLib.defaultImplemented().trigonometry();
+
+    public DCT4Moch() {
+        super(MAX_DATA_SIZE);
+    }
 
     @Override
-    public double[] apply(double[] data) {
+    public double[] applyInner(double[] data) {
         return new DCT4Calc(data).calculate();
     }
 
@@ -43,7 +54,7 @@ public final class DCT4Moch implements DCT4Executor {
 
                 int j2p1_k2p1_mod_8N = 2 * k + 1;
                 for (int j = 0; j < this.entireLength; j++) {
-                    double cos = Trigonometry.cospi(2d * j2p1_k2p1_mod_8N / Mod);
+                    double cos = TRIGONOMETRY.cospi(2d * j2p1_k2p1_mod_8N / Mod);
                     X_k += data[j] * cos;
 
                     j2p1_k2p1_mod_8N += 4 * k + 2;

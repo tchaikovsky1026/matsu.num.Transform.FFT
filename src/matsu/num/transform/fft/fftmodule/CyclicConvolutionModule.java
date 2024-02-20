@@ -1,39 +1,38 @@
 /**
- * 2023.9.30
+ * 2024.2.15
  */
 package matsu.num.transform.fft.fftmodule;
 
 import java.util.Arrays;
-import java.util.Objects;
 
 import matsu.num.transform.fft.component.ComplexNumber;
+import matsu.num.transform.fft.component.FourierBasisComputer;
 import matsu.num.transform.fft.number.Power2Util;
 
 /**
  * 複素数列の巡回畳み込みを扱う.
  * 
  * @author Matsuura Y.
- * @version 12.8
+ * @version 18.0
  */
 public final class CyclicConvolutionModule {
-
-    private static final CyclicConvolutionModule INSTANCE = new CyclicConvolutionModule();
 
     /**
      * 扱うことができるデータサイズの最大値: 2<sup>28</sup>
      */
-    public static final int MAX_SEQUENCE_SIZE;
+    public static final int MAX_SEQUENCE_SIZE = 0x1000_0000;
 
-    static {
-        MAX_SEQUENCE_SIZE = 0x1000_0000;
-    }
+    private final Power2CyclicConvolutionModule power2CyclicConv;
 
-    private final Power2CyclicConvolutionModule power2CyclicConv = Power2CyclicConvolutionModule.instance();
-
-    private CyclicConvolutionModule() {
-        if (Objects.nonNull(INSTANCE)) {
-            throw new AssertionError();
-        }
+    /**
+     * このクラスの機能を実行するインスタンスを返す.
+     * 
+     * @param computerSupplier Fourier基底コンピュータのサプライヤ
+     * @throws NullPointerException 引数にnullが含まれる場合
+     */
+    public CyclicConvolutionModule(FourierBasisComputer.Supplier computerSupplier) {
+        super();
+        this.power2CyclicConv = new Power2CyclicConvolutionModule(computerSupplier);
     }
 
     /**
@@ -48,15 +47,6 @@ public final class CyclicConvolutionModule {
     public ComplexNumber[] compute(ComplexNumber[] f, ComplexNumber[] g) {
 
         return new CyclicConvHelper(f, g).compute();
-    }
-
-    /**
-     * このクラスの機能を実行するインスタンスを返す.
-     * 
-     * @return このクラスの機能を実行するインスタンス
-     */
-    public static CyclicConvolutionModule instance() {
-        return INSTANCE;
     }
 
     private final class CyclicConvHelper {

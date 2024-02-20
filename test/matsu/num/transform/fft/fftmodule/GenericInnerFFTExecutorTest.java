@@ -1,22 +1,24 @@
 package matsu.num.transform.fft.fftmodule;
 
+import static matsu.num.transform.fft.NumberArrayDataCreator.*;
+import static matsu.num.transform.fft.lib.privatelib.ArraysUtilForTestModule.*;
 import static org.hamcrest.MatcherAssert.*;
 import static org.hamcrest.Matchers.*;
 
-import java.util.Random;
-import java.util.concurrent.ThreadLocalRandom;
-
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.BeforeClass;
 import org.junit.experimental.runners.Enclosed;
+import org.junit.experimental.theories.DataPoint;
+import org.junit.experimental.theories.Theories;
+import org.junit.experimental.theories.Theory;
 import org.junit.runner.RunWith;
 
 import matsu.num.transform.fft.component.ComplexNumber;
 import matsu.num.transform.fft.component.FourierBasisComputer;
+import matsu.num.transform.fft.component.FourierBasisComputerSupplierDefaultHolder;
 import matsu.num.transform.fft.component.FourierType;
 
 /**
- * {@link GenericInnerFFTExecutor}クラスのテスト. 
+ * {@link GenericInnerFFTExecutor}クラスのテスト.
  * 
  * @author Matsuura Y.
  */
@@ -25,117 +27,57 @@ public class GenericInnerFFTExecutorTest {
 
     public static final Class<?> TEST_CLASS = GenericInnerFFTExecutor.class;
 
-    public static class FFT検証_サイズ8 {
+    private static final FourierBasisComputer.Supplier COMPUTER_SUPPLIER =
+            FourierBasisComputerSupplierDefaultHolder.INSTANCE;
 
-        private final int size = 8;
+    private static final GenericInnerFFTExecutor GENERIC_INNER_FFT_EXECUTOR =
+            new GenericInnerFFTExecutor(COMPUTER_SUPPLIER);
+    private static final RawInnerDFTExecutor RAW_DFT_EXECUTOR = new RawInnerDFTExecutor();
 
-        private ComplexNumber[] data;
+    @RunWith(Theories.class)
+    public static class FFT検証 {
 
-        @Before
-        public void before_複素数のデータを作成() {
-            double[] real = new double[size];
-            double[] imaginary = new double[size];
+        @DataPoint
+        public static ComplexNumber[] data_size_8;
+        @DataPoint
+        public static ComplexNumber[] data_size_100;
+        @DataPoint
+        public static ComplexNumber[] data_size_2_41_43;
 
-            Random random = ThreadLocalRandom.current();
-
-            for (int i = 0; i < size; i++) {
-                real[i] = random.nextDouble();
-                imaginary[i] = random.nextDouble();
-            }
-
-            data = new ComplexNumber[real.length];
-            for (int j = 0; j < real.length; j++) {
-                data[j] = ComplexNumber.of(real[j], imaginary[j]);
-            }
+        @BeforeClass
+        public static void before_data_size_8_ノコギリ波のデータを作成() {
+            data_size_8 = createComplexArrayData(8);
         }
 
-        @Test
-        public void test_FFTの実行() {
-            FourierBasisComputer basisComputer = FourierBasisComputer.covering(data.length, FourierType.DFT);
-            ComplexNumber[] result = GenericInnerFFTExecutor.instance().compute(data, basisComputer);
-            ComplexNumber[] expected = RawDFTExecutor.instance().compute(data, basisComputer);
-            assertThat(result.length, is(expected.length));
-
-            for (int i = 0; i < result.length; i++) {
-                assertThat(result[i].real(), is(closeTo(expected[i].real(), 1E-12 * size)));
-                assertThat(result[i].imaginary(), is(closeTo(expected[i].imaginary(), 1E-12 * size)));
-            }
-        }
-    }
-
-    public static class FFT検証_サイズ100 {
-
-        private final int size = 100;
-
-        private ComplexNumber[] data;
-
-        @Before
-        public void before_複素数のデータを作成() {
-            double[] real = new double[size];
-            double[] imaginary = new double[size];
-
-            Random random = ThreadLocalRandom.current();
-
-            for (int i = 0; i < size; i++) {
-                real[i] = random.nextDouble();
-                imaginary[i] = random.nextDouble();
-            }
-
-            data = new ComplexNumber[real.length];
-            for (int j = 0; j < real.length; j++) {
-                data[j] = ComplexNumber.of(real[j], imaginary[j]);
-            }
+        @BeforeClass
+        public static void before_data_size_100_三角波のデータを作成() {
+            data_size_100 = createComplexArrayData(100);
         }
 
-        @Test
-        public void test_FFTの実行() {
-            FourierBasisComputer basisComputer = FourierBasisComputer.covering(data.length, FourierType.DFT);
-            ComplexNumber[] result = GenericInnerFFTExecutor.instance().compute(data, basisComputer);
-            ComplexNumber[] expected = RawDFTExecutor.instance().compute(data, basisComputer);
-            assertThat(result.length, is(expected.length));
-
-            for (int i = 0; i < result.length; i++) {
-                assertThat(result[i].real(), is(closeTo(expected[i].real(), 1E-12 * size)));
-                assertThat(result[i].imaginary(), is(closeTo(expected[i].imaginary(), 1E-12 * size)));
-            }
-        }
-    }
-
-    public static class FFT検証_サイズ2_41_43 {
-
-        private final int size = 2 * 41 * 43;
-
-        private ComplexNumber[] data;
-
-        @Before
-        public void before_複素数のデータを作成() {
-            double[] real = new double[size];
-            double[] imaginary = new double[size];
-
-            Random random = ThreadLocalRandom.current();
-
-            for (int i = 0; i < size; i++) {
-                real[i] = random.nextDouble();
-                imaginary[i] = random.nextDouble();
-            }
-
-            data = new ComplexNumber[real.length];
-            for (int j = 0; j < real.length; j++) {
-                data[j] = ComplexNumber.of(real[j], imaginary[j]);
-            }
+        @BeforeClass
+        public static void before_data_size_2_41_43_三角波のデータを作成() {
+            data_size_2_41_43 = createComplexArrayData(2 * 41 * 43);
         }
 
-        @Test
-        public void test_FFTの実行() {
-            FourierBasisComputer basisComputer = FourierBasisComputer.covering(data.length, FourierType.DFT);
-            ComplexNumber[] result = GenericInnerFFTExecutor.instance().compute(data, basisComputer);
-            ComplexNumber[] expected = RawDFTExecutor.instance().compute(data, basisComputer);
-            assertThat(result.length, is(expected.length));
+        @Theory
+        public void test_FFTの実行(ComplexNumber[] data) {
+            FourierBasisComputer basisComputer = COMPUTER_SUPPLIER.covering(data.length, FourierType.DFT);
+            double[][] resultArray = ComplexNumber.separateToArrays(
+                    GENERIC_INNER_FFT_EXECUTOR.compute(data, basisComputer));
+            double[][] expectedArray = ComplexNumber.separateToArrays(
+                    RAW_DFT_EXECUTOR.compute(data, basisComputer));
 
-            for (int i = 0; i < result.length; i++) {
-                assertThat(result[i].real(), is(closeTo(expected[i].real(), 1E-12 * size)));
-                assertThat(result[i].imaginary(), is(closeTo(expected[i].imaginary(), 1E-12 * size)));
-            }
+            double[] resReal = resultArray[0].clone();
+            subtract(resReal, expectedArray[0]);
+            double[] resImag = resultArray[1].clone();
+            subtract(resImag, expectedArray[1]);
+
+            double norm = Math.max(
+                    normMax(expectedArray[0]), normMax(expectedArray[1]));
+            double normRes = Math.max(
+                    normMax(resReal), normMax(resImag));
+
+            assertThat(normRes, is(lessThan(1E-12 * norm + 1E-100)));
         }
     }
 }

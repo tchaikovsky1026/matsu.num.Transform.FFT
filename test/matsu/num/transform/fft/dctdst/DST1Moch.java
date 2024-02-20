@@ -1,24 +1,31 @@
 /**
- * 2023.9.11
+ * 2024.2.18
  */
 package matsu.num.transform.fft.dctdst;
 
-import matsu.num.commons.Trigonometry;
+import org.junit.Ignore;
+
+import matsu.num.transform.fft.lib.Trigonometry;
+import matsu.num.transform.fft.service.CommonLib;
+import matsu.num.transform.fft.skeletal.LinearByScalingStability;
 
 /**
  * 実用的でない(低速な)DST-1.
  * 
  * @author Matsuura Y.
- * @version 12.0
+ * @version 18.0
  */
-public final class DST1Moch implements DST1Executor {
+@Ignore
+public final class DST1Moch extends LinearByScalingStability implements DST1Executor {
+
+    private static final Trigonometry TRIGONOMETRY = CommonLib.defaultImplemented().trigonometry();
 
     public DST1Moch() {
-
+        super(MAX_DATA_SIZE);
     }
 
     @Override
-    public double[] apply(double[] data) {
+    public double[] applyInner(double[] data) {
         return new DST1Calc(data).calculate();
     }
 
@@ -43,7 +50,7 @@ public final class DST1Moch implements DST1Executor {
 
                 int j1_k1_mod_2Np2 = k + 1;
                 for (int j = 0; j < this.entireLength; j++) {
-                    double sin = Trigonometry.sinpi(2d * j1_k1_mod_2Np2 / Mod);
+                    double sin = TRIGONOMETRY.sinpi(2d * j1_k1_mod_2Np2 / Mod);
                     X_k += data[j] * sin;
 
                     j1_k1_mod_2Np2 += k + 1;

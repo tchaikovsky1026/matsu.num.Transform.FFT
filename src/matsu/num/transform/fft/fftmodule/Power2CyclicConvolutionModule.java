@@ -1,5 +1,5 @@
 /**
- * 2023.9.30
+ * 2024.2.19
  */
 package matsu.num.transform.fft.fftmodule;
 
@@ -14,27 +14,22 @@ import matsu.num.transform.fft.number.Power2Util;
  * 2の累乗のデータサイズに特化した, 複素数列の巡回畳み込みを扱う.
  * 
  * @author Matsuura Y.
- * @version 12.8
+ * @version 18.0
  */
 public final class Power2CyclicConvolutionModule {
-
-    private static final Power2CyclicConvolutionModule INSTANCE = new Power2CyclicConvolutionModule();
 
     /**
      * 扱うことができるデータサイズの最大値: 2<sup>30</sup>
      */
-    public static final int MAX_SEQUENCE_SIZE;
+    public static final int MAX_SEQUENCE_SIZE = 0x4000_0000;
 
-    static {
-        MAX_SEQUENCE_SIZE = 0x4000_0000;
-    }
+    private final InnerDFTExecutor power2FFT;
+    private final FourierBasisComputer.Supplier computerSupplier;
 
-    private final InnerDFTExecutor power2FFT = Power2FFTExecutor.instance();
-
-    private Power2CyclicConvolutionModule() {
-        if (Objects.nonNull(INSTANCE)) {
-            throw new AssertionError();
-        }
+    public Power2CyclicConvolutionModule(FourierBasisComputer.Supplier computerSupplier) {
+        super();
+        this.computerSupplier = Objects.requireNonNull(computerSupplier);
+        this.power2FFT = new Power2InnerFFTExecutor();
     }
 
     /**
@@ -47,16 +42,7 @@ public final class Power2CyclicConvolutionModule {
      * @throws NullPointerException 引数にnullが含まれる場合
      */
     public ComplexNumber[] compute(ComplexNumber[] f, ComplexNumber[] g) {
-        return new CyclicConvHelper(f, g).compute();
-    }
-
-    /**
-     * このクラスの機能を実行するインスタンスを返す.
-     * 
-     * @return このクラスの機能を実行するインスタンス
-     */
-    public static Power2CyclicConvolutionModule instance() {
-        return INSTANCE;
+        return new CyclicConvHelper(f, g, this.computerSupplier).compute();
     }
 
     private final class CyclicConvHelper {
@@ -75,11 +61,12 @@ public final class Power2CyclicConvolutionModule {
          * 
          * @param f f
          * @param g g
-         * @param dftComputer DFTの生成器キャッシュ
-         * @throws IllegalArgumentException 引数の長さが一致しない場合, 長さが2の累乗でない場合, 長さが大きすぎる場合
+         * @param computerSupplier Fourier基底コンピュータのサプライヤ
+         * @throws IllegalArgumentException 引数の長さが一致しない場合, 長さが2の累乗でない場合,
+         *             長さが大きすぎる場合
          * @throws NullPointerException 引数にnullが含まれる場合
          */
-        private CyclicConvHelper(ComplexNumber[] f, ComplexNumber[] g) {
+        CyclicConvHelper(ComplexNumber[] f, ComplexNumber[] g, FourierBasisComputer.Supplier computerSupplier) {
             if (f.length != g.length) {
                 throw new IllegalArgumentException("長さが一致しない");
             }
@@ -95,8 +82,8 @@ public final class Power2CyclicConvolutionModule {
             this.f = f;
             this.g = g;
 
-            this.dftComputer = FourierBasisComputer.covering(this.length, FourierType.DFT);
-            this.idftComputer = FourierBasisComputer.covering(this.length, FourierType.IDFT);
+            this.dftComputer = computerSupplier.covering(this.length, FourierType.DFT);
+            this.idftComputer = computerSupplier.covering(this.length, FourierType.IDFT);
 
         }
 

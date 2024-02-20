@@ -1,5 +1,5 @@
 /**
- * 2023.9.28
+ * 2024.2.15
  */
 package matsu.num.transform.fft.fftmodule;
 
@@ -7,12 +7,13 @@ import matsu.num.transform.fft.component.ComplexNumber;
 import matsu.num.transform.fft.component.FourierBasisComputer;
 
 /**
- * 内部的なDFT/IDFTの実行を扱う.
+ * 内部的なDFT/IDFTの実行を扱う. <br>
+ * パッケージプライベート予定.
  * 
  * <p>
- * {@linkplain #compute(ComplexNumber[], FourierBasisComputer)}メソッドでは,
+ * {@link #compute(ComplexNumber[], FourierBasisComputer)}メソッドでは,
  * 対応不可なdataを与えられた場合には,
- * {@linkplain IllegalArgumentException}のサブクラスを追加でスローしても良い. 
+ * {@link IllegalArgumentException}のサブクラスを追加でスローしても良い. 
  * </p>
  * 
  * <p>
@@ -30,9 +31,9 @@ import matsu.num.transform.fft.component.FourierBasisComputer;
  * </p>
  * 
  * @author Matsuura Y.
- * @version 12.5
+ * @version 18.0
  */
-public interface InnerDFTExecutor {
+interface InnerDFTExecutor {
 
     /**
      * 与えられたデータに対してDFT/IDFTをcomputeする.

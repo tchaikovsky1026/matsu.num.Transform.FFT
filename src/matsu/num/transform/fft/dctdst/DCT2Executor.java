@@ -1,9 +1,10 @@
 /**
- * 2023.12.4
+ * 2024.2.17
  */
 package matsu.num.transform.fft.dctdst;
 
-import matsu.num.transform.fft.RealNumbersLinearTransform;
+import matsu.num.transform.fft.LinearTransform;
+import matsu.num.transform.fft.validation.StructureAcceptance;
 
 /**
  * タイプ2の離散cosine変換 (DCT-2) を扱う.
@@ -17,8 +18,16 @@ import matsu.num.transform.fft.RealNumbersLinearTransform;
  * </p>
  * 
  * <p>
- * 細かい規約はスーパーインターフェースに従う.
+ * このインターフェースにおいて,
+ * {@link #accepts(double[])}
+ * のreject条件は,
+ * {@link LinearTransform}
+ * に対して次が追加される.
  * </p>
+ * 
+ * <ul>
+ * <li>データサイズが {@link #MAX_DATA_SIZE} を超過する場合</li>
+ * </ul>
  * 
  * <p>
  * <u><i>技術的補足</i></u>
@@ -33,7 +42,7 @@ import matsu.num.transform.fft.RealNumbersLinearTransform;
  * <i>x</i>'<sub><i>j</i></sub> = (<i>N</i> / 2) <i>x</i><sub><i>j</i></sub>
  * <br>
  * が成立する.
- * (see {@linkplain DCT3Executor})
+ * (see {@link DCT3Executor})
  * </p>
  * 
  * <p>
@@ -65,19 +74,27 @@ import matsu.num.transform.fft.RealNumbersLinearTransform;
  * が成立する.
  * </p>
  * 
- * 
  * @author Matsuura Y.
- * @version 17.0
+ * @version 18.0
  */
-public interface DCT2Executor extends RealNumbersLinearTransform {
+public interface DCT2Executor extends LinearTransform {
 
     /**
-     * {@inheritDoc }
+     * 扱うことができるデータサイズの最大値: 2<sup>27</sup>
+     */
+    public static final int MAX_DATA_SIZE = 0x1000_0000 / 2;
+
+    /**
+     * {@inheritDoc}
      * 
      * <p>
-     * スローされる例外は, スーパーインターフェースに従う.
+     * {@link DCT2Executor} ではデータサイズが
+     * {@link #MAX_DATA_SIZE}
+     * を超過する場合にrejectされる.
      * </p>
+     * 
+     * @throws NullPointerException {@inheritDoc}
      */
     @Override
-    public abstract double[] apply(double[] data);
+    public abstract StructureAcceptance accepts(double[] data);
 }

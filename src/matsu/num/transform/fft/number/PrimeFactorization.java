@@ -274,8 +274,8 @@ public final class PrimeFactorization {
      * 
      * <p>
      * {@link PrimeFactorization#separatedLowest}, {@link PrimeFactorization#separatedHighest}によって, <br>
-     * {@linkplain Separated}が2の累乗で爆発するリスクがあるので, <br>
-     * それを管理して無駄な{@linkplain PrimeFactorization}を生成しないための仕組み.
+     * {@link Separated}が2の累乗で爆発するリスクがあるので, <br>
+     * それを管理して無駄な{@link PrimeFactorization}を生成しないための仕組み.
      * </p>
      */
     private static final class Family {

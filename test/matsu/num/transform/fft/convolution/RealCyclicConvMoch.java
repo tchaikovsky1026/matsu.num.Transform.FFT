@@ -3,7 +3,10 @@
  */
 package matsu.num.transform.fft.convolution;
 
-import matsu.num.commons.ArraysUtil;
+import org.junit.Ignore;
+
+import matsu.num.transform.fft.lib.privatelib.ArraysUtilForTestModule;
+import matsu.num.transform.fft.skeletal.BiLinearByScalingStability;
 
 /**
  * 実用性の低い(低速な)実数の巡回畳み込みを扱う.
@@ -11,24 +14,19 @@ import matsu.num.commons.ArraysUtil;
  * @author Matsuura Y.
  * @version 12.8
  */
-public final class RealCyclicConvMoch implements RealNumbersCyclicConvolution {
+@Ignore
+public final class RealCyclicConvMoch
+        extends BiLinearByScalingStability implements CyclicConvolutionExecutor {
 
-    private static final RealNumbersCyclicConvolution INSTANCE = new RealCyclicConvMoch();
+    private static final CyclicConvolutionExecutor INSTANCE = new RealCyclicConvMoch();
 
     private RealCyclicConvMoch() {
-
+        super(MAX_DATA_SIZE);
     }
 
     @Override
-    public double[] apply(double[] f, double[] g) {
+    protected double[] applyInner(double[] f, double[] g) {
         int length = f.length;
-        if (length != g.length) {
-            throw new IllegalArgumentException("サイズが整合しない");
-        }
-
-        if (length == 0) {
-            throw new IllegalArgumentException("サイズ0");
-        }
 
         double[] h = new double[length];
 
@@ -42,14 +40,13 @@ public final class RealCyclicConvMoch implements RealNumbersCyclicConvolution {
                 }
                 g_shift[j] = g[i_minus_j];
             }
-            h[i] = ArraysUtil.dot(f, g_shift);
+            h[i] = ArraysUtilForTestModule.dot(f, g_shift);
         }
 
         return h;
     }
 
-    public static RealNumbersCyclicConvolution instance() {
+    public static CyclicConvolutionExecutor instance() {
         return INSTANCE;
     }
-
 }

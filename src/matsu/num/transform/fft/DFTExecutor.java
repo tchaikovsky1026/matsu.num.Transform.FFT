@@ -1,9 +1,10 @@
 /**
- * 2023.12.5
+ * 2024.2.17
  */
 package matsu.num.transform.fft;
 
 import matsu.num.transform.fft.dto.ComplexNumberArrayDTO;
+import matsu.num.transform.fft.validation.StructureAcceptance;
 
 /**
  * 離散Fourier変換 (DFT) を扱う.
@@ -17,12 +18,16 @@ import matsu.num.transform.fft.dto.ComplexNumberArrayDTO;
  * </p>
  * 
  * <p>
- * 出力サイズは入力サイズに等しい.
+ * このインターフェースにおいて,
+ * {@link #accepts(ComplexNumberArrayDTO)}
+ * のreject条件は,
+ * {@link ComplexLinearTransform}
+ * に対して次が追加される.
  * </p>
  * 
- * <p>
- * 細かい規約はスーパーインターフェースに従う.
- * </p>
+ * <ul>
+ * <li>データサイズが {@link #MAX_DATA_SIZE} を超過する場合.</li>
+ * </ul>
  * 
  * <p>
  * <u><i>技術的補足</i></u>
@@ -36,22 +41,30 @@ import matsu.num.transform.fft.dto.ComplexNumberArrayDTO;
  * <i>a</i>'<sub>0</sub>, ... , <i>a</i>'<sub><i>N</i> - 1</sub> とすると, <br>
  * <i>a</i>'<sub><i>j</i></sub> = <i>N</i> <i>a</i><sub><i>j</i></sub> <br>
  * が成立する.
- * (see {@linkplain IDFTExecutor})
+ * (see {@link IDFTExecutor})
  * </p>
  * 
  * @author Matsuura Y.
- * @version 17.0
+ * @version 18.0
  */
-public interface DFTExecutor extends ComplexNumbersLinearTransform {
+public interface DFTExecutor extends ComplexLinearTransform {
 
     /**
-     * {@inheritDoc }
+     * 扱うことができるデータサイズの最大値: 2<sup>28</sup>
+     */
+    public static final int MAX_DATA_SIZE = 0x1000_0000;
+
+    /**
+     * {@inheritDoc}
      * 
      * <p>
-     * スローされる例外はスーパーインターフェースに従う.
+     * {@link DFTExecutor} ではデータサイズが {@link #MAX_DATA_SIZE}
+     * を超過する場合にrejectされる.
      * </p>
+     * 
+     * @throws NullPointerException {@inheritDoc}
      */
     @Override
-    public abstract ComplexNumberArrayDTO apply(ComplexNumberArrayDTO complexNumberArray);
+    public abstract StructureAcceptance accepts(ComplexNumberArrayDTO complexNumberArray);
 
 }

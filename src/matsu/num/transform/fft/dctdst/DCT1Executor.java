@@ -1,9 +1,10 @@
 /**
- * 2023.12.4
+ * 2024.2.17
  */
 package matsu.num.transform.fft.dctdst;
 
-import matsu.num.transform.fft.RealNumbersLinearTransform;
+import matsu.num.transform.fft.LinearTransform;
+import matsu.num.transform.fft.validation.StructureAcceptance;
 
 /**
  * タイプ1の離散cosine変換 (DCT-1) を扱う. <br>
@@ -20,14 +21,17 @@ import matsu.num.transform.fft.RealNumbersLinearTransform;
  * </p>
  * 
  * <p>
- * 細かい規約はスーパーインターフェースに従うが, 加えて次の例外を
- * {@linkplain DCT1Executor#apply(double[])} メソッドでスローする.
+ * このインターフェースにおいて,
+ * {@link #accepts(double[])}
+ * のreject条件は,
+ * {@link LinearTransform}
+ * に対して次が追加される.
  * </p>
  * 
  * <ul>
- * <li>{@code IllegalArgumentException 入力データの長さが} {@code 1以下の場合}</li>
+ * <li>データサイズが1の場合</li>
+ * <li>データサイズが {@link #MAX_DATA_SIZE} を超過する場合</li>
  * </ul>
- * 
  * 
  * <p>
  * <u><i>技術的補足</i></u>
@@ -78,21 +82,27 @@ import matsu.num.transform.fft.RealNumbersLinearTransform;
  * が成立する.
  * </p>
  * 
- * 
  * @author Matsuura Y.
- * @version 17.0
+ * @version 18.0
  */
-public interface DCT1Executor extends RealNumbersLinearTransform {
+public interface DCT1Executor extends LinearTransform {
 
     /**
-     * {@inheritDoc }
+     * 扱うことができるデータサイズの最大値: 2<sup>27</sup> + 1
+     */
+    public static final int MAX_DATA_SIZE = 0x1000_0000 / 2 + 1;
+
+    /**
+     * {@inheritDoc}
      * 
      * <p>
-     * スローされる例外はスーパーインターフェースに加えて, このインターフェースで条件が追加される.
+     * {@link DCT1Executor} ではデータサイズが1の場合,
+     * {@link #MAX_DATA_SIZE}
+     * を超過する場合にrejectされる.
      * </p>
      * 
-     * @throws IllegalArgumentException 引数の長さが1以下の場合
+     * @throws NullPointerException {@inheritDoc}
      */
     @Override
-    public abstract double[] apply(double[] data);
+    public abstract StructureAcceptance accepts(double[] data);
 }

@@ -1,115 +1,39 @@
 /**
- * 2023.12.5
+ * 2024.2.17
  */
 package matsu.num.transform.fft;
 
-import matsu.num.transform.fft.component.ComplexNumber;
-import matsu.num.transform.fft.component.FourierBasisComputer;
-import matsu.num.transform.fft.component.FourierType;
 import matsu.num.transform.fft.dto.ComplexNumberArrayDTO;
-import matsu.num.transform.fft.fftmodule.GenericInnerFFTExecutor;
-import matsu.num.transform.fft.fftmodule.InnerDFTExecutor;
-import matsu.num.transform.fft.scaling.AbstractScalingComplexLinear;
+import matsu.num.transform.fft.validation.StructureAcceptance;
 
 /**
- * 汎用的に使えるIDFTの実行手段を提供する.
+ * 任意のデータサイズに適用可能なIDFT.
  * 
  * <p>
- * このクラスが提供する {@linkplain IDFTExecutor} は,
- * 任意のデータサイズのIDFTに対応する.
+ * このインターフェースにおいて,
+ * {@link #accepts(ComplexNumberArrayDTO)}
+ * のreject条件は, 
+ * {@link IDFTExecutor} と同等である.
  * </p>
  * 
  * <p>
- * {@linkplain IDFTExecutor#apply(ComplexNumberArrayDTO)}
- * メソッドで追加でスローされる条件は次のとおりである.
+ * このインターフェースのサブタイプでは, これ以上reject条件を緩めては (accept条件を強めては) いけない.
  * </p>
- * 
- * <ul>
- * <li>{@code IllegalArgumentException 入力データの長さが} {@linkplain #MAX_DATA_SIZE}
- * {@code を超える場合}</li>
- * </ul>
  * 
  * @author Matsuura Y.
- * @version 17.0
+ * @version 18.0
  */
-public final class GenericIDFTExecutor {
+public interface GenericIDFTExecutor extends IDFTExecutor{
 
     /**
-     * 扱うことができるデータサイズの最大値: 2<sup>28</sup>
-     */
-    public static final int MAX_DATA_SIZE = GenericInnerFFTExecutor.MAX_DATA_SIZE;
-
-    private static final IDFTExecutor INSTANCE = new IDFTExecutorImpl();
-
-    private GenericIDFTExecutor() {
-        //インスタンス化不可
-        throw new AssertionError();
-    }
-
-    /**
-     * IDFTの実行インスタンスを返す.
+     * {@inheritDoc}
      * 
-     * @return IDFT実行インスタンス
+     * <p>
+     * {@link GenericIDFTExecutor} でaccept条件とreject条件が共に確定 (固定) される.
+     * </p>
+     * 
+     * @throws NullPointerException {@inheritDoc}
      */
-    public static IDFTExecutor instance() {
-        return INSTANCE;
-    }
-
-    private static final class IDFTExecutorImpl
-            extends AbstractScalingComplexLinear implements IDFTExecutor {
-
-        private static final String CLASS_STRING = "Generic-IDFT";
-
-        private static final FourierType TYPE = FourierType.IDFT;
-
-        private final InnerDFTExecutor innerDFTExecutor = GenericInnerFFTExecutor.instance();
-
-        /**
-         * IDFTExecutorを構築する.
-         */
-        IDFTExecutorImpl() {
-            super();
-        }
-
-        /**
-         * @throws IllegalArgumentException サイズが{@link #MAX_DATA_SIZE}を超える場合
-         */
-        @Override
-        protected ComplexNumberArrayDTO applyInner(ComplexNumberArrayDTO complexNumberArray) {
-            int size = complexNumberArray.size;
-            if (size > MAX_DATA_SIZE) {
-                throw new IllegalArgumentException("サイズが大きすぎる");
-            }
-
-            //複素数の配列
-            ComplexNumber[] data =
-                    ComplexNumber.from(complexNumberArray.realPart, complexNumberArray.imaginaryPart);
-
-            //変換を実行
-            ComplexNumber[] result = this.innerDFTExecutor
-                    .compute(data, FourierBasisComputer.covering(data.length, IDFTExecutorImpl.TYPE));
-            double[][] resultArray = ComplexNumber.separateToArrays(result);
-
-            //DTOに
-            ComplexNumberArrayDTO out = ComplexNumberArrayDTO.zeroFilledOf(size);
-            System.arraycopy(resultArray[0], 0, out.realPart, 0, size);
-            System.arraycopy(resultArray[1], 0, out.imaginaryPart, 0, size);
-
-            return out;
-        }
-
-        /**
-         * このインスタンスの文字列表現を提供する.
-         * 
-         * <p>
-         * おそらく次の形式が適切であろうが, 確実ではなく,
-         * バージョン間の整合性も担保されていない. <br>
-         * {@code %変換名}
-         * </p>
-         */
-        @Override
-        public String toString() {
-            return CLASS_STRING;
-        }
-    }
+    @Override
+    public abstract StructureAcceptance accepts(ComplexNumberArrayDTO complexNumberArray);
 }

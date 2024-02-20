@@ -1,20 +1,25 @@
 /**
- * 高速Fourier変換(Fast Fourier transform, FFT)に関するコンポーネントを扱うモジュール. 
+ * 高速Fourier変換(Fast Fourier transform, FFT)に関するコンポーネントを扱うモジュール.
+ * 
+ * <p>
+ * {@link matsu.num.transform.fft.service.FFTModuleExecutorProvider} を経由して生成することが,
+ * このモジュールが提供する各エグゼキュータの標準的な利用法である.
+ * </p>
  * 
  * <p>
  * <i>必須モジュール:</i> <br>
- * {@code matsu.num.Commons}
  * </p>
  * 
  * @author Matsuura Y.
- * @version 17.0
+ * @version 18.0
  */
 module matsu.num.transform.FFT {
 
-    requires matsu.num.Commons;
-    
     exports matsu.num.transform.fft;
-    exports matsu.num.transform.fft.dto;
-    exports matsu.num.transform.fft.dctdst;
     exports matsu.num.transform.fft.convolution;
+    exports matsu.num.transform.fft.dctdst;
+    exports matsu.num.transform.fft.dto;
+    exports matsu.num.transform.fft.lib;
+    exports matsu.num.transform.fft.service;
+    exports matsu.num.transform.fft.validation;
 }

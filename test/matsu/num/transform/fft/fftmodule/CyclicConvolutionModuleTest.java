@@ -1,14 +1,19 @@
 package matsu.num.transform.fft.fftmodule;
 
+import static matsu.num.transform.fft.NumberArrayDataCreator.*;
+import static matsu.num.transform.fft.lib.privatelib.ArraysUtilForTestModule.*;
 import static org.hamcrest.MatcherAssert.*;
 import static org.hamcrest.Matchers.*;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.BeforeClass;
 import org.junit.experimental.runners.Enclosed;
+import org.junit.experimental.theories.DataPoint;
+import org.junit.experimental.theories.Theories;
+import org.junit.experimental.theories.Theory;
 import org.junit.runner.RunWith;
 
 import matsu.num.transform.fft.component.ComplexNumber;
+import matsu.num.transform.fft.component.FourierBasisComputerSupplierDefaultHolder;
 
 /**
  * {@link CyclicConvolutionModule}クラスのテスト.
@@ -20,84 +25,57 @@ public class CyclicConvolutionModuleTest {
 
     public static final Class<?> TEST_CLASS = CyclicConvolutionModule.class;
 
-    public static class 畳み込み検証_サイズ4 {
+    private static final CyclicConvolutionModule CYCLIC_CONVOLUTION_MODULE =
+            new CyclicConvolutionModule(FourierBasisComputerSupplierDefaultHolder.INSTANCE);
 
-        private ComplexNumber[] f;
-        private ComplexNumber[] g;
+    @RunWith(Theories.class)
+    public static class 畳み込み検証 {
 
-        @Before
-        public void before_複素数列fのデータを作成() {
-            double[] real = { 1, 2, 3, 3 };
-            double[] imaginary = { 2, -1, 1, -1 };
+        @DataPoint
+        public static ComplexNumber[][] data_size_4;
+        @DataPoint
+        public static ComplexNumber[][] data_size_7;
 
-            f = new ComplexNumber[real.length];
-            for (int j = 0; j < real.length; j++) {
-                f[j] = ComplexNumber.of(real[j], imaginary[j]);
-            }
+        @BeforeClass
+        public static void before_size_4_fgを作成() {
+            data_size_4 = new ComplexNumber[][] {
+                    createComplexArrayData(4),
+                    createComplexArrayData(4)
+            };
         }
 
-        @Before
-        public void before_複素数列gのデータを作成() {
-            double[] real = { 1, 0, 3, 3 };
-            double[] imaginary = { 2, 1, 1, -1 };
-
-            g = new ComplexNumber[real.length];
-            for (int j = 0; j < real.length; j++) {
-                g[j] = ComplexNumber.of(real[j], imaginary[j]);
-            }
+        @BeforeClass
+        public static void before_size_7_fgを作成() {
+            data_size_7 = new ComplexNumber[][] {
+                    createComplexArrayData(7),
+                    createComplexArrayData(7)
+            };
         }
 
-        @Test
-        public void test_畳み込みの実行() {
-            ComplexNumber[] result = CyclicConvolutionModule.instance().compute(f, g);
-            ComplexNumber[] expected = new CyclicConvolutionMoch(f, g).computeConvolution();
-            assertThat(result.length, is(expected.length));
+        @Theory
+        public void test_畳み込みの実行(ComplexNumber[][] data) {
+            ComplexNumber[] f = data[0];
+            ComplexNumber[] g = data[1];
 
-            for (int i = 0; i < result.length; i++) {
-                assertThat(result[i].real(), is(closeTo(expected[i].real(), 1E-12)));
-                assertThat(result[i].imaginary(), is(closeTo(expected[i].imaginary(), 1E-12)));
-            }
-        }
-    }
+            double[][] resultArray = ComplexNumber.separateToArrays(
+                    CYCLIC_CONVOLUTION_MODULE.compute(f, g));
+            double[][] expectedArray = ComplexNumber.separateToArrays(
+                    new CyclicConvolutionMoch(f, g).computeConvolution());
 
-    public static class 畳み込み検証_サイズ7 {
+            double[] resReal = resultArray[0].clone();
+            subtract(resReal, expectedArray[0]);
+            double[] resImag = resultArray[1].clone();
+            subtract(resImag, expectedArray[1]);
 
-        private ComplexNumber[] f;
-        private ComplexNumber[] g;
+            double[][] arrayF = ComplexNumber.separateToArrays(f);
+            double[][] arrayG = ComplexNumber.separateToArrays(g);
 
-        @Before
-        public void before_複素数列fのデータを作成() {
-            double[] real = { 1, 2, 3, 3, 1, 1, 2 };
-            double[] imaginary = { 2, -1, 1, -1, -1, 1, 2 };
+            double norm = Math.max(normMax(arrayF[0]), normMax(arrayF[1]))
+                    * Math.max(normMax(arrayG[0]), normMax(arrayG[1]));
+            double normRes = Math.max(
+                    normMax(resReal), normMax(resImag));
 
-            f = new ComplexNumber[real.length];
-            for (int j = 0; j < real.length; j++) {
-                f[j] = ComplexNumber.of(real[j], imaginary[j]);
-            }
-        }
-
-        @Before
-        public void before_複素数列gのデータを作成() {
-            double[] real = { 1, 0, 3, 3, 0, 2, 1 };
-            double[] imaginary = { 2, 1, 1, -1, 4, -1, 1 };
-
-            g = new ComplexNumber[real.length];
-            for (int j = 0; j < real.length; j++) {
-                g[j] = ComplexNumber.of(real[j], imaginary[j]);
-            }
-        }
-
-        @Test
-        public void test_畳み込みの実行() {
-            ComplexNumber[] result = CyclicConvolutionModule.instance().compute(f, g);
-            ComplexNumber[] expected = new CyclicConvolutionMoch(f, g).computeConvolution();
-            assertThat(result.length, is(expected.length));
-
-            for (int i = 0; i < result.length; i++) {
-                assertThat(result[i].real(), is(closeTo(expected[i].real(), 1E-12)));
-                assertThat(result[i].imaginary(), is(closeTo(expected[i].imaginary(), 1E-12)));
-            }
+            assertThat(normRes, is(lessThan(1E-12 * norm + 1E-100)));
         }
     }
-
 }

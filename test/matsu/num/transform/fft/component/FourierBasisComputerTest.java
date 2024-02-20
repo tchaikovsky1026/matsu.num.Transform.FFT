@@ -20,12 +20,15 @@ import org.junit.runner.RunWith;
 public class FourierBasisComputerTest {
 
     public static final Class<?> TEST_CLASS = FourierBasisComputer.class;
+    
+    private static final FourierBasisComputer.Supplier DEFAULT_SUPPLIER =
+            FourierBasisComputerSupplierDefaultHolder.INSTANCE;
 
     public static class 基底関数のテスト {
 
         @Test
         public void test_8分割_DFT() {
-            FourierBasis basis = FourierBasisComputer.covering(8, FourierType.DFT).getBasis(8);
+            FourierBasis basis = DEFAULT_SUPPLIER.covering(8, FourierType.DFT).getBasis(8);
 
             assertThat(basis.valueAt(0).real(), is(1d));
             assertThat(basis.valueAt(4).real(), is(-1d));
@@ -36,7 +39,7 @@ public class FourierBasisComputerTest {
 
         @Test
         public void test_8分割_IDFT() {
-            FourierBasis basis = FourierBasisComputer.covering(8, FourierType.IDFT).getBasis(8);
+            FourierBasis basis = DEFAULT_SUPPLIER.covering(8, FourierType.IDFT).getBasis(8);
 
             assertThat(basis.valueAt(0).real(), is(1d));
             assertThat(basis.valueAt(4).real(), is(-1d));
@@ -47,7 +50,7 @@ public class FourierBasisComputerTest {
 
         @Test(expected = IllegalArgumentException.class)
         public void test_0分割は不可能() {
-            FourierBasisComputer.covering(0, FourierType.DFT);
+            DEFAULT_SUPPLIER.covering(0, FourierType.DFT);
         }
     }
 
@@ -57,7 +60,7 @@ public class FourierBasisComputerTest {
 
         @Before
         public void before_8分割_DFT() {
-            basisComputer = FourierBasisComputer.covering(8, FourierType.DFT);
+            basisComputer = DEFAULT_SUPPLIER.covering(8, FourierType.DFT);
         }
 
         @Test
@@ -101,13 +104,13 @@ public class FourierBasisComputerTest {
         @Theory
         public void test_DFTのBasis取得(int size) {
             //2の累乗サイズのBasisを取得する
-            FourierBasisComputer.covering(size, FourierType.DFT).getBasis(size);
+            DEFAULT_SUPPLIER.covering(size, FourierType.DFT).getBasis(size);
         }
 
         @Theory
         public void test_IDFTのBasis取得(int size) {
             //2の累乗サイズのBasisを取得する
-            FourierBasisComputer.covering(size, FourierType.IDFT).getBasis(size);
+            DEFAULT_SUPPLIER.covering(size, FourierType.IDFT).getBasis(size);
         }
     }
 }

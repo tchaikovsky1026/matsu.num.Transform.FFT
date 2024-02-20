@@ -1,20 +1,27 @@
 /**
- * 2023.9.22
+ * 2024.2.18
  */
 package matsu.num.transform.fft.dctdst;
 
-import matsu.num.commons.Trigonometry;
+import org.junit.Ignore;
+
+import matsu.num.transform.fft.lib.Trigonometry;
+import matsu.num.transform.fft.service.CommonLib;
+import matsu.num.transform.fft.skeletal.dctdst.DCT1ExecutorSkeletal;
 
 /**
  * 実用的でない(低速な)DCT-1.
  * 
  * @author Matsuura Y.
- * @version 12.2
+ * @version 18.0
  */
-public final class DCT1Moch implements DCT1Executor {
-
+@Ignore
+public final class DCT1Moch extends DCT1ExecutorSkeletal implements DCT1Executor {
+    
+    private static final Trigonometry TRIGONOMETRY = CommonLib.defaultImplemented().trigonometry();
+    
     @Override
-    public double[] apply(double[] data) {
+    protected double[] applyInner(double[] data) {
         return new DCT1Calc(data).calculate();
     }
 
@@ -46,7 +53,7 @@ public final class DCT1Moch implements DCT1Executor {
 
                 int j_k_mod_2Nm2 = 0;
                 for (int j = 0; j < this.entireLength; j++) {
-                    double cos = Trigonometry.cospi(2d * j_k_mod_2Nm2 / Mod);
+                    double cos = TRIGONOMETRY.cospi(2d * j_k_mod_2Nm2 / Mod);
                     X_k += data[j] * cos;
 
                     j_k_mod_2Nm2 += k;
