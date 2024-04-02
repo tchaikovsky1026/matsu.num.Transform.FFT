@@ -1,9 +1,10 @@
 /**
- * 2024.2.18
+ * 2024.4.2
  */
 package matsu.num.transform.fft.skeletal;
 
 import java.util.Arrays;
+import java.util.Objects;
 
 import matsu.num.transform.fft.ComplexLinearTransform;
 import matsu.num.transform.fft.dto.ComplexNumberArrayDTO;
@@ -28,23 +29,26 @@ import matsu.num.transform.fft.validation.StructureAcceptance;
  * </p>
  * 
  * @author Matsuura Y.
- * @version 18.0
+ * @version 19.0
  */
 public abstract class ComplexLinearByScalingStability
         extends DataSizeContract implements ComplexLinearTransform {
 
     private final int requiredSize;
     private final int upperLimitSize;
+    private final ArraysUtil arraysUtil;
 
     /**
      * 許容されるデータサイズを与えるコンストラクタ.
      * 
      * @param requiredSize acceptされるために必要なデータサイズの最小値
      * @param upperLimitSize acceptされるデータサイズの最大値
+     * @param arraysUtil 配列ユーティリティ
      * @throws IllegalArgumentException requiredSizeが1以上でない場合,
      *             upperLimitSizeがrequiredSize以上でない場合
+     * @throws NullPointerException 引数にnullが含まれる場合
      */
-    protected ComplexLinearByScalingStability(int requiredSize, int upperLimitSize) {
+    protected ComplexLinearByScalingStability(int requiredSize, int upperLimitSize, ArraysUtil arraysUtil) {
         super();
 
         if (requiredSize < 1 || upperLimitSize < requiredSize) {
@@ -53,6 +57,7 @@ public abstract class ComplexLinearByScalingStability
 
         this.requiredSize = requiredSize;
         this.upperLimitSize = upperLimitSize;
+        this.arraysUtil = Objects.requireNonNull(arraysUtil);
     }
 
     /**
@@ -60,10 +65,12 @@ public abstract class ComplexLinearByScalingStability
      * requiredSizeは1である.
      * 
      * @param upperLimitSize acceptされるデータサイズの最大値
+     * @param arraysUtil 配列ユーティリティ
      * @throws IllegalArgumentException upperLimitSizeが1以上でない場合
+     * @throws NullPointerException 引数にnullが含まれる場合
      */
-    protected ComplexLinearByScalingStability(int upperLimitSize) {
-        this(1, upperLimitSize);
+    protected ComplexLinearByScalingStability(int upperLimitSize, ArraysUtil arraysUtil) {
+        this(1, upperLimitSize, arraysUtil);
     }
 
     @Override
@@ -110,7 +117,7 @@ public abstract class ComplexLinearByScalingStability
         double[] cloneImaginaryPart = cloneData.imaginaryPart;
 
         double scale = Math.max(
-                ArraysUtil.normMax(cloneRealPart), ArraysUtil.normMax(cloneImaginaryPart));
+                this.arraysUtil.normMax(cloneRealPart), this.arraysUtil.normMax(cloneImaginaryPart));
 
         //不正な値が入っている場合はNaNにしてreturn
         if (!Double.isFinite(scale)) {

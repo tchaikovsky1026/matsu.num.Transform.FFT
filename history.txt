@@ -1,0 +1,7 @@
+19.0:
+各々のExecutorの実装をプロバイダから切り離す.
+CommonLibが持つゲッタを非公開にする.
+ArraysUtilライブラリをDIに変更する(ただし, インターフェースの定義とライブラリの変更方法が公開されていない).
+Providerに与えるTypeをsealedインターフェースにより表現する.
+
+version　19よりhistoryの記録を開始する.

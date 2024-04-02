@@ -1,9 +1,10 @@
 /**
- * 2024.2.18
+ * 2024.4.2
  */
 package matsu.num.transform.fft.skeletal;
 
 import java.util.Arrays;
+import java.util.Objects;
 
 import matsu.num.transform.fft.BiLinearTransform;
 import matsu.num.transform.fft.lib.privatelib.ArraysUtil;
@@ -24,7 +25,7 @@ import matsu.num.transform.fft.validation.StructureRejected;
  * </p>
  * 
  * @author Matsuura Y.
- * @version 18.0
+ * @version 19.0
  */
 public abstract class BiLinearByScalingStability
         extends DataSizeContract implements BiLinearTransform {
@@ -34,16 +35,19 @@ public abstract class BiLinearByScalingStability
 
     private final int requiredSize;
     private final int upperLimitSize;
+    private final ArraysUtil arraysUtil;
 
     /**
      * 許容されるデータサイズを与えるコンストラクタ.
      * 
      * @param requiredSize acceptされるために必要なデータサイズの最小値
      * @param upperLimitSize acceptされるデータサイズの最大値
+     * @param arraysUtil 配列ユーティリティ
      * @throws IllegalArgumentException requiredSizeが1以上でない場合,
      *             upperLimitSizeがrequiredSize以上でない場合
+     * @throws NullPointerException 引数にnullが含まれる場合
      */
-    protected BiLinearByScalingStability(int requiredSize, int upperLimitSize) {
+    protected BiLinearByScalingStability(int requiredSize, int upperLimitSize, ArraysUtil arraysUtil) {
         super();
 
         if (requiredSize < 1 || upperLimitSize < requiredSize) {
@@ -52,6 +56,7 @@ public abstract class BiLinearByScalingStability
 
         this.requiredSize = requiredSize;
         this.upperLimitSize = upperLimitSize;
+        this.arraysUtil = Objects.requireNonNull(arraysUtil);
     }
 
     /**
@@ -59,10 +64,12 @@ public abstract class BiLinearByScalingStability
      * requiredSizeは1である.
      * 
      * @param upperLimitSize acceptされるデータサイズの最大値
+     * @param arraysUtil 配列ユーティリティ
      * @throws IllegalArgumentException upperLimitSizeが1以上でない場合
+     * @throws NullPointerException 引数にnullが含まれる場合
      */
-    protected BiLinearByScalingStability(int upperLimitSize) {
-        this(1, upperLimitSize);
+    protected BiLinearByScalingStability(int upperLimitSize, ArraysUtil arraysUtil) {
+        this(1, upperLimitSize, arraysUtil);
     }
 
     @Override
@@ -88,7 +95,7 @@ public abstract class BiLinearByScalingStability
     @Override
     public final double[] apply(double[] f, double[] g) {
         StructureAcceptance acceptance = this.accepts(f, g);
-        if(!acceptance.isAcceptState()) {
+        if (!acceptance.isAcceptState()) {
             throw acceptance.getException();
         }
 
@@ -96,8 +103,8 @@ public abstract class BiLinearByScalingStability
 
         double[] cloneF = f.clone();
         double[] cloneG = g.clone();
-        double scaleF = ArraysUtil.normMax(cloneF);
-        double scaleG = ArraysUtil.normMax(cloneG);
+        double scaleF = this.arraysUtil.normMax(cloneF);
+        double scaleG = this.arraysUtil.normMax(cloneG);
 
         //不正な値が入っている場合,NaNで埋めてreturn
         if (!(Double.isFinite(scaleF) && Double.isFinite(scaleG))) {

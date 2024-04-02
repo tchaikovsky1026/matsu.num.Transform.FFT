@@ -1,5 +1,8 @@
 package matsu.num.transform.fft.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
@@ -7,6 +10,8 @@ import org.junit.experimental.theories.DataPoints;
 import org.junit.experimental.theories.Theories;
 import org.junit.experimental.theories.Theory;
 import org.junit.runner.RunWith;
+
+import matsu.num.transform.fft.service.fuctionaltype.FunctionalType;
 
 /**
  * {@link FFTModuleExecutorProvider} クラスのテスト.
@@ -29,13 +34,17 @@ public class FFTModuleExecutorProviderTest {
         @BeforeClass
         public static void before_ExecutorTypeの登録() {
             ExecutorType<?>[] zero = new ExecutorType<?>[0];
-            types = ExecutorTypes.values().toArray(zero);
+            List<ExecutorType<?>> list = new ArrayList<>();
+            list.addAll(DftTypes.values());
+            list.addAll(DctDstTypes.values());
+            list.addAll(CyclicConvolutionTypes.values());
+            types = list.toArray(zero);
         }
 
         @Theory
         public void test(ExecutorType<?> type) {
             try {
-                type.executorClass().cast(provider.get(type));
+                ((FunctionalType<?>) type).executorClass().cast(provider.get(type));
             } catch (ClassCastException e) {
                 throw new AssertionError("providerは正しい型のインスタンスを生成していない");
             }

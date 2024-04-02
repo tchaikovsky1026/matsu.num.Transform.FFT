@@ -1,9 +1,10 @@
 /**
- * 2024.2.18
+ * 2024.4.2
  */
 package matsu.num.transform.fft.skeletal.dctdst;
 
 import matsu.num.transform.fft.dctdst.DCT1Executor;
+import matsu.num.transform.fft.lib.privatelib.ArraysUtil;
 import matsu.num.transform.fft.skeletal.LinearByScalingStability;
 
 /**
@@ -18,16 +19,19 @@ import matsu.num.transform.fft.skeletal.LinearByScalingStability;
  * </p>
  * 
  * @author Matsuura Y.
- * @version 18.0
+ * @version 19.0
  */
 public abstract class DCT1ExecutorSkeletal
         extends LinearByScalingStability implements DCT1Executor {
 
     /**
      * 唯一のコンストラクタ.
+     * 
+     * @param arraysUtil 配列ユーティリティ
+     * @throws NullPointerException 引数にnullが含まれる場合
      */
-    protected DCT1ExecutorSkeletal() {
-        super(2, MAX_DATA_SIZE);
+    protected DCT1ExecutorSkeletal(ArraysUtil arraysUtil) {
+        super(2, MAX_DATA_SIZE, arraysUtil);
     }
 
     @Override

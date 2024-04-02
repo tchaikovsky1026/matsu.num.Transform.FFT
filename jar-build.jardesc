@@ -13,5 +13,6 @@
     <selectedElements exportClassFiles="true" exportJavaFiles="true" exportOutputFolder="false">
         <javaElement handleIdentifier="=matsu.num.transform.FFT/src"/>
         <folder path="/matsu.num.transform.FFT/javadoc-file"/>
+        <file path="/matsu.num.transform.FFT/history.txt"/>
     </selectedElements>
 </jardesc>

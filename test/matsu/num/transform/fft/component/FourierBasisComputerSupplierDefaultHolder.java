@@ -2,7 +2,7 @@ package matsu.num.transform.fft.component;
 
 import org.junit.Ignore;
 
-import matsu.num.transform.fft.service.CommonLib;
+import matsu.num.transform.fft.lib.TrigonometryForTesting;
 
 /**
  * Fourier基底コンピュータのデフォルトサプライヤのホルダ.
@@ -13,7 +13,7 @@ import matsu.num.transform.fft.service.CommonLib;
 public final class FourierBasisComputerSupplierDefaultHolder {
 
     public static final FourierBasisComputer.Supplier INSTANCE =
-            new FourierBasisComputer.Supplier(CommonLib.defaultImplemented().trigonometry());
+            new FourierBasisComputer.Supplier(TrigonometryForTesting.INSTANCE);
 
     private FourierBasisComputerSupplierDefaultHolder() {
         // インスタンス化不可

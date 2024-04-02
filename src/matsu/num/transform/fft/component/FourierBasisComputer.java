@@ -1,5 +1,5 @@
 /**
- * 2024.2.14
+ * 2024.4.3
  */
 package matsu.num.transform.fft.component;
 
@@ -32,7 +32,7 @@ import matsu.num.transform.fft.lib.Trigonometry;
  * </p>
  * 
  * @author Matsuura Y.
- * @version 18.0
+ * @version 19.0
  */
 public final class FourierBasisComputer {
 
@@ -80,15 +80,6 @@ public final class FourierBasisComputer {
             double argByPi = this.type.argByPi(this.supportedSequenceSize, j);
             this.values[j] = ComplexNumber.of(this.trigonometry.cospi(argByPi), this.trigonometry.sinpi(argByPi));
         }
-    }
-
-    /**
-     * このコンピュータが扱う基底関数のタイプを返す.
-     * 
-     * @return 基底関数のタイプ
-     */
-    public FourierType tyoe() {
-        return this.type;
     }
 
     /**

@@ -1,29 +1,46 @@
 /**
- * 2024.2.7
+ * 2024.4.3
  */
 package matsu.num.transform.fft.lib;
 
 /**
- * 三角関数を扱う.
+ * <p>
+ * このモジュール内での処理における, 三角関数の計算を扱う. <br>
+ * 外部のモジュールからこのインターフェースのメソッドを呼ぶことは想定されていない.
+ * </p>
  * 
  * @author Matsuura Y.
- * @version 18.0
+ * @version 19.0
  */
 public interface Trigonometry {
 
     /**
-     * cos(&pi;x) を返す.
-     *
-     * @param x x
-     * @return cos(&pi;x)
+     * <p>
+     * cos(<i>&pi;x</i>) の値を返す.
+     * </p>
+     * 
+     * <p>
+     * このインターフェースが適切に使用される限り, 
+     * <i>x</i>に極端な与えられることはない.
+     * </p>
+     * 
+     * @param x ラジアン単位での <i>x</i>
+     * @return cos(<i>&pi;x</i>)
      */
     public abstract double cospi(double x);
 
     /**
-     * sin(&pi;x) を返す.
+     * <p>
+     * sin(<i>&pi;x</i>) の値を返す.
+     * </p>
+     * 
+     * <p>
+     * このインターフェースが適切に使用される限り, 
+     * <i>x</i>に極端な与えられることはない.
+     * </p>
      *
-     * @param x x
-     * @return sin(&pi;x)
+     * @param x ラジアン単位での <i>x</i>
+     * @return sin(<i>&pi;x</i>)
      */
     public abstract double sinpi(double x);
 }

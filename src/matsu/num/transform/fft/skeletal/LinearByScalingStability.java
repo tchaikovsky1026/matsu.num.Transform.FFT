@@ -1,9 +1,10 @@
 /**
- * 2024.2.18
+ * 2024.4.2
  */
 package matsu.num.transform.fft.skeletal;
 
 import java.util.Arrays;
+import java.util.Objects;
 
 import matsu.num.transform.fft.LinearTransform;
 import matsu.num.transform.fft.lib.privatelib.ArraysUtil;
@@ -22,23 +23,26 @@ import matsu.num.transform.fft.validation.StructureAcceptance;
  * </p>
  * 
  * @author Matsuura Y.
- * @version 18.0
+ * @version 19.0
  */
 public abstract class LinearByScalingStability
         extends DataSizeContract implements LinearTransform {
 
     private final int requiredSize;
     private final int upperLimitSize;
+    private final ArraysUtil arraysUtil;
 
     /**
      * 許容されるデータサイズを与えるコンストラクタ.
      * 
      * @param requiredSize acceptされるために必要なデータサイズの最小値
      * @param upperLimitSize acceptされるデータサイズの最大値
+     * @param arraysUtil 配列ユーティリティ
      * @throws IllegalArgumentException requiredSizeが1以上でない場合,
      *             upperLimitSizeがrequiredSize以上でない場合
+     * @throws NullPointerException 引数にnullが含まれる場合
      */
-    protected LinearByScalingStability(int requiredSize, int upperLimitSize) {
+    protected LinearByScalingStability(int requiredSize, int upperLimitSize, ArraysUtil arraysUtil) {
         super();
 
         if (requiredSize < 1 || upperLimitSize < requiredSize) {
@@ -47,6 +51,7 @@ public abstract class LinearByScalingStability
 
         this.requiredSize = requiredSize;
         this.upperLimitSize = upperLimitSize;
+        this.arraysUtil = Objects.requireNonNull(arraysUtil);
     }
 
     /**
@@ -54,10 +59,12 @@ public abstract class LinearByScalingStability
      * requiredSizeは1である.
      * 
      * @param upperLimitSize acceptされるデータサイズの最大値
+     * @param arraysUtil 配列ユーティリティ
      * @throws IllegalArgumentException upperLimitSizeが1以上でない場合
+     * @throws NullPointerException 引数にnullが含まれる場合
      */
-    protected LinearByScalingStability(int upperLimitSize) {
-        this(1, upperLimitSize);
+    protected LinearByScalingStability(int upperLimitSize, ArraysUtil arraysUtil) {
+        this(1, upperLimitSize, arraysUtil);
     }
 
     @Override
@@ -78,13 +85,13 @@ public abstract class LinearByScalingStability
     @Override
     public final double[] apply(double[] data) {
         StructureAcceptance acceptance = this.accepts(data);
-        if(!acceptance.isAcceptState()) {
+        if (!acceptance.isAcceptState()) {
             throw acceptance.getException();
         }
 
         double[] cloneData = data.clone();
         int size = cloneData.length;
-        double scale = ArraysUtil.normMax(cloneData);
+        double scale = this.arraysUtil.normMax(cloneData);
 
         //不正な値が入っている場合はNaNにしてreturn
         if (!Double.isFinite(scale)) {

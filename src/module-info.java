@@ -11,7 +11,7 @@
  * </p>
  * 
  * @author Matsuura Y.
- * @version 18.0
+ * @version 19.0
  */
 module matsu.num.transform.FFT {
 

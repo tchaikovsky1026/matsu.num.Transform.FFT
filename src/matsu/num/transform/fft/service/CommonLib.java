@@ -6,6 +6,7 @@ package matsu.num.transform.fft.service;
 import java.util.Objects;
 
 import matsu.num.transform.fft.lib.Trigonometry;
+import matsu.num.transform.fft.lib.privatelib.ArraysUtil;
 
 /**
  * <p>
@@ -14,7 +15,7 @@ import matsu.num.transform.fft.lib.Trigonometry;
  * </p>
  * 
  * <p>
- * デフォルトインスタンスの生成は {@link #defaultImplemented()} で可能だが, 
+ * デフォルトインスタンスの生成は {@link #defaultImplemented()} で可能だが,
  * その他はビルダを使用する.
  * </p>
  * 
@@ -35,7 +36,14 @@ public abstract class CommonLib {
      * 
      * @return 三角関数の計算
      */
-    public abstract Trigonometry trigonometry();
+    abstract Trigonometry trigonometry();
+
+    /**
+     * 配列に関する計算を扱うライブラリを返す.
+     * 
+     * @return 配列の計算
+     */
+    abstract ArraysUtil arrayUtil();
 
     /**
      * このライブラリの文字列表現.
@@ -71,6 +79,7 @@ public abstract class CommonLib {
         private static final Builder DEFAULT_BUILDER = new Builder();
 
         private Trigonometry trigonometry;
+        private ArraysUtil arraysUtil;
 
         /**
          * このビルダの状態でビルドされたインスタンス.
@@ -85,6 +94,7 @@ public abstract class CommonLib {
             super();
             CommonLib defaultInstance = CommonLibDefaultHolder.DEFAULT_INSTANCE;
             this.trigonometry = defaultInstance.trigonometry();
+            this.arraysUtil = defaultInstance.arrayUtil();
         }
 
         /**
@@ -94,6 +104,7 @@ public abstract class CommonLib {
          */
         private Builder(Builder src) {
             this.trigonometry = src.trigonometry;
+            this.arraysUtil = src.arraysUtil;
         }
 
         /**
@@ -153,6 +164,7 @@ public abstract class CommonLib {
         private static final class CommonLibImpl extends CommonLib {
 
             private final Trigonometry trigonometry;
+            private final ArraysUtil arraysUtil;
 
             /**
              * ビルダから呼ばれる.
@@ -160,17 +172,24 @@ public abstract class CommonLib {
             CommonLibImpl(Builder builder) {
                 super();
                 this.trigonometry = builder.trigonometry;
+                this.arraysUtil = builder.arraysUtil;
             }
 
             @Override
             public Trigonometry trigonometry() {
                 return this.trigonometry;
             }
-            
+
+            @Override
+            ArraysUtil arrayUtil() {
+                return this.arraysUtil;
+            }
+
             @Override
             public String toString() {
                 return "CommonLib(byBuilder)";
             }
+
         }
     }
 }

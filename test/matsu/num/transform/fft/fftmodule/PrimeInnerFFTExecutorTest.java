@@ -1,7 +1,7 @@
 package matsu.num.transform.fft.fftmodule;
 
 import static matsu.num.transform.fft.NumberArrayDataCreator.*;
-import static matsu.num.transform.fft.lib.privatelib.ArraysUtilForTestModule.*;
+import static matsu.num.transform.fft.lib.privatelib.ArraysUtilStaticForTestModule.*;
 import static org.hamcrest.MatcherAssert.*;
 import static org.hamcrest.Matchers.*;
 

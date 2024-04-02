@@ -1,5 +1,5 @@
 /**
- * 2024.2.14
+ * 2024.4.2
  */
 package matsu.num.transform.fft.service;
 
@@ -8,6 +8,7 @@ import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 
 import matsu.num.transform.fft.Executor;
+import matsu.num.transform.fft.service.fuctionaltype.FunctionalType;
 
 /**
  * このモジュール内で実装されているFFTモジュールエグゼキュータのプロバイダ.
@@ -15,11 +16,17 @@ import matsu.num.transform.fft.Executor;
  * <p>
  * このプロバイダの {@link #get(ExecutorType)} メソッドを呼ぶことで,
  * 対応するエグゼキュータを得ることができる. <br>
- * {@link ExecutorType} は {@link ExecutorTypes} 内に定数として提供されている.
+ * {@link ExecutorType} は次のクラス内に定数として提供されている.
  * </p>
  * 
+ * <ul>
+ * <li>{@link DftTypes}</li>
+ * <li>{@link DctDstTypes}</li>
+ * <li>{@link CyclicConvolutionTypes}</li>
+ * </ul>
+ * 
  * @author Matsuura Y.
- * @version 18.0
+ * @version 19.0
  */
 public final class FFTModuleExecutorProvider {
 
@@ -28,7 +35,7 @@ public final class FFTModuleExecutorProvider {
 
     private final CommonLib lib;
 
-    private final Map<ExecutorType<?>, Object> map;
+    private final Map<FunctionalType<?>, Object> map;
 
     //ロック用オブジェクト
     private final Object lock = new Object();
@@ -53,21 +60,22 @@ public final class FFTModuleExecutorProvider {
      */
     public <R extends Executor> R get(ExecutorType<R> type) {
         Objects.requireNonNull(type);
+        FunctionalType<R> functionalType = (FunctionalType<R>) type;
 
-        Class<R> executorClass = type.executorClass();
-        Object out = this.map.get(type);
+        Class<R> executorClass = functionalType.executorClass();
+        Object out = this.map.get(functionalType);
         if (Objects.nonNull(out)) {
             //このキャストは必ず成功する
             return executorClass.cast(out);
         }
         synchronized (this.lock) {
-            out = this.map.get(type);
+            out = this.map.get(functionalType);
             if (Objects.nonNull(out)) {
                 //このキャストは必ず成功する
                 return executorClass.cast(out);
             }
-            R castedObj = type.createExecutor(this.lib);
-            this.map.put(type, castedObj);
+            R castedObj = functionalType.createExecutor(this.lib);
+            this.map.put(functionalType, castedObj);
             return castedObj;
         }
     }
