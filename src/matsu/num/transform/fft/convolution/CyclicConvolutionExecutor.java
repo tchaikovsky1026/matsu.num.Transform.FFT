@@ -1,5 +1,11 @@
-/**
- * 2024.2.17
+/*
+ * Copyright (c) 2024 Matsuura Y.
+ * 
+ * This software is released under the MIT License.
+ * http://opensource.org/licenses/mit-license.php
+ */
+/*
+ * 2024.4.4
  */
 package matsu.num.transform.fft.convolution;
 
@@ -38,7 +44,7 @@ import matsu.num.transform.fft.validation.StructureAcceptance;
  * </ul>
  * 
  * @author Matsuura Y.
- * @version 18.0
+ * @version 20.0
  */
 public interface CyclicConvolutionExecutor extends BiLinearTransform {
 

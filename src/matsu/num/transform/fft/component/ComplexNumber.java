@@ -1,5 +1,11 @@
-/**
- * 2023.9.29
+/*
+ * Copyright (c) 2024 Matsuura Y.
+ * 
+ * This software is released under the MIT License.
+ * http://opensource.org/licenses/mit-license.php
+ */
+/*
+ * 2024.4.4
  */
 package matsu.num.transform.fft.component;
 
@@ -17,7 +23,7 @@ import java.util.Objects;
  * </p>
  * 
  * @author Matsuura Y.
- * @version 12.7
+ * @version 20.0
  */
 public final class ComplexNumber {
 
@@ -48,7 +54,7 @@ public final class ComplexNumber {
     }
 
     /**
-     * 実部を返す. 
+     * 実部を返す.
      * 
      * @return 実部
      */
@@ -142,7 +148,7 @@ public final class ComplexNumber {
     }
 
     /**
-     * 実数を乗算した結果を返す. 
+     * 実数を乗算した結果を返す.
      * 
      * @param multiplier 乗数
      * @return 乗算結果
@@ -188,8 +194,8 @@ public final class ComplexNumber {
      * 2系列の複素数列の成分積の総和を計算する. <br>
      * 空の場合は0が返る.
      * 
-     * @param a 
-     * @param b 
+     * @param a
+     * @param b
      * @return 総和
      * @throws IllegalArgumentException 引数の長さが異なる場合
      * @throws NullPointerException 引数にnullが含まれる場合

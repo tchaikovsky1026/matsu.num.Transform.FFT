@@ -1,5 +1,11 @@
-/**
- * 2024.4.3
+/*
+ * Copyright (c) 2024 Matsuura Y.
+ * 
+ * This software is released under the MIT License.
+ * http://opensource.org/licenses/mit-license.php
+ */
+/*
+ * 2024.4.4
  */
 package matsu.num.transform.fft.lib;
 
@@ -10,7 +16,7 @@ package matsu.num.transform.fft.lib;
  * </p>
  * 
  * @author Matsuura Y.
- * @version 19.0
+ * @version 20.0
  */
 public interface Trigonometry {
 
@@ -20,7 +26,7 @@ public interface Trigonometry {
      * </p>
      * 
      * <p>
-     * このインターフェースが適切に使用される限り, 
+     * このインターフェースが適切に使用される限り,
      * <i>x</i>に極端な与えられることはない.
      * </p>
      * 
@@ -35,7 +41,7 @@ public interface Trigonometry {
      * </p>
      * 
      * <p>
-     * このインターフェースが適切に使用される限り, 
+     * このインターフェースが適切に使用される限り,
      * <i>x</i>に極端な与えられることはない.
      * </p>
      *

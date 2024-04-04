@@ -1,9 +1,11 @@
 /**
- * 高速Fourier変換(Fast Fourier transform, FFT)に関するコンポーネントを扱うモジュール.
+ * 高速Fourier変換(Fast Fourier transform, FFT)に関する機能を提供するモジュール.
  * 
  * <p>
- * {@link matsu.num.transform.fft.service.FFTModuleExecutorProvider} を経由して生成することが,
- * このモジュールが提供する各エグゼキュータの標準的な利用法である.
+ * 各機能 (エグゼキュータ) はインターフェースとして公開されている. <br>
+ * {@link matsu.num.transform.fft.service.FFTModuleExecutorProvider}
+ * のメソッドを経由して各エグゼキュータのインスタンスを取得するのが,
+ * 標準的な利用方法である.
  * </p>
  * 
  * <p>
@@ -11,7 +13,7 @@
  * </p>
  * 
  * @author Matsuura Y.
- * @version 19.0
+ * @version 20.0
  */
 module matsu.num.transform.FFT {
 

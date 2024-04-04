@@ -1,5 +1,11 @@
-/**
- * 2024.2.18
+/*
+ * Copyright (c) 2024 Matsuura Y.
+ * 
+ * This software is released under the MIT License.
+ * http://opensource.org/licenses/mit-license.php
+ */
+/*
+ * 2024.4.4
  */
 package matsu.num.transform.fft.validation;
 
@@ -15,7 +21,7 @@ package matsu.num.transform.fft.validation;
  * </p>
  * 
  * @author Matsuura Y.
- * @version 18.0
+ * @version 20.0
  */
 public abstract class StructureAcceptance {
 
@@ -58,7 +64,7 @@ public abstract class StructureAcceptance {
     abstract Type type();
 
     /**
-     * このインスタンスが「数列が対応していること」を表すかどうか, 
+     * このインスタンスが「数列が対応していること」を表すかどうか,
      * すなわち {@link #ACCEPTED} に相当するかどうかを判定する.
      * 
      * @return 「数列が対応していること」を表す場合はtrue

@@ -1,5 +1,11 @@
-/**
- * 2023.9.27
+/*
+ * Copyright (c) 2024 Matsuura Y.
+ * 
+ * This software is released under the MIT License.
+ * http://opensource.org/licenses/mit-license.php
+ */
+/*
+ * 2024.4.4
  */
 package matsu.num.transform.fft.number;
 
@@ -8,10 +14,10 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * 3以上の素数の原始根の最小値の検索. 
+ * 3以上の素数の原始根の最小値の検索.
  * 
  * @author Matsuura Y.
- * @version 12.5
+ * @version 20.0
  */
 final class MinimumPrimitiveRootSearch {
 
@@ -28,7 +34,7 @@ final class MinimumPrimitiveRootSearch {
      * 
      * @param prime 3以上の素数
      * @throws IllegalArgumentException 引数が3以上の奇数でない場合, primeが合成数と予測される場合
-     * (ただし, 合成数ならば必ずスローされるわけではない)
+     *             (ただし, 合成数ならば必ずスローされるわけではない)
      */
     MinimumPrimitiveRootSearch(int prime) {
         if (!(prime >= 3 && (prime & 1) == 1)) {

@@ -1,5 +1,11 @@
-/**
- * 2024.4.2
+/*
+ * Copyright (c) 2024 Matsuura Y.
+ * 
+ * This software is released under the MIT License.
+ * http://opensource.org/licenses/mit-license.php
+ */
+/*
+ * 2024.4.4
  */
 package matsu.num.transform.fft.service.fuctionaltype;
 
@@ -11,7 +17,7 @@ import matsu.num.transform.fft.service.ExecutorType;
  * このモジュールが提供するエグゼキュータタイプのmix-in.
  * 
  * @author Matsuura Y.
- * @version 19.0
+ * @version 20.0
  * @param <T> このタイプが返却するエグゼキュータの型
  */
 public non-sealed interface FunctionalType<T extends Executor> extends ExecutorType<T> {

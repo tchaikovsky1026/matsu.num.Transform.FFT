@@ -14,5 +14,7 @@
         <javaElement handleIdentifier="=matsu.num.transform.FFT/src"/>
         <folder path="/matsu.num.transform.FFT/javadoc-file"/>
         <file path="/matsu.num.transform.FFT/history.txt"/>
+        <file path="/matsu.num.transform.FFT/LICENSE.txt"/>
+        <file path="/matsu.num.transform.FFT/README.md"/>
     </selectedElements>
 </jardesc>

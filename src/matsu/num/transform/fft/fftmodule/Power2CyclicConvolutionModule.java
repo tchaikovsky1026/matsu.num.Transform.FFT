@@ -1,5 +1,11 @@
-/**
- * 2024.2.19
+/*
+ * Copyright (c) 2024 Matsuura Y.
+ * 
+ * This software is released under the MIT License.
+ * http://opensource.org/licenses/mit-license.php
+ */
+/*
+ * 2024.4.4
  */
 package matsu.num.transform.fft.fftmodule;
 
@@ -14,7 +20,7 @@ import matsu.num.transform.fft.number.Power2Util;
  * 2の累乗のデータサイズに特化した, 複素数列の巡回畳み込みを扱う.
  * 
  * @author Matsuura Y.
- * @version 18.0
+ * @version 20.0
  */
 public final class Power2CyclicConvolutionModule {
 

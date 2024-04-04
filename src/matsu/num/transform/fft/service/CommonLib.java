@@ -1,5 +1,11 @@
-/**
- * 2024.2.7
+/*
+ * Copyright (c) 2024 Matsuura Y.
+ * 
+ * This software is released under the MIT License.
+ * http://opensource.org/licenses/mit-license.php
+ */
+/*
+ * 2024.6.14
  */
 package matsu.num.transform.fft.service;
 
@@ -20,7 +26,7 @@ import matsu.num.transform.fft.lib.privatelib.ArraysUtil;
  * </p>
  * 
  * @author Matsuura Y.
- * @version 18.0
+ * @version 20.0
  */
 public abstract class CommonLib {
 
@@ -56,9 +62,9 @@ public abstract class CommonLib {
     }
 
     /**
-     * デフォルトのライブラリが入った状態のビルダを返す.
+     * デフォルトライブラリを返す.
      * 
-     * @return デフォルトビルダ
+     * @return デフォルトライブラリ
      */
     public static CommonLib defaultImplemented() {
         return CommonLibDefaultHolder.DEFAULT_INSTANCE;

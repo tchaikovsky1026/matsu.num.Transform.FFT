@@ -1,5 +1,11 @@
-/**
- * 2024.2.15
+/*
+ * Copyright (c) 2024 Matsuura Y.
+ * 
+ * This software is released under the MIT License.
+ * http://opensource.org/licenses/mit-license.php
+ */
+/*
+ * 2024.4.4
  */
 package matsu.num.transform.fft.service;
 
@@ -10,7 +16,7 @@ import matsu.num.transform.fft.lib.privatelib.ArraysUtil;
  * {@link CommonLib} のデフォルト実装のホルダ.
  * 
  * @author Matsuura Y.
- * @version 18.0
+ * @version 20.0
  */
 final class CommonLibDefaultHolder {
 
@@ -36,12 +42,11 @@ final class CommonLibDefaultHolder {
             return this.trigonometry;
         }
 
-
         @Override
         ArraysUtil arrayUtil() {
             return this.arraysUtil;
         }
-        
+
         @Override
         public String toString() {
             return "CommonLib(default)";

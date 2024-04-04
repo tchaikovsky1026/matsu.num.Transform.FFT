@@ -1,5 +1,11 @@
-/**
- * 2024.2.15
+/*
+ * Copyright (c) 2024 Matsuura Y.
+ * 
+ * This software is released under the MIT License.
+ * http://opensource.org/licenses/mit-license.php
+ */
+/*
+ * 2024.4.4
  */
 package matsu.num.transform.fft.fftmodule;
 
@@ -36,7 +42,7 @@ import matsu.num.transform.fft.number.PrimeFactorization.Separated;
  * </p>
  * 
  * @author Matsuura Y.
- * @version 18.0
+ * @version 20.0
  */
 public final class GenericInnerFFTExecutor implements InnerDFTExecutor {
 

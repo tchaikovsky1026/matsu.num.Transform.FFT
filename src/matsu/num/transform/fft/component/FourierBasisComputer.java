@@ -1,5 +1,11 @@
-/**
- * 2024.4.3
+/*
+ * Copyright (c) 2024 Matsuura Y.
+ * 
+ * This software is released under the MIT License.
+ * http://opensource.org/licenses/mit-license.php
+ */
+/*
+ * 2024.4.4
  */
 package matsu.num.transform.fft.component;
 
@@ -32,7 +38,7 @@ import matsu.num.transform.fft.lib.Trigonometry;
  * </p>
  * 
  * @author Matsuura Y.
- * @version 19.0
+ * @version 20.0
  */
 public final class FourierBasisComputer {
 

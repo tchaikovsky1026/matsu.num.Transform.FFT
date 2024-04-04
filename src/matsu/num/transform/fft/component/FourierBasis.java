@@ -1,17 +1,23 @@
-/**
- * 2023.9.28
+/*
+ * Copyright (c) 2024 Matsuura Y.
+ * 
+ * This software is released under the MIT License.
+ * http://opensource.org/licenses/mit-license.php
+ */
+/*
+ * 2024.4.4
  */
 package matsu.num.transform.fft.component;
 
 /**
- * 離散Fourier変換 (DFT) と逆変換 (IDFT) の基底関数. 
+ * 離散Fourier変換 (DFT) と逆変換 (IDFT) の基底関数.
  * 
  * <p>
- * DFTの基底関数である, 
- * { 1, exp[-i(2&pi;/<i>N</i>)], exp[-i(4&pi;/<i>N</i>)], ... } 
+ * DFTの基底関数である,
+ * { 1, exp[-i(2&pi;/<i>N</i>)], exp[-i(4&pi;/<i>N</i>)], ... }
  * を扱うためのクラスである(<i>N</i>は標本サイズ). <br>
- * また, 同時にIDFTに関する基底:  
- * { 1, exp[i(2&pi;/<i>N</i>)], exp[i(4&pi;/<i>N</i>)], ... } 
+ * また, 同時にIDFTに関する基底:
+ * { 1, exp[i(2&pi;/<i>N</i>)], exp[i(4&pi;/<i>N</i>)], ... }
  * も提供する.
  * </p>
  * 
@@ -20,7 +26,7 @@ package matsu.num.transform.fft.component;
  * </p>
  * 
  * @author Matsuura Y.
- * @version 12.5
+ * @version 20.0
  */
 public final class FourierBasis {
 

@@ -1,5 +1,11 @@
-/**
- * 2024.2.17
+/*
+ * Copyright (c) 2024 Matsuura Y.
+ * 
+ * This software is released under the MIT License.
+ * http://opensource.org/licenses/mit-license.php
+ */
+/*
+ * 2024.4.4
  */
 package matsu.num.transform.fft;
 
@@ -20,7 +26,7 @@ import matsu.num.transform.fft.validation.StructureAcceptance;
  * <p>
  * このインターフェースにおいて,
  * {@link #accepts(ComplexNumberArrayDTO)}
- * のreject条件は, 
+ * のreject条件は,
  * {@link ComplexLinearTransform}
  * に対して次が追加される.
  * </p>
@@ -45,7 +51,7 @@ import matsu.num.transform.fft.validation.StructureAcceptance;
  * </p>
  * 
  * @author Matsuura Y.
- * @version 18.0
+ * @version 20.0
  */
 public interface IDFTExecutor extends ComplexLinearTransform {
 
@@ -58,7 +64,7 @@ public interface IDFTExecutor extends ComplexLinearTransform {
      * {@inheritDoc}
      * 
      * <p>
-     * {@link IDFTExecutor} ではデータサイズが {@link #MAX_DATA_SIZE} 
+     * {@link IDFTExecutor} ではデータサイズが {@link #MAX_DATA_SIZE}
      * を超過する場合にrejectされる.
      * </p>
      * 

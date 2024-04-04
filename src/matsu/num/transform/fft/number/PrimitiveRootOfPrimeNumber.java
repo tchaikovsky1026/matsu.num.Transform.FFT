@@ -1,17 +1,23 @@
-/**
- * 2023.9.27
+/*
+ * Copyright (c) 2024 Matsuura Y.
+ * 
+ * This software is released under the MIT License.
+ * http://opensource.org/licenses/mit-license.php
+ */
+/*
+ * 2024.4.4
  */
 package matsu.num.transform.fft.number;
 
 /**
- * 素数の原始根に関する振る舞いを扱う. 
+ * 素数の原始根に関する振る舞いを扱う.
  * 
  * <p>
- * このクラスは素数と原始根の値に基づく等価性を提供する. 
+ * このクラスは素数と原始根の値に基づく等価性を提供する.
  * </p>
  * 
  * @author Matsuura Y.
- * @version 12.5
+ * @version 20.0
  */
 public final class PrimitiveRootOfPrimeNumber {
 
@@ -32,7 +38,7 @@ public final class PrimitiveRootOfPrimeNumber {
 
     /**
      * インスタンスを生成する. <br>
-     * 与えた素数と原始根が正当かどうかを判定しないため, このコンストラクタを公開してはいけない. 
+     * 与えた素数と原始根が正当かどうかを判定しないため, このコンストラクタを公開してはいけない.
      * 
      * @param prime 素数
      * @param primitiveRoot primeの原始根
@@ -72,7 +78,7 @@ public final class PrimitiveRootOfPrimeNumber {
     }
 
     /**
-     * このクラスが扱う素数pを返す. 
+     * このクラスが扱う素数pを返す.
      * 
      * @return p
      */
@@ -81,7 +87,7 @@ public final class PrimitiveRootOfPrimeNumber {
     }
 
     /**
-     * このクラスが扱う素数pの原始根aを返す. 
+     * このクラスが扱う素数pの原始根aを返す.
      * 
      * @return a
      */
@@ -92,10 +98,10 @@ public final class PrimitiveRootOfPrimeNumber {
     /**
      * このクラスの扱う素数pとその原始根aと, 与えられたnについて, <br>
      * a^n mod p <br>
-     * を返す. 
+     * を返す.
      * 
      * <p>
-     * {@literal 0 <= n <= p-2}をサポートする. 
+     * {@literal 0 <= n <= p-2}をサポートする.
      * </p>
      * 
      * @param n n
@@ -112,10 +118,10 @@ public final class PrimitiveRootOfPrimeNumber {
     /**
      * このクラスの扱う素数pとその原始根aと, 与えられたrについて, <br>
      * a^n mod p = r <br>
-     * を満たすnを返す. 
+     * を満たすnを返す.
      * 
      * <p>
-     * {@literal 1 <= r <= p-1}をサポートする. 
+     * {@literal 1 <= r <= p-1}をサポートする.
      * </p>
      * 
      * @param r r
@@ -167,7 +173,7 @@ public final class PrimitiveRootOfPrimeNumber {
      * @param prime 3以上の素数
      * @return 素数の原始根
      * @throws IllegalArgumentException 引数が3以上の奇数でない場合, primeが合成数と予測される場合
-     * (ただし, 合成数ならば必ずスローされるわけではない)
+     *             (ただし, 合成数ならば必ずスローされるわけではない)
      */
     public static PrimitiveRootOfPrimeNumber of(int prime) {
         if (!(prime >= 3 && (prime & 1) == 1)) {

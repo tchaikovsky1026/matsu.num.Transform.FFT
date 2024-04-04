@@ -1,5 +1,11 @@
-/**
- * 2024.4.2
+/*
+ * Copyright (c) 2024 Matsuura Y.
+ * 
+ * This software is released under the MIT License.
+ * http://opensource.org/licenses/mit-license.php
+ */
+/*
+ * 2024.6.14
  */
 package matsu.num.transform.fft.service;
 
@@ -11,7 +17,19 @@ import matsu.num.transform.fft.Executor;
 import matsu.num.transform.fft.service.fuctionaltype.FunctionalType;
 
 /**
- * このモジュール内で実装されているFFTモジュールエグゼキュータのプロバイダ.
+ * <p>
+ * このモジュール内で実装されているエグゼキュータのプロバイダ.
+ * </p>
+ * 
+ * <p>
+ * まずこのプロバイダを生成するには, 共通ライブラリ
+ * ({@link CommonLib})
+ * の準備が必要である. <br>
+ * デフォルトのライブラリを使う場合は
+ * {@link #byDefaultLib()} をコールすればよく,
+ * ユーザーが準備し多ライブラリを使う場合は
+ * {@link #by(CommonLib)} をコールする.
+ * </p>
  * 
  * <p>
  * このプロバイダの {@link #get(ExecutorType)} メソッドを呼ぶことで,
@@ -26,7 +44,7 @@ import matsu.num.transform.fft.service.fuctionaltype.FunctionalType;
  * </ul>
  * 
  * @author Matsuura Y.
- * @version 19.0
+ * @version 20.0
  */
 public final class FFTModuleExecutorProvider {
 

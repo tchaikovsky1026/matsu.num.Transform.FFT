@@ -1,5 +1,11 @@
-/**
- * 2023.9.7
+/*
+ * Copyright (c) 2024 Matsuura Y.
+ * 
+ * This software is released under the MIT License.
+ * http://opensource.org/licenses/mit-license.php
+ */
+/*
+ * 2024.4.4
  */
 package matsu.num.transform.fft.component;
 
@@ -7,12 +13,13 @@ package matsu.num.transform.fft.component;
  * 離散Fourier変換に関する基底関数の種類を表す列挙型.
  * 
  * @author Matsuura Y.
- * @version 12.0
+ * @version 20.0
  */
 public enum FourierType {
 
     /**
-     * Fourier変換: <i>W</i><sub><i>N</i></sub> = exp(-i(2&pi;/<i>N</i>)) を扱うことの表示. 
+     * Fourier変換: <i>W</i><sub><i>N</i></sub> = exp(-i(2&pi;/<i>N</i>))
+     * を扱うことの表示.
      */
     DFT {
         @Override
@@ -22,7 +29,8 @@ public enum FourierType {
     },
 
     /**
-     * 逆Fourier変換: <i>W</i><sub><i>N</i></sub> = exp(i(2&pi;/<i>N</i>)) を扱うことの表示. 
+     * 逆Fourier変換: <i>W</i><sub><i>N</i></sub> = exp(i(2&pi;/<i>N</i>))
+     * を扱うことの表示.
      */
     IDFT {
         @Override
@@ -32,7 +40,8 @@ public enum FourierType {
     };
 
     /**
-     * <i>W</i><sub><i>N</i></sub><sup><i>j</i></sup> = exp(i&pi;<i>x</i>) となる<i>x</i>を計算する. 
+     * <i>W</i><sub><i>N</i></sub><sup><i>j</i></sup> = exp(i&pi;<i>x</i>)
+     * となる<i>x</i>を計算する.
      * 
      * @param N N
      * @param j j

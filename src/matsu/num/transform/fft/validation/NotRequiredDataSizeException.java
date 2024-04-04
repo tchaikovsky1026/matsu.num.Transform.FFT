@@ -1,5 +1,11 @@
-/**
- * 2024.2.18
+/*
+ * Copyright (c) 2024 Matsuura Y.
+ * 
+ * This software is released under the MIT License.
+ * http://opensource.org/licenses/mit-license.php
+ */
+/*
+ * 2024.4.4
  */
 package matsu.num.transform.fft.validation;
 
@@ -7,7 +13,7 @@ package matsu.num.transform.fft.validation;
  * 必要なデータサイズが無いことを通知する例外クラス.
  * 
  * @author Matsuura Y.
- * @version 18.0
+ * @version 20.0
  */
 public class NotRequiredDataSizeException extends IllegalArgumentException {
 

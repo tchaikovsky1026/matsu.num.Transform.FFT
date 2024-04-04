@@ -1,5 +1,11 @@
-/**
- * 2024.2.16
+/*
+ * Copyright (c) 2024 Matsuura Y.
+ * 
+ * This software is released under the MIT License.
+ * http://opensource.org/licenses/mit-license.php
+ */
+/*
+ * 2024.4.4
  */
 package matsu.num.transform.fft.validation;
 
@@ -10,7 +16,7 @@ import java.util.function.Supplier;
  * 拒絶を表す {@link StructureAcceptance} を扱う.
  * 
  * @author Matsuura Y.
- * @version 18.0
+ * @version 20.0
  */
 public final class StructureRejected extends StructureAcceptance {
 

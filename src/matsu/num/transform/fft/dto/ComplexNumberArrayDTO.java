@@ -1,5 +1,11 @@
-/**
- * 2023.12.4
+/*
+ * Copyright (c) 2024 Matsuura Y.
+ * 
+ * This software is released under the MIT License.
+ * http://opensource.org/licenses/mit-license.php
+ */
+/*
+ * 2024.4.4
  */
 package matsu.num.transform.fft.dto;
 
@@ -13,7 +19,7 @@ package matsu.num.transform.fft.dto;
  * </p>
  * 
  * @author Matsuura Y.
- * @version 17.0
+ * @version 20.0
  */
 public final class ComplexNumberArrayDTO {
 

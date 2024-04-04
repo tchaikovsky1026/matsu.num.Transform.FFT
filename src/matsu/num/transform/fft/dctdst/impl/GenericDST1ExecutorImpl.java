@@ -1,5 +1,11 @@
-/**
- * 2024.4.2
+/*
+ * Copyright (c) 2024 Matsuura Y.
+ * 
+ * This software is released under the MIT License.
+ * http://opensource.org/licenses/mit-license.php
+ */
+/*
+ * 2024.4.4
  */
 package matsu.num.transform.fft.dctdst.impl;
 
@@ -18,7 +24,7 @@ import matsu.num.transform.fft.skeletal.LinearByScalingStability;
  * {@link GenericDST1Executor} の実装.
  * 
  * @author Matsuura Y.
- * @version 19.0
+ * @version 20.0
  */
 public final class GenericDST1ExecutorImpl
         extends LinearByScalingStability implements GenericDST1Executor {

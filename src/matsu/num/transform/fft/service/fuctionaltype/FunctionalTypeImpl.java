@@ -1,5 +1,11 @@
-/**
- * 2024.4.2
+/*
+ * Copyright (c) 2024 Matsuura Y.
+ * 
+ * This software is released under the MIT License.
+ * http://opensource.org/licenses/mit-license.php
+ */
+/*
+ * 2024.4.4
  */
 package matsu.num.transform.fft.service.fuctionaltype;
 
@@ -13,7 +19,7 @@ import matsu.num.transform.fft.service.CommonLib;
  * このモジュールが提供するエグゼキュータのタイプ.
  * 
  * @author Matsuura Y.
- * @version 19.0
+ * @version 20.0
  * @param <T> このタイプが返却するエグゼキュータの型,
  *            {@link CommonLib} 以外の状態を持たないことが保証されている.
  */
@@ -26,9 +32,10 @@ public final class FunctionalTypeImpl<T extends Executor> implements FunctionalT
     /**
      * パッケージプライベートな唯一のコンストラクタ. <br>
      * Function::apply でnullが与えられることはない.
-     * @param executorClass 
-     * @param getter 
-     * @param typeName 
+     * 
+     * @param executorClass
+     * @param getter
+     * @param typeName
      */
     public FunctionalTypeImpl(Class<T> executorClass, Function<CommonLib, T> getter, String typeName) {
         this.executorClass = Objects.requireNonNull(executorClass);

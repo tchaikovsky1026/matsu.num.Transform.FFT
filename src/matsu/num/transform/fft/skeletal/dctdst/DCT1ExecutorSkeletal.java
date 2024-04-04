@@ -1,5 +1,11 @@
-/**
- * 2024.4.2
+/*
+ * Copyright (c) 2024 Matsuura Y.
+ * 
+ * This software is released under the MIT License.
+ * http://opensource.org/licenses/mit-license.php
+ */
+/*
+ * 2024.4.4
  */
 package matsu.num.transform.fft.skeletal.dctdst;
 
@@ -19,7 +25,7 @@ import matsu.num.transform.fft.skeletal.LinearByScalingStability;
  * </p>
  * 
  * @author Matsuura Y.
- * @version 19.0
+ * @version 20.0
  */
 public abstract class DCT1ExecutorSkeletal
         extends LinearByScalingStability implements DCT1Executor {

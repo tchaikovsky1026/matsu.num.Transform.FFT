@@ -1,5 +1,11 @@
-/**
- * 2024.4.2
+/*
+ * Copyright (c) 2024 Matsuura Y.
+ * 
+ * This software is released under the MIT License.
+ * http://opensource.org/licenses/mit-license.php
+ */
+/*
+ * 2024.4.4
  */
 package matsu.num.transform.fft.service;
 
@@ -18,15 +24,15 @@ import matsu.num.transform.fft.service.fuctionaltype.FunctionalTypeImpl;
  * {@link ExecutorType} 型の離散Fourier変換と逆変換に関する定数を取りまとめるクラス.
  * 
  * @author Matsuura Y.
- * @version 19.0
+ * @version 20.0
  */
 public final class DftTypes {
-    
+
     private DftTypes() {
         //インスタンス化不可
         throw new AssertionError();
     }
-    
+
     /**
      * 任意サイズに対応するDFTの実行手段を表す.
      */

@@ -1,5 +1,11 @@
-/**
- * 2023.9.30
+/*
+ * Copyright (c) 2024 Matsuura Y.
+ * 
+ * This software is released under the MIT License.
+ * http://opensource.org/licenses/mit-license.php
+ */
+/*
+ * 2024.4.4
  */
 package matsu.num.transform.fft.number;
 
@@ -18,7 +24,7 @@ import java.util.Objects;
  * </p>
  * 
  * @author Matsuura Y.
- * @version 12.8
+ * @version 20.0
  */
 public final class PrimeFactorization {
 
@@ -183,7 +189,7 @@ public final class PrimeFactorization {
     }
 
     /**
-     * 与えた整数を素因数分解する. 
+     * 与えた整数を素因数分解する.
      * 
      * @param original 素因数分解する整数
      * @return 素因数分解
@@ -273,7 +279,8 @@ public final class PrimeFactorization {
      * 素因数分解のファミリーを管理する.
      * 
      * <p>
-     * {@link PrimeFactorization#separatedLowest}, {@link PrimeFactorization#separatedHighest}によって, <br>
+     * {@link PrimeFactorization#separatedLowest},
+     * {@link PrimeFactorization#separatedHighest}によって, <br>
      * {@link Separated}が2の累乗で爆発するリスクがあるので, <br>
      * それを管理して無駄な{@link PrimeFactorization}を生成しないための仕組み.
      * </p>

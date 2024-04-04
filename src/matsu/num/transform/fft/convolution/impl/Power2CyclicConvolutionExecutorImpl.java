@@ -1,5 +1,11 @@
-/**
- * 2024.4.2
+/*
+ * Copyright (c) 2024 Matsuura Y.
+ * 
+ * This software is released under the MIT License.
+ * http://opensource.org/licenses/mit-license.php
+ */
+/*
+ * 2024.4.4
  */
 package matsu.num.transform.fft.convolution.impl;
 
@@ -15,7 +21,7 @@ import matsu.num.transform.fft.skeletal.convolution.Power2CyclicConvolutionSkele
  * {@link Power2CyclicConvolutionExecutor} の実装.
  * 
  * @author Matsuura Y.
- * @version 19.0
+ * @version 20.0
  */
 public final class Power2CyclicConvolutionExecutorImpl
         extends Power2CyclicConvolutionSkeletal implements Power2CyclicConvolutionExecutor {

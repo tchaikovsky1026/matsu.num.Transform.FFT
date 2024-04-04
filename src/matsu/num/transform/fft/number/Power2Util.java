@@ -1,5 +1,11 @@
-/**
- * 2023.9.27
+/*
+ * Copyright (c) 2024 Matsuura Y.
+ * 
+ * This software is released under the MIT License.
+ * http://opensource.org/licenses/mit-license.php
+ */
+/*
+ * 2024.4.4
  */
 package matsu.num.transform.fft.number;
 
@@ -7,7 +13,7 @@ package matsu.num.transform.fft.number;
  * 2のべき乗の整数に関する計算補助.
  * 
  * @author Matsuura Y.
- * @version 12.5
+ * @version 20.0
  */
 public final class Power2Util {
     private Power2Util() {

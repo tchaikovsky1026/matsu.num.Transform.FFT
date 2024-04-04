@@ -1,5 +1,11 @@
-/**
- * 2024.2.17
+/*
+ * Copyright (c) 2024 Matsuura Y.
+ * 
+ * This software is released under the MIT License.
+ * http://opensource.org/licenses/mit-license.php
+ */
+/*
+ * 2024.4.4
  */
 package matsu.num.transform.fft.convolution;
 
@@ -20,7 +26,7 @@ import matsu.num.transform.fft.validation.StructureAcceptance;
  * </p>
  * 
  * @author Matsuura Y.
- * @version 18.0
+ * @version 20.0
  */
 public interface GenericCyclicConvolutionExecutor extends CyclicConvolutionExecutor {
 
@@ -28,7 +34,8 @@ public interface GenericCyclicConvolutionExecutor extends CyclicConvolutionExecu
      * {@inheritDoc}
      * 
      * <p>
-     * {@link GenericCyclicConvolutionExecutor} でaccept条件とreject条件が共に確定 (固定) される.
+     * {@link GenericCyclicConvolutionExecutor} でaccept条件とreject条件が共に確定 (固定)
+     * される.
      * </p>
      * 
      * @throws NullPointerException {@inheritDoc}
