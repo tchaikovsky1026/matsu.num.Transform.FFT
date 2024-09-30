@@ -5,7 +5,7 @@
  * http://opensource.org/licenses/mit-license.php
  */
 /*
- * 2024.6.14
+ * 2024.9.30
  */
 package matsu.num.transform.fft.service;
 
@@ -14,7 +14,6 @@ import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 
 import matsu.num.transform.fft.Executor;
-import matsu.num.transform.fft.service.fuctionaltype.FunctionalType;
 
 /**
  * <p>
@@ -44,7 +43,7 @@ import matsu.num.transform.fft.service.fuctionaltype.FunctionalType;
  * </ul>
  * 
  * @author Matsuura Y.
- * @version 20.0
+ * @version 21.0
  */
 public final class FFTModuleExecutorProvider {
 
@@ -53,7 +52,7 @@ public final class FFTModuleExecutorProvider {
 
     private final CommonLib lib;
 
-    private final Map<FunctionalType<?>, Object> map;
+    private final Map<ExecutorType<?>, Object> map;
 
     //ロック用オブジェクト
     private final Object lock = new Object();
@@ -78,22 +77,21 @@ public final class FFTModuleExecutorProvider {
      */
     public <R extends Executor> R get(ExecutorType<R> type) {
         Objects.requireNonNull(type);
-        FunctionalType<R> functionalType = (FunctionalType<R>) type;
 
-        Class<R> executorClass = functionalType.executorClass();
-        Object out = this.map.get(functionalType);
+        Class<R> executorClass = type.executorClass();
+        Object out = this.map.get(type);
         if (Objects.nonNull(out)) {
             //このキャストは必ず成功する
             return executorClass.cast(out);
         }
         synchronized (this.lock) {
-            out = this.map.get(functionalType);
+            out = this.map.get(type);
             if (Objects.nonNull(out)) {
                 //このキャストは必ず成功する
                 return executorClass.cast(out);
             }
-            R castedObj = functionalType.createExecutor(this.lib);
-            this.map.put(functionalType, castedObj);
+            R castedObj = type.createExecutor(this.lib);
+            this.map.put(type, castedObj);
             return castedObj;
         }
     }

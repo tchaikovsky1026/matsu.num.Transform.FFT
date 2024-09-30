@@ -5,7 +5,7 @@
  * http://opensource.org/licenses/mit-license.php
  */
 /*
- * 2024.4.4
+ * 2024.9.30
  */
 package matsu.num.transform.fft.service;
 
@@ -18,7 +18,6 @@ import matsu.num.transform.fft.convolution.GenericCyclicConvolutionExecutor;
 import matsu.num.transform.fft.convolution.Power2CyclicConvolutionExecutor;
 import matsu.num.transform.fft.convolution.impl.GenericCyclicConvolutionExecutorImpl;
 import matsu.num.transform.fft.convolution.impl.Power2CyclicConvolutionExecutorImpl;
-import matsu.num.transform.fft.service.fuctionaltype.FunctionalTypeImpl;
 
 /**
  * {@link ExecutorType} 型の巡回畳み込みに関する定数を取りまとめるクラス.
@@ -51,14 +50,14 @@ public final class CyclicConvolutionTypes {
         List<ExecutorType<?>> list = new ArrayList<>();
 
         GENERIC_CYCLIC_CONVOLUTION_EXECUTOR =
-                new FunctionalTypeImpl<>(
+                new ExecutorType<>(
                         GenericCyclicConvolutionExecutor.class,
                         lib -> new GenericCyclicConvolutionExecutorImpl(lib.trigonometry(), lib.arrayUtil()),
                         "GENERIC_CYCLIC_CONVOLUTION_EXECUTOR");
         list.add(GENERIC_CYCLIC_CONVOLUTION_EXECUTOR);
 
         POWER2_CYCLIC_CONVOLUTION_EXECUTOR =
-                new FunctionalTypeImpl<>(
+                new ExecutorType<>(
                         Power2CyclicConvolutionExecutor.class,
                         lib -> new Power2CyclicConvolutionExecutorImpl(lib.trigonometry(), lib.arrayUtil()),
                         "POWER2_CYCLIC_CONVOLUTION_EXECUTOR");

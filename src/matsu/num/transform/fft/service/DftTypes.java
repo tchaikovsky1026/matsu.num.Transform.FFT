@@ -5,7 +5,7 @@
  * http://opensource.org/licenses/mit-license.php
  */
 /*
- * 2024.4.4
+ * 2024.9.30
  */
 package matsu.num.transform.fft.service;
 
@@ -18,13 +18,12 @@ import matsu.num.transform.fft.GenericDFTExecutor;
 import matsu.num.transform.fft.GenericIDFTExecutor;
 import matsu.num.transform.fft.dft.impl.GenericDFTExecutorImpl;
 import matsu.num.transform.fft.dft.impl.GenericIDFTExecutorImpl;
-import matsu.num.transform.fft.service.fuctionaltype.FunctionalTypeImpl;
 
 /**
  * {@link ExecutorType} 型の離散Fourier変換と逆変換に関する定数を取りまとめるクラス.
  * 
  * @author Matsuura Y.
- * @version 20.0
+ * @version 21.0
  */
 public final class DftTypes {
 
@@ -48,12 +47,12 @@ public final class DftTypes {
     static {
         List<ExecutorType<?>> list = new ArrayList<>();
 
-        GENERIC_DFT_EXECUTOR = new FunctionalTypeImpl<>(
+        GENERIC_DFT_EXECUTOR = new ExecutorType<>(
                 GenericDFTExecutor.class, lib -> new GenericDFTExecutorImpl(lib.trigonometry(), lib.arrayUtil()),
                 "GENERIC_DFT_EXECUTOR");
         list.add(GENERIC_DFT_EXECUTOR);
 
-        GENERIC_IDFT_EXECUTOR = new FunctionalTypeImpl<>(
+        GENERIC_IDFT_EXECUTOR = new ExecutorType<>(
                 GenericIDFTExecutor.class, lib -> new GenericIDFTExecutorImpl(lib.trigonometry(), lib.arrayUtil()),
                 "GENERIC_IDFT_EXECUTOR");
         list.add(GENERIC_IDFT_EXECUTOR);

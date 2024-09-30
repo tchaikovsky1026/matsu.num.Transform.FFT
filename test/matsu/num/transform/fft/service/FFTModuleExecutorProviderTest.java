@@ -11,8 +11,6 @@ import org.junit.experimental.theories.Theories;
 import org.junit.experimental.theories.Theory;
 import org.junit.runner.RunWith;
 
-import matsu.num.transform.fft.service.fuctionaltype.FunctionalType;
-
 /**
  * {@link FFTModuleExecutorProvider} クラスのテスト.
  * 
@@ -44,7 +42,7 @@ public class FFTModuleExecutorProviderTest {
         @Theory
         public void test(ExecutorType<?> type) {
             try {
-                ((FunctionalType<?>) type).executorClass().cast(provider.get(type));
+                type.executorClass().cast(provider.get(type));
             } catch (ClassCastException e) {
                 throw new AssertionError("providerは正しい型のインスタンスを生成していない");
             }
