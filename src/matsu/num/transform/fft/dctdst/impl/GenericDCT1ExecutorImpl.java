@@ -5,27 +5,27 @@
  * http://opensource.org/licenses/mit-license.php
  */
 /*
- * 2024.4.4
+ * 2024.10.1
  */
 package matsu.num.transform.fft.dctdst.impl;
 
 import matsu.num.transform.fft.component.ComplexNumber;
 import matsu.num.transform.fft.component.FourierBasisComputer;
 import matsu.num.transform.fft.component.FourierType;
+import matsu.num.transform.fft.component.LinearByScalingStability;
 import matsu.num.transform.fft.dctdst.GenericDCT1Executor;
 import matsu.num.transform.fft.fftmodule.GenericInnerFFTExecutor;
 import matsu.num.transform.fft.lib.Trigonometry;
 import matsu.num.transform.fft.lib.privatelib.ArraysUtil;
-import matsu.num.transform.fft.skeletal.dctdst.DCT1ExecutorSkeletal;
 
 /**
  * {@link GenericDCT1Executor} の実装.
  * 
  * @author Matsuura Y.
- * @version 20.0
+ * @version 21.1
  */
 public final class GenericDCT1ExecutorImpl
-        extends DCT1ExecutorSkeletal implements GenericDCT1Executor {
+        extends LinearByScalingStability implements GenericDCT1Executor {
 
     private final FourierBasisComputer.Supplier computerSupplier;
     private final GenericInnerFFTExecutor fftExecutor;
@@ -41,6 +41,9 @@ public final class GenericDCT1ExecutorImpl
         super(arraysUtil);
         this.computerSupplier = new FourierBasisComputer.Supplier(trigonometry);
         this.fftExecutor = new GenericInnerFFTExecutor(this.computerSupplier);
+
+        this.dataSizeContract.bindRequiredSize(2);
+        this.dataSizeContract.bindUpperLimitSize(MAX_DATA_SIZE);
     }
 
     @Override

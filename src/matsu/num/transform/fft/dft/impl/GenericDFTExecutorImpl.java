@@ -5,11 +5,12 @@
  * http://opensource.org/licenses/mit-license.php
  */
 /*
- * 2024.4.4
+ * 2024.10.1
  */
 package matsu.num.transform.fft.dft.impl;
 
 import matsu.num.transform.fft.GenericDFTExecutor;
+import matsu.num.transform.fft.component.ComplexLinearByScalingStability;
 import matsu.num.transform.fft.component.ComplexNumber;
 import matsu.num.transform.fft.component.FourierBasisComputer;
 import matsu.num.transform.fft.component.FourierType;
@@ -17,13 +18,12 @@ import matsu.num.transform.fft.dto.ComplexNumberArrayDTO;
 import matsu.num.transform.fft.fftmodule.GenericInnerFFTExecutor;
 import matsu.num.transform.fft.lib.Trigonometry;
 import matsu.num.transform.fft.lib.privatelib.ArraysUtil;
-import matsu.num.transform.fft.skeletal.ComplexLinearByScalingStability;
 
 /**
  * {@link GenericDFTExecutor} の実装.
  * 
  * @author Matsuura Y.
- * @version 20.0
+ * @version 21.1
  */
 public final class GenericDFTExecutorImpl
         extends ComplexLinearByScalingStability implements GenericDFTExecutor {
@@ -41,9 +41,11 @@ public final class GenericDFTExecutorImpl
      * @throws NullPointerException 引数にnullが含まれる場合
      */
     public GenericDFTExecutorImpl(Trigonometry trigonometry, ArraysUtil arraysUtil) {
-        super(MAX_DATA_SIZE, arraysUtil);
+        super(arraysUtil);
         this.computerSupplier = new FourierBasisComputer.Supplier(trigonometry);
         this.innerDFTExecutor = new GenericInnerFFTExecutor(this.computerSupplier);
+
+        this.dataSizeContract.bindUpperLimitSize(MAX_DATA_SIZE);
     }
 
     /**

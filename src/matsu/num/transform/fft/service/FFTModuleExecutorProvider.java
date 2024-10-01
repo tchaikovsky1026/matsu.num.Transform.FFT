@@ -5,15 +5,13 @@
  * http://opensource.org/licenses/mit-license.php
  */
 /*
- * 2024.9.30
+ * 2024.10.1
  */
 package matsu.num.transform.fft.service;
 
 import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
-
-import matsu.num.transform.fft.Executor;
 
 /**
  * <p>
@@ -43,7 +41,7 @@ import matsu.num.transform.fft.Executor;
  * </ul>
  * 
  * @author Matsuura Y.
- * @version 21.0
+ * @version 21.1
  */
 public final class FFTModuleExecutorProvider {
 
@@ -75,7 +73,7 @@ public final class FFTModuleExecutorProvider {
      * @return エグゼキュータ
      * @throws NullPointerException 引数にnullが含まれる場合
      */
-    public <R extends Executor> R get(ExecutorType<R> type) {
+    public <R> R get(ExecutorType<R> type) {
         Objects.requireNonNull(type);
 
         Class<R> executorClass = type.executorClass();

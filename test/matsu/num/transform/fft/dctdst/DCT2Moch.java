@@ -2,10 +2,10 @@ package matsu.num.transform.fft.dctdst;
 
 import org.junit.Ignore;
 
+import matsu.num.transform.fft.component.LinearByScalingStability;
 import matsu.num.transform.fft.lib.Trigonometry;
 import matsu.num.transform.fft.lib.TrigonometryForTesting;
 import matsu.num.transform.fft.lib.privatelib.ArraysUtilForTesting;
-import matsu.num.transform.fft.skeletal.LinearByScalingStability;
 
 /**
  * 実用的でない(低速な)DCT-2.
@@ -18,7 +18,9 @@ public final class DCT2Moch extends LinearByScalingStability implements DCT2Exec
     private static final Trigonometry TRIGONOMETRY = TrigonometryForTesting.INSTANCE;
 
     public DCT2Moch() {
-        super(MAX_DATA_SIZE, ArraysUtilForTesting.INSTANCE);
+        super(ArraysUtilForTesting.INSTANCE);
+
+        this.dataSizeContract.bindUpperLimitSize(MAX_DATA_SIZE);
     }
 
     @Override

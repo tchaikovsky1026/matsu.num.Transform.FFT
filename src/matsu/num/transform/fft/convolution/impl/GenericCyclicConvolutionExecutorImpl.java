@@ -5,23 +5,23 @@
  * http://opensource.org/licenses/mit-license.php
  */
 /*
- * 2024.4.4
+ * 2024.10.1
  */
 package matsu.num.transform.fft.convolution.impl;
 
+import matsu.num.transform.fft.component.BiLinearByScalingStability;
 import matsu.num.transform.fft.component.ComplexNumber;
 import matsu.num.transform.fft.component.FourierBasisComputer;
 import matsu.num.transform.fft.convolution.GenericCyclicConvolutionExecutor;
 import matsu.num.transform.fft.fftmodule.CyclicConvolutionModule;
 import matsu.num.transform.fft.lib.Trigonometry;
 import matsu.num.transform.fft.lib.privatelib.ArraysUtil;
-import matsu.num.transform.fft.skeletal.BiLinearByScalingStability;
 
 /**
  * {@link GenericCyclicConvolutionExecutor} の実装.
  * 
  * @author Matsuura Y.
- * @version 20.0
+ * @version 21.1
  */
 public final class GenericCyclicConvolutionExecutorImpl
         extends BiLinearByScalingStability
@@ -38,9 +38,11 @@ public final class GenericCyclicConvolutionExecutorImpl
      * @throws NullPointerException 引数にnullが含まれる場合
      */
     public GenericCyclicConvolutionExecutorImpl(Trigonometry trigonometry, ArraysUtil arraysUtil) {
-        super(MAX_DATA_SIZE, arraysUtil);
+        super(arraysUtil);
         this.computerSupplier = new FourierBasisComputer.Supplier(trigonometry);
         this.module = new CyclicConvolutionModule(this.computerSupplier);
+
+        this.dataSizeContract.bindUpperLimitSize(MAX_DATA_SIZE);
     }
 
     @Override

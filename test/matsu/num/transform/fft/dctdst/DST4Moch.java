@@ -2,10 +2,10 @@ package matsu.num.transform.fft.dctdst;
 
 import org.junit.Ignore;
 
+import matsu.num.transform.fft.component.LinearByScalingStability;
 import matsu.num.transform.fft.lib.Trigonometry;
 import matsu.num.transform.fft.lib.TrigonometryForTesting;
 import matsu.num.transform.fft.lib.privatelib.ArraysUtilForTesting;
-import matsu.num.transform.fft.skeletal.LinearByScalingStability;
 
 /**
  * 実用的でない(低速な)DST-4.
@@ -18,7 +18,9 @@ public final class DST4Moch extends LinearByScalingStability implements DST4Exec
     private static final Trigonometry TRIGONOMETRY = TrigonometryForTesting.INSTANCE;
 
     public DST4Moch() {
-        super(MAX_DATA_SIZE, ArraysUtilForTesting.INSTANCE);
+        super(ArraysUtilForTesting.INSTANCE);
+
+        this.dataSizeContract.bindUpperLimitSize(MAX_DATA_SIZE);
     }
 
     @Override

@@ -12,8 +12,6 @@ package matsu.num.transform.fft.service;
 import java.util.Objects;
 import java.util.function.Function;
 
-import matsu.num.transform.fft.Executor;
-
 /**
  * このモジュールが提供するエグゼキュータのタイプを表す.
  * 
@@ -21,7 +19,7 @@ import matsu.num.transform.fft.Executor;
  * @version 21.0
  * @param <T> このタイプが返却するエグゼキュータの型
  */
-public final class ExecutorType<T extends Executor> {
+public final class ExecutorType<T> {
 
     private final Class<T> executorClass;
     private final Function<CommonLib, T> getter;

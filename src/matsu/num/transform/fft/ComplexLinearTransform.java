@@ -5,7 +5,7 @@
  * http://opensource.org/licenses/mit-license.php
  */
 /*
- * 2024.4.4
+ * 2024.10.1
  */
 package matsu.num.transform.fft;
 
@@ -42,11 +42,17 @@ import matsu.num.transform.fft.validation.StructureAcceptance;
  * <li>例: 入力の長さは2の累乗でなければならない.</li>
  * </ul>
  * 
+ * <p>
+ * このインターフェースのサブタイプは実質的にイミュータブルであり,
+ * すべてのメソッドは副作用無し,
+ * スレッドセーフ, 参照透過であることが保証される.
+ * </p>
+ * 
  * @author Matsuura Y.
- * @version 20.0
+ * @version 21.1
  * @see ComplexNumberArrayDTO
  */
-public interface ComplexLinearTransform extends Executor {
+public interface ComplexLinearTransform {
 
     /**
      * <p>

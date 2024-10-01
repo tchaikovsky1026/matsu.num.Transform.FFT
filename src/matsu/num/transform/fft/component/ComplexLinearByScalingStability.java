@@ -5,9 +5,9 @@
  * http://opensource.org/licenses/mit-license.php
  */
 /*
- * 2024.4.4
+ * 2024.10.1
  */
-package matsu.num.transform.fft.skeletal;
+package matsu.num.transform.fft.component;
 
 import java.util.Arrays;
 import java.util.Objects;
@@ -35,74 +35,36 @@ import matsu.num.transform.fft.validation.StructureAcceptance;
  * </p>
  * 
  * @author Matsuura Y.
- * @version 20.0
+ * @version 21.1
  */
-public abstract class ComplexLinearByScalingStability
-        extends DataSizeContract implements ComplexLinearTransform {
+public abstract class ComplexLinearByScalingStability implements ComplexLinearTransform {
 
-    private final int requiredSize;
-    private final int upperLimitSize;
+    protected final DataSizeContract dataSizeContract = new DataSizeContract();
+
     private final ArraysUtil arraysUtil;
 
     /**
-     * 許容されるデータサイズを与えるコンストラクタ.
+     * 唯一のコンストラクタ.
      * 
-     * @param requiredSize acceptされるために必要なデータサイズの最小値
-     * @param upperLimitSize acceptされるデータサイズの最大値
      * @param arraysUtil 配列ユーティリティ
-     * @throws IllegalArgumentException requiredSizeが1以上でない場合,
-     *             upperLimitSizeがrequiredSize以上でない場合
      * @throws NullPointerException 引数にnullが含まれる場合
      */
-    protected ComplexLinearByScalingStability(int requiredSize, int upperLimitSize, ArraysUtil arraysUtil) {
+    protected ComplexLinearByScalingStability(ArraysUtil arraysUtil) {
         super();
 
-        if (requiredSize < 1 || upperLimitSize < requiredSize) {
-            throw new IllegalArgumentException("引数が規約を満たしていない");
-        }
-
-        this.requiredSize = requiredSize;
-        this.upperLimitSize = upperLimitSize;
         this.arraysUtil = Objects.requireNonNull(arraysUtil);
-    }
 
-    /**
-     * acceptされるデータサイズの最大値を与えるコンストラクタ. <br>
-     * requiredSizeは1である.
-     * 
-     * @param upperLimitSize acceptされるデータサイズの最大値
-     * @param arraysUtil 配列ユーティリティ
-     * @throws IllegalArgumentException upperLimitSizeが1以上でない場合
-     * @throws NullPointerException 引数にnullが含まれる場合
-     */
-    protected ComplexLinearByScalingStability(int upperLimitSize, ArraysUtil arraysUtil) {
-        this(1, upperLimitSize, arraysUtil);
+        this.dataSizeContract.bindRequiredSize(1);
     }
 
     @Override
     public final StructureAcceptance accepts(ComplexNumberArrayDTO complexNumberArray) {
-        return this.acceptsSize(complexNumberArray.size);
+        return this.dataSizeContract.acceptsSize(complexNumberArray.size);
     }
 
     @Override
     public final StructureAcceptance acceptsReal(double[] realNumberData) {
-        return this.acceptsSize(realNumberData.length);
-    }
-
-    /**
-     * 外部から呼ぶことはできない.
-     */
-    @Override
-    protected final int requiredSize() {
-        return this.requiredSize;
-    }
-
-    /**
-     * 外部から呼ぶことはできない.
-     */
-    @Override
-    protected final int upperLimitSize() {
-        return this.upperLimitSize;
+        return this.dataSizeContract.acceptsSize(realNumberData.length);
     }
 
     @Override

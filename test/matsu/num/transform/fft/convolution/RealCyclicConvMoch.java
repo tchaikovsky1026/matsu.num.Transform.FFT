@@ -2,9 +2,9 @@ package matsu.num.transform.fft.convolution;
 
 import org.junit.Ignore;
 
+import matsu.num.transform.fft.component.BiLinearByScalingStability;
 import matsu.num.transform.fft.lib.privatelib.ArraysUtilForTesting;
 import matsu.num.transform.fft.lib.privatelib.ArraysUtilStaticForTestModule;
-import matsu.num.transform.fft.skeletal.BiLinearByScalingStability;
 
 /**
  * 実用性の低い(低速な)実数の巡回畳み込みを扱う.
@@ -18,7 +18,9 @@ public final class RealCyclicConvMoch
     private static final CyclicConvolutionExecutor INSTANCE = new RealCyclicConvMoch();
 
     private RealCyclicConvMoch() {
-        super(MAX_DATA_SIZE, ArraysUtilForTesting.INSTANCE);
+        super(ArraysUtilForTesting.INSTANCE);
+
+        this.dataSizeContract.bindUpperLimitSize(MAX_DATA_SIZE);
     }
 
     @Override

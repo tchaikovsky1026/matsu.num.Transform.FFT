@@ -56,7 +56,9 @@ import matsu.num.transform.fft.validation.StructureRejected;
  * 
  * @author Matsuura Y.
  * @version 20.0
+ * @deprecated データサイズの契約を抽象クラスにするのは構造が複雑になるので, 分離を行った. このクラスは使われていない.
  */
+@Deprecated
 abstract class DataSizeContract {
 
     private final List<RejectionContract> contract;

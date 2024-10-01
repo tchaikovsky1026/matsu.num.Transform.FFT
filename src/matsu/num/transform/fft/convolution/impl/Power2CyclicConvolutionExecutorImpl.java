@@ -5,26 +5,29 @@
  * http://opensource.org/licenses/mit-license.php
  */
 /*
- * 2024.4.4
+ * 2024.10.1
  */
 package matsu.num.transform.fft.convolution.impl;
 
+import matsu.num.transform.fft.component.BiLinearByScalingStability;
 import matsu.num.transform.fft.component.ComplexNumber;
 import matsu.num.transform.fft.component.FourierBasisComputer;
 import matsu.num.transform.fft.convolution.Power2CyclicConvolutionExecutor;
 import matsu.num.transform.fft.fftmodule.Power2CyclicConvolutionModule;
 import matsu.num.transform.fft.lib.Trigonometry;
 import matsu.num.transform.fft.lib.privatelib.ArraysUtil;
-import matsu.num.transform.fft.skeletal.convolution.Power2CyclicConvolutionSkeletal;
+import matsu.num.transform.fft.number.Power2Util;
+import matsu.num.transform.fft.validation.DataSizeNotMismatchException;
+import matsu.num.transform.fft.validation.StructureRejected;
 
 /**
  * {@link Power2CyclicConvolutionExecutor} の実装.
  * 
  * @author Matsuura Y.
- * @version 20.0
+ * @version 21.1
  */
 public final class Power2CyclicConvolutionExecutorImpl
-        extends Power2CyclicConvolutionSkeletal implements Power2CyclicConvolutionExecutor {
+        extends BiLinearByScalingStability implements Power2CyclicConvolutionExecutor {
 
     private final FourierBasisComputer.Supplier computerSupplier;
     private final Power2CyclicConvolutionModule module;
@@ -40,6 +43,12 @@ public final class Power2CyclicConvolutionExecutorImpl
         super(arraysUtil);
         this.computerSupplier = new FourierBasisComputer.Supplier(trigonometry);
         this.module = new Power2CyclicConvolutionModule(this.computerSupplier);
+
+        this.dataSizeContract.bindUpperLimitSize(MAX_DATA_SIZE);
+        this.dataSizeContract.addRejectionContract(
+                size -> !Power2Util.isPowerOf2(size),
+                StructureRejected
+                        .by(() -> new DataSizeNotMismatchException("データサイズが2の累乗でない"), "REJECT_BY_NOT_POWER_OF_2"));
     }
 
     @Override
