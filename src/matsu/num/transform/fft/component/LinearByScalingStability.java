@@ -5,7 +5,7 @@
  * http://opensource.org/licenses/mit-license.php
  */
 /*
- * 2024.10.1
+ * 2024.10.26
  */
 package matsu.num.transform.fft.component;
 
@@ -31,7 +31,7 @@ import matsu.num.transform.fft.validation.StructureAcceptance;
  * @author Matsuura Y.
  * @version 21.1
  */
-public abstract class LinearByScalingStability implements LinearTransform {
+public abstract non-sealed class LinearByScalingStability implements LinearTransform {
 
     protected final DataSizeContract dataSizeContract = new DataSizeContract();
 

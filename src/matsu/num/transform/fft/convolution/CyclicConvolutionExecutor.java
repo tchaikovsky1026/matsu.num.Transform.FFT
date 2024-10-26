@@ -5,7 +5,7 @@
  * http://opensource.org/licenses/mit-license.php
  */
 /*
- * 2024.4.4
+ * 2024.10.26
  */
 package matsu.num.transform.fft.convolution;
 
@@ -44,9 +44,10 @@ import matsu.num.transform.fft.validation.StructureAcceptance;
  * </ul>
  * 
  * @author Matsuura Y.
- * @version 20.0
+ * @version 21.1
  */
-public interface CyclicConvolutionExecutor extends BiLinearTransform {
+public sealed interface CyclicConvolutionExecutor
+        extends BiLinearTransform permits GenericCyclicConvolutionExecutor, Power2CyclicConvolutionExecutor {
 
     /**
      * 扱うことができるデータサイズの最大値: 2<sup>28</sup>

@@ -5,7 +5,7 @@
  * http://opensource.org/licenses/mit-license.php
  */
 /*
- * 2024.4.4
+ * 2024.10.26
  */
 package matsu.num.transform.fft.dctdst;
 
@@ -35,10 +35,10 @@ import matsu.num.transform.fft.validation.StructureAcceptance;
  * <ul>
  * <li>データサイズが {@link #MAX_DATA_SIZE} を超過する場合</li>
  * </ul>
+ *
  * 
- * <p>
- * <u><i>技術的補足</i></u> <br>
- * </p>
+ * <hr>
+ * <h2>技術的補足</h2>
  * 
  * <p>
  * DST-1の逆変換はDST-1自身である. <br>
@@ -84,9 +84,9 @@ import matsu.num.transform.fft.validation.StructureAcceptance;
  * </p>
  * 
  * @author Matsuura Y.
- * @version 20.0
+ * @version 21.1
  */
-public interface DST1Executor extends LinearTransform {
+public sealed interface DST1Executor extends LinearTransform permits GenericDST1Executor {
 
     /**
      * 扱うことができるデータサイズの最大値: 2<sup>27</sup> - 1

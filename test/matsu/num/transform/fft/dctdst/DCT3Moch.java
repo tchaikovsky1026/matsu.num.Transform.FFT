@@ -13,7 +13,7 @@ import matsu.num.transform.fft.lib.privatelib.ArraysUtilForTesting;
  * @author Matsuura Y.
  */
 @Ignore
-public final class DCT3Moch extends LinearByScalingStability implements DCT3Executor {
+public final class DCT3Moch extends LinearByScalingStability implements GenericDCT3Executor {
 
     private static final Trigonometry TRIGONOMETRY = TrigonometryForTesting.INSTANCE;
 

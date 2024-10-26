@@ -5,7 +5,7 @@
  * http://opensource.org/licenses/mit-license.php
  */
 /*
- * 2024.4.4
+ * 2024.10.26
  */
 package matsu.num.transform.fft.dctdst;
 
@@ -18,17 +18,21 @@ import matsu.num.transform.fft.validation.StructureAcceptance;
  * このインターフェースにおいて,
  * {@link #accepts(double[])}
  * のreject条件は,
- * {@link DST2Executor} と同等である.
+ * {@link DST2Executor} と同等である. <br>
+ * このインターフェースのサブタイプではこれ以上reject条件を緩めて (accept条件を強めて) いないことを保証する.
  * </p>
- * 
+ *
  * <p>
- * このインターフェースのサブタイプでは, これ以上reject条件を緩めては (accept条件を強めては) いけない.
+ * <i><u>
+ * このインターフェース, およびサブインターフェースは実装を隠ぺいして型を公開するためのものである. <br>
+ * モジュールの外部で実装することを禁止する.
+ * </u></i>
  * </p>
  * 
  * @author Matsuura Y.
- * @version 20.0
+ * @version 21.1
  */
-public interface GenericDST2Executor extends DST2Executor {
+public non-sealed interface GenericDST2Executor extends DST2Executor {
 
     /**
      * {@inheritDoc}

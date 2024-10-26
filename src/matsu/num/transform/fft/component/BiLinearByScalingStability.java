@@ -5,7 +5,7 @@
  * http://opensource.org/licenses/mit-license.php
  */
 /*
- * 2024.10.1
+ * 2024.10.26
  */
 package matsu.num.transform.fft.component;
 
@@ -33,7 +33,7 @@ import matsu.num.transform.fft.validation.StructureRejected;
  * @author Matsuura Y.
  * @version 21.1
  */
-public abstract class BiLinearByScalingStability implements BiLinearTransform {
+public abstract non-sealed class BiLinearByScalingStability implements BiLinearTransform {
 
     protected final DataSizeContract dataSizeContract = new DataSizeContract();
 

@@ -5,7 +5,7 @@
  * http://opensource.org/licenses/mit-license.php
  */
 /*
- * 2024.4.4
+ * 2024.10.26
  */
 package matsu.num.transform.fft;
 
@@ -35,9 +35,9 @@ import matsu.num.transform.fft.validation.StructureAcceptance;
  * <li>データサイズが {@link #MAX_DATA_SIZE} を超過する場合.</li>
  * </ul>
  * 
- * <p>
- * <u><i>技術的補足</i></u>
- * </p>
+ * 
+ * <hr>
+ * <h2>技術的補足</h2>
  * 
  * <p>
  * IDFTの逆変換はDFTである. <br>
@@ -51,9 +51,9 @@ import matsu.num.transform.fft.validation.StructureAcceptance;
  * </p>
  * 
  * @author Matsuura Y.
- * @version 20.0
+ * @version 21.1
  */
-public interface IDFTExecutor extends ComplexLinearTransform {
+public sealed interface IDFTExecutor extends ComplexLinearTransform permits GenericIDFTExecutor {
 
     /**
      * 扱うことができるデータサイズの最大値: 2<sup>28</sup>

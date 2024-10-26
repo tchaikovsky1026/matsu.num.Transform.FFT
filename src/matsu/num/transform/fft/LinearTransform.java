@@ -5,10 +5,19 @@
  * http://opensource.org/licenses/mit-license.php
  */
 /*
- * 2024.10.1
+ * 2024.10.26
  */
 package matsu.num.transform.fft;
 
+import matsu.num.transform.fft.component.LinearByScalingStability;
+import matsu.num.transform.fft.dctdst.DCT1Executor;
+import matsu.num.transform.fft.dctdst.DCT2Executor;
+import matsu.num.transform.fft.dctdst.DCT3Executor;
+import matsu.num.transform.fft.dctdst.DCT4Executor;
+import matsu.num.transform.fft.dctdst.DST1Executor;
+import matsu.num.transform.fft.dctdst.DST2Executor;
+import matsu.num.transform.fft.dctdst.DST3Executor;
+import matsu.num.transform.fft.dctdst.DST4Executor;
 import matsu.num.transform.fft.validation.StructureAcceptance;
 
 /**
@@ -44,10 +53,20 @@ import matsu.num.transform.fft.validation.StructureAcceptance;
  * スレッドセーフ, 参照透過であることが保証される.
  * </p>
  * 
+ * 
+ * <p>
+ * <i><u>
+ * このインターフェース, およびサブインターフェースは実装を隠ぺいして型を公開するためのものである. <br>
+ * モジュールの外部で実装することを禁止する. <br>
+ * バージョン間で継承階層に互換性があるとは限らないので,
+ * シールインターフェースであるが {@code instanceof} 比較による分岐は危険である.
+ * </u></i>
+ * </p>
+ * 
  * @author Matsuura Y.
  * @version 21.1
  */
-public interface LinearTransform {
+public sealed interface LinearTransform permits DCT1Executor, DCT2Executor, DCT3Executor, DCT4Executor, DST1Executor, DST2Executor, DST3Executor, DST4Executor, LinearByScalingStability {
 
     /**
      * <p>

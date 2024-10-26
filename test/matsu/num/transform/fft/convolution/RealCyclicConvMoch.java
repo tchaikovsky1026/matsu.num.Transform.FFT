@@ -13,7 +13,7 @@ import matsu.num.transform.fft.lib.privatelib.ArraysUtilStaticForTestModule;
  */
 @Ignore
 public final class RealCyclicConvMoch
-        extends BiLinearByScalingStability implements CyclicConvolutionExecutor {
+        extends BiLinearByScalingStability implements GenericCyclicConvolutionExecutor {
 
     private static final CyclicConvolutionExecutor INSTANCE = new RealCyclicConvMoch();
 
