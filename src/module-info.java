@@ -9,11 +9,11 @@
  * </p>
  * 
  * <p>
- * <i>必須モジュール:</i> <br>
+ * <i>依存モジュール:</i> <br>
  * </p>
  * 
  * @author Matsuura Y.
- * @version 21.1
+ * @version 22.0
  */
 module matsu.num.transform.FFT {
 

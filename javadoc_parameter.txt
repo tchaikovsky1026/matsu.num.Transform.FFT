@@ -1,0 +1,9 @@
+(Antビルド: javadoc)
+packagenames="
+    			matsu.num.transform.fft,
+    			matsu.num.transform.fft.convolution,
+    			matsu.num.transform.fft.dctdst,
+    			matsu.num.transform.fft.dto,
+    			matsu.num.transform.fft.lib,
+				matsu.num.transform.fft.service,
+    	        matsu.num.transform.fft.validation,
