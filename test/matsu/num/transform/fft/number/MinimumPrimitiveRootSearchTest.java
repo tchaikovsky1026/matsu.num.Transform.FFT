@@ -11,11 +11,9 @@ import org.junit.runner.RunWith;
 
 /**
  * {@link MinimumPrimitiveRootSearch}クラスのテスト.
- * 
- * @author Matsuura Y.
  */
 @RunWith(Enclosed.class)
-public class MinimumPrimitiveRootSearchTest {
+final class MinimumPrimitiveRootSearchTest {
 
     public static final Class<?> TEST_CLASS = MinimumPrimitiveRootSearch.class;
 

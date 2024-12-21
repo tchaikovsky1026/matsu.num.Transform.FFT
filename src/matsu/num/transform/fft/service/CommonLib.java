@@ -5,7 +5,7 @@
  * http://opensource.org/licenses/mit-license.php
  */
 /*
- * 2024.6.14
+ * 2024.12.21
  */
 package matsu.num.transform.fft.service;
 
@@ -15,18 +15,22 @@ import matsu.num.transform.fft.lib.Trigonometry;
 import matsu.num.transform.fft.lib.privatelib.ArraysUtil;
 
 /**
- * <p>
  * このモジュールで使うライブラリを管理する概念. <br>
  * イミュータブルである.
- * </p>
  * 
  * <p>
  * デフォルトインスタンスの生成は {@link #defaultImplemented()} で可能だが,
  * その他はビルダを使用する.
  * </p>
  * 
+ * <p>
+ * <u>
+ * <i>コンストラクタが公開されていないので, 外部からの継承は不可.</i>
+ * </u>
+ * </p>
+ * 
  * @author Matsuura Y.
- * @version 20.0
+ * @version 22.1
  */
 public abstract class CommonLib {
 
@@ -71,14 +75,64 @@ public abstract class CommonLib {
     }
 
     /**
-     * <p>
+     * -
+     * 
+     * @return -
+     * @throws CloneNotSupportedException 常に
+     * @deprecated Clone不可
+     */
+    @Deprecated
+    @Override
+    protected final Object clone() throws CloneNotSupportedException {
+        throw new CloneNotSupportedException();
+    }
+
+    /**
+     * オーバーライド不可.
+     */
+    @Deprecated
+    @Override
+    protected final void finalize() throws Throwable {
+        super.finalize();
+    }
+
+    /**
      * {@link CommonLib} のイミュータブルビルダ.
+     * 
+     * <p>
+     * 基本となるビルダインスタンスは, {@link #implementedInit()} により取得する. <br>
+     * このビルダインスタンスにはデフォルトとなるライブラリがセットされている. <br>
+     * 個別のライブラリに置き換える場合は専用のメソッドを用いる. <br>
+     * ただし, ビルダインスタンスはイミュータブルであるため, 戻り値を受け取る必要がある
+     * (ただし, メソッドチェーンは書ける).
      * </p>
      * 
      * <p>
-     * ビルダ生成時には, デフォルトとなるライブラリがセットされている. <br>
-     * 個別のライブラリに置き換える場合は専用のメソッドを用いる.
+     * 使用例は以下である
+     * (メソッド名は適宜読み替える).
      * </p>
+     * 
+     * 
+     * <blockquote>
+     * 
+     * <pre>
+     * // 基本となるビルダインスタンスの取得
+     * CommonLib.Builder builder =　CommonLib.Builder.implementedInit();　
+     * // 個別のライブラリで置き換えた新しいビルダインスタンスを受け取る
+     * builder = builder.replacedX(myXLibrary);
+     * // ライブラリのビルド
+     * CommonLib lib = builder.build();
+     * </pre>
+     * 
+     * <pre>
+     * // メソッドチェーンを用いたビルド
+     * CommonLib lib = CommonLib.Builder.implementedInit()
+     *         .replacedX(myXLibrary)
+     *         .build();
+     * </pre>
+     * 
+     * </blockquote>
+     * 
      */
     public static final class Builder {
 
@@ -114,10 +168,8 @@ public abstract class CommonLib {
         }
 
         /**
-         * <p>
          * 自身の三角関数計算器を引数のものに置き換え, 新しいビルダインスタンスとして返す. <br>
          * メソッドチェーンが可能だが, 最後に呼び出し元で戻り値を受け取る必要がある.
-         * </p>
          * 
          * @param newTrigonometry 三角関数計算器
          * @return 置き換え後の新しいビルダ
@@ -195,7 +247,6 @@ public abstract class CommonLib {
             public String toString() {
                 return "CommonLib(byBuilder)";
             }
-
         }
     }
 }

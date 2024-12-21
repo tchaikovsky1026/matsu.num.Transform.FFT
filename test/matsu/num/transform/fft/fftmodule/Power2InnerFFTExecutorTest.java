@@ -20,11 +20,9 @@ import matsu.num.transform.fft.component.FourierType;
 
 /**
  * {@link Power2InnerFFTExecutor}クラスのテスト.
- * 
- * @author Matsuura Y.
  */
 @RunWith(Enclosed.class)
-public class Power2InnerFFTExecutorTest {
+final class Power2InnerFFTExecutorTest {
 
     public static final Class<?> TEST_CLASS = Power2InnerFFTExecutor.class;
 

@@ -10,8 +10,6 @@ import matsu.num.transform.fft.service.FFTModuleExecutorProvider;
 
 /**
  * {@link GenericDFTExecutor}のパフォーマンスに関する検証.
- * 
- * @author Matsuura Y.
  */
 @Ignore
 final class GenericDFTPerformance {

@@ -22,11 +22,9 @@ import matsu.num.transform.fft.validation.NotRequiredDataSizeException;
 
 /**
  * {@link GenericDCT1ExecutorImpl}クラスのテスト.
- * 
- * @author Matsuura Y.
  */
 @RunWith(Enclosed.class)
-public class GenericDCT1ExecutorImplTest {
+final class GenericDCT1ExecutorImplTest {
 
     public static final Class<?> TEST_CLASS = GenericDCT1ExecutorImpl.class;
 

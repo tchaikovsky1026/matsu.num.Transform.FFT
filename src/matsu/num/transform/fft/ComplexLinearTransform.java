@@ -5,7 +5,7 @@
  * http://opensource.org/licenses/mit-license.php
  */
 /*
- * 2024.10.26
+ * 2024.12.20
  */
 package matsu.num.transform.fft;
 
@@ -60,10 +60,11 @@ import matsu.num.transform.fft.validation.StructureAcceptance;
  * </p>
  * 
  * @author Matsuura Y.
- * @version 21.1
+ * @version 22.1
  * @see ComplexNumberArrayDTO
  */
-public sealed interface ComplexLinearTransform permits DFTExecutor, IDFTExecutor, ComplexLinearByScalingStability {
+public sealed interface ComplexLinearTransform extends FFTModuleExecutor
+        permits DFTExecutor, IDFTExecutor, ComplexLinearByScalingStability {
 
     /**
      * <p>

@@ -6,12 +6,10 @@ import org.junit.runner.RunWith;
 
 /**
  * {@link DftTypes} クラスのテスト.
- * 
- * @author Matsuura Y.
  */
 @RunWith(Enclosed.class)
-public class DftTypesTest {
-    
+final class DftTypesTest {
+
     public static final Class<?> TEST_CLASS = DftTypes.class;
 
     public static class toString表示 {

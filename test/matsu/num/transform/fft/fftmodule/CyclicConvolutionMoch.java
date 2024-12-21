@@ -1,6 +1,3 @@
-/**
- * 2024.2.19
- */
 package matsu.num.transform.fft.fftmodule;
 
 import org.junit.Ignore;
@@ -9,9 +6,6 @@ import matsu.num.transform.fft.component.ComplexNumber;
 
 /**
  * 実用性の低い(低速な)巡回畳み込みを扱う.
- * 
- * @author Matsuura Y.
- * @version 18.0
  */
 @Ignore
 public final class CyclicConvolutionMoch {

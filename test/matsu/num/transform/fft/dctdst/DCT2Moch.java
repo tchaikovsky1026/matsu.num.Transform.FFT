@@ -9,8 +9,6 @@ import matsu.num.transform.fft.lib.privatelib.ArraysUtilForTesting;
 
 /**
  * 実用的でない(低速な)DCT-2.
- * 
- * @author Matsuura Y.
  */
 @Ignore
 public final class DCT2Moch extends LinearByScalingStability implements GenericDCT2Executor {

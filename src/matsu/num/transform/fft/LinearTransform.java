@@ -5,7 +5,7 @@
  * http://opensource.org/licenses/mit-license.php
  */
 /*
- * 2024.10.26
+ * 2024.12.20
  */
 package matsu.num.transform.fft;
 
@@ -64,9 +64,11 @@ import matsu.num.transform.fft.validation.StructureAcceptance;
  * </p>
  * 
  * @author Matsuura Y.
- * @version 21.1
+ * @version 22.1
  */
-public sealed interface LinearTransform permits DCT1Executor, DCT2Executor, DCT3Executor, DCT4Executor, DST1Executor, DST2Executor, DST3Executor, DST4Executor, LinearByScalingStability {
+public sealed interface LinearTransform extends FFTModuleExecutor
+        permits DCT1Executor, DCT2Executor, DCT3Executor, DCT4Executor, DST1Executor, DST2Executor, DST3Executor,
+        DST4Executor, LinearByScalingStability {
 
     /**
      * <p>

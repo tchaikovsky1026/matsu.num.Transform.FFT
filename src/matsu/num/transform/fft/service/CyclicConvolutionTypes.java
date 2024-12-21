@@ -5,7 +5,7 @@
  * http://opensource.org/licenses/mit-license.php
  */
 /*
- * 2024.9.30
+ * 2024.12.21
  */
 package matsu.num.transform.fft.service;
 
@@ -23,7 +23,7 @@ import matsu.num.transform.fft.convolution.impl.Power2CyclicConvolutionExecutorI
  * {@link ExecutorType} 型の巡回畳み込みに関する定数を取りまとめるクラス.
  * 
  * @author Matsuura Y.
- * @version 20.0
+ * @version 22.1
  */
 public final class CyclicConvolutionTypes {
 
@@ -51,16 +51,14 @@ public final class CyclicConvolutionTypes {
 
         GENERIC_CYCLIC_CONVOLUTION_EXECUTOR =
                 new ExecutorType<>(
-                        GenericCyclicConvolutionExecutor.class,
-                        lib -> new GenericCyclicConvolutionExecutorImpl(lib.trigonometry(), lib.arrayUtil()),
-                        "GENERIC_CYCLIC_CONVOLUTION_EXECUTOR");
+                        "GENERIC_CYCLIC_CONVOLUTION_EXECUTOR", GenericCyclicConvolutionExecutor.class,
+                        p -> new GenericCyclicConvolutionExecutorImpl(p.lib().trigonometry(), p.lib().arrayUtil()));
         list.add(GENERIC_CYCLIC_CONVOLUTION_EXECUTOR);
 
         POWER2_CYCLIC_CONVOLUTION_EXECUTOR =
                 new ExecutorType<>(
-                        Power2CyclicConvolutionExecutor.class,
-                        lib -> new Power2CyclicConvolutionExecutorImpl(lib.trigonometry(), lib.arrayUtil()),
-                        "POWER2_CYCLIC_CONVOLUTION_EXECUTOR");
+                        "POWER2_CYCLIC_CONVOLUTION_EXECUTOR", Power2CyclicConvolutionExecutor.class,
+                        p -> new Power2CyclicConvolutionExecutorImpl(p.lib().trigonometry(), p.lib().arrayUtil()));
         list.add(POWER2_CYCLIC_CONVOLUTION_EXECUTOR);
 
         values = Collections.unmodifiableList(list);

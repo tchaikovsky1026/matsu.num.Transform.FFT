@@ -9,11 +9,9 @@ import org.junit.runner.RunWith;
 
 /**
  * {@link ComplexNumber}クラスのテスト.
- * 
- * @author Matsuura Y.
  */
 @RunWith(Enclosed.class)
-public class ComplexNumberTest {
+final class ComplexNumberTest {
 
     public static final Class<?> TEST_CLASS = ComplexNumber.class;
 

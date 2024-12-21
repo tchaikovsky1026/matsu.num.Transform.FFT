@@ -6,11 +6,9 @@ import org.junit.runner.RunWith;
 
 /**
  * {@link DctDstTypes} クラスのテスト.
- * 
- * @author Matsuura Y.
  */
 @RunWith(Enclosed.class)
-public class DctDstTypesTest {
+final class DctDstTypesTest {
 
     public static final Class<?> TEST_CLASS = DctDstTypes.class;
 

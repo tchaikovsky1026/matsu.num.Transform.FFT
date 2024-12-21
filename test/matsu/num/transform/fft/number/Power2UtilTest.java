@@ -11,11 +11,9 @@ import org.junit.runner.RunWith;
 
 /**
  * {@link Power2Util}クラスのテスト.
- * 
- * @author Matsuura Y.
  */
 @RunWith(Enclosed.class)
-public class Power2UtilTest {
+final class Power2UtilTest {
 
     public static final Class<?> TEST_CLASS = Power2Util.class;
 

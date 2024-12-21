@@ -16,11 +16,9 @@ import matsu.num.transform.fft.number.PrimeFactorization.Separated;
 
 /**
  * {@link PrimeFactorization}クラスのテスト.
- * 
- * @author Matsuura Y.
  */
 @RunWith(Enclosed.class)
-public class PrimeFactorizationTest {
+final class PrimeFactorizationTest {
 
     public static final Class<?> TEST_CLASS = PrimeFactorization.class;
 

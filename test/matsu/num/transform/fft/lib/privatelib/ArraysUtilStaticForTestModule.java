@@ -3,11 +3,7 @@ package matsu.num.transform.fft.lib.privatelib;
 import org.junit.Ignore;
 
 /**
- * <p>
  * 配列に対するベクトル基本演算を扱う.
- * </p>
- *
- * @author Matsuura Y.
  */
 @Ignore
 public final class ArraysUtilStaticForTestModule {

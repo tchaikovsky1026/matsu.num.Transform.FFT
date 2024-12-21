@@ -13,8 +13,6 @@ import org.junit.runner.RunWith;
 
 /**
  * {@link FFTModuleExecutorProvider} クラスのテスト.
- * 
- * @author Matsuura Y.
  */
 @RunWith(Enclosed.class)
 public class FFTModuleExecutorProviderTest {
@@ -42,7 +40,7 @@ public class FFTModuleExecutorProviderTest {
         @Theory
         public void test(ExecutorType<?> type) {
             try {
-                type.executorClass().cast(provider.get(type));
+                type.cast(provider.get(type));
             } catch (ClassCastException e) {
                 throw new AssertionError("providerは正しい型のインスタンスを生成していない");
             }

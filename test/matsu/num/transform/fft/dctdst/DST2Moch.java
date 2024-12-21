@@ -9,8 +9,6 @@ import matsu.num.transform.fft.lib.privatelib.ArraysUtilForTesting;
 
 /**
  * 実用的でない(低速な)DST-2.
- * 
- * @author Matsuura Y.
  */
 @Ignore
 public final class DST2Moch extends LinearByScalingStability implements GenericDST2Executor {

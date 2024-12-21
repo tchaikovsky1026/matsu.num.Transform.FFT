@@ -5,7 +5,7 @@
  * http://opensource.org/licenses/mit-license.php
  */
 /*
- * 2024.9.30
+ * 2024.12.21
  */
 package matsu.num.transform.fft.service;
 
@@ -35,7 +35,7 @@ import matsu.num.transform.fft.dctdst.impl.GenericDST4ExecutorImpl;
  * {@link ExecutorType} 型の離散cosine/sine変換に関する定数を取りまとめるクラス.
  * 
  * @author Matsuura Y.
- * @version 21.0
+ * @version 22.1
  */
 public final class DctDstTypes {
 
@@ -90,43 +90,43 @@ public final class DctDstTypes {
         List<ExecutorType<?>> list = new ArrayList<>();
 
         GENERIC_DCT1_EXECUTOR = new ExecutorType<>(
-                GenericDCT1Executor.class, lib -> new GenericDCT1ExecutorImpl(lib.trigonometry(), lib.arrayUtil()),
-                "GENERIC_DCT1_EXECUTOR");
+                "GENERIC_DCT1_EXECUTOR", GenericDCT1Executor.class,
+                p -> new GenericDCT1ExecutorImpl(p.lib().trigonometry(), p.lib().arrayUtil()));
         list.add(GENERIC_DCT1_EXECUTOR);
 
         GENERIC_DCT2_EXECUTOR = new ExecutorType<>(
-                GenericDCT2Executor.class, lib -> new GenericDCT2ExecutorImpl(lib.trigonometry(), lib.arrayUtil()),
-                "GENERIC_DCT2_EXECUTOR");
+                "GENERIC_DCT2_EXECUTOR", GenericDCT2Executor.class,
+                p -> new GenericDCT2ExecutorImpl(p.lib().trigonometry(), p.lib().arrayUtil()));
         list.add(GENERIC_DCT2_EXECUTOR);
 
         GENERIC_DCT3_EXECUTOR = new ExecutorType<>(
-                GenericDCT3Executor.class, lib -> new GenericDCT3ExecutorImpl(lib.trigonometry(), lib.arrayUtil()),
-                "GENERIC_DCT3_EXECUTOR");
+                "GENERIC_DCT3_EXECUTOR", GenericDCT3Executor.class,
+                p -> new GenericDCT3ExecutorImpl(p.lib().trigonometry(), p.lib().arrayUtil()));
         list.add(GENERIC_DCT3_EXECUTOR);
 
         GENERIC_DCT4_EXECUTOR = new ExecutorType<>(
-                GenericDCT4Executor.class, lib -> new GenericDCT4ExecutorImpl(lib.trigonometry(), lib.arrayUtil()),
-                "GENERIC_DCT4_EXECUTOR");
+                "GENERIC_DCT4_EXECUTOR", GenericDCT4Executor.class,
+                p -> new GenericDCT4ExecutorImpl(p.lib().trigonometry(), p.lib().arrayUtil()));
         list.add(GENERIC_DCT4_EXECUTOR);
 
         GENERIC_DST1_EXECUTOR = new ExecutorType<>(
-                GenericDST1Executor.class, lib -> new GenericDST1ExecutorImpl(lib.trigonometry(), lib.arrayUtil()),
-                "GENERIC_DST1_EXECUTOR");
+                "GENERIC_DST1_EXECUTOR", GenericDST1Executor.class,
+                p -> new GenericDST1ExecutorImpl(p.lib().trigonometry(), p.lib().arrayUtil()));
         list.add(GENERIC_DST1_EXECUTOR);
 
         GENERIC_DST2_EXECUTOR = new ExecutorType<>(
-                GenericDST2Executor.class, lib -> new GenericDST2ExecutorImpl(lib.trigonometry(), lib.arrayUtil()),
-                "GENERIC_DST2_EXECUTOR");
+                "GENERIC_DST2_EXECUTOR", GenericDST2Executor.class,
+                p -> new GenericDST2ExecutorImpl(p.lib().trigonometry(), p.lib().arrayUtil()));
         list.add(GENERIC_DST2_EXECUTOR);
 
         GENERIC_DST3_EXECUTOR = new ExecutorType<>(
-                GenericDST3Executor.class, lib -> new GenericDST3ExecutorImpl(lib.trigonometry(), lib.arrayUtil()),
-                "GENERIC_DST3_EXECUTOR");
+                "GENERIC_DST3_EXECUTOR", GenericDST3Executor.class,
+                p -> new GenericDST3ExecutorImpl(p.lib().trigonometry(), p.lib().arrayUtil()));
         list.add(GENERIC_DST3_EXECUTOR);
 
         GENERIC_DST4_EXECUTOR = new ExecutorType<>(
-                GenericDST4Executor.class, lib -> new GenericDST4ExecutorImpl(lib.trigonometry(), lib.arrayUtil()),
-                "GENERIC_DST4_EXECUTOR");
+                "GENERIC_DST4_EXECUTOR", GenericDST4Executor.class,
+                p -> new GenericDST4ExecutorImpl(p.lib().trigonometry(), p.lib().arrayUtil()));
         list.add(GENERIC_DST4_EXECUTOR);
 
         values = Collections.unmodifiableList(list);

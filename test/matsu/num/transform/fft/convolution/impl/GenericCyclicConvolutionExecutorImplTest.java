@@ -24,11 +24,9 @@ import matsu.num.transform.fft.validation.NotRequiredDataSizeException;
 
 /**
  * {@link GenericCyclicConvolutionExecutorImpl}クラスのテスト.
- * 
- * @author Matsuura Y.
  */
 @RunWith(Enclosed.class)
-public class GenericCyclicConvolutionExecutorImplTest {
+final class GenericCyclicConvolutionExecutorImplTest {
 
     public static final Class<?> TEST_CLASS = GenericCyclicConvolutionExecutorImpl.class;
 

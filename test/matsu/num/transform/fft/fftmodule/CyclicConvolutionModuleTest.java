@@ -17,11 +17,9 @@ import matsu.num.transform.fft.component.FourierBasisComputerSupplierDefaultHold
 
 /**
  * {@link CyclicConvolutionModule}クラスのテスト.
- * 
- * @author Matsuura Y.
  */
 @RunWith(Enclosed.class)
-public class CyclicConvolutionModuleTest {
+final class CyclicConvolutionModuleTest {
 
     public static final Class<?> TEST_CLASS = CyclicConvolutionModule.class;
 

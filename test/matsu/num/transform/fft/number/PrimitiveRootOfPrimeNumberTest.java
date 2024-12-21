@@ -12,12 +12,10 @@ import org.junit.experimental.theories.Theory;
 import org.junit.runner.RunWith;
 
 /**
- * {@link PrimitiveRootOfPrimeNumber}クラスのテスト. 
- * 
- * @author Matsuura Y.
+ * {@link PrimitiveRootOfPrimeNumber}クラスのテスト.
  */
 @RunWith(Enclosed.class)
-public class PrimitiveRootOfPrimeNumberTest {
+final class PrimitiveRootOfPrimeNumberTest {
 
     public static final Class<?> TEST_CLASS = PrimitiveRootOfPrimeNumber.class;
 

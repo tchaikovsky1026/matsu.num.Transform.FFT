@@ -8,8 +8,6 @@ import matsu.num.transform.fft.lib.privatelib.ArraysUtilStaticForTestModule;
 
 /**
  * 実用性の低い(低速な)実数の巡回畳み込みを扱う.
- * 
- * @author Matsuura Y.
  */
 @Ignore
 public final class RealCyclicConvMoch

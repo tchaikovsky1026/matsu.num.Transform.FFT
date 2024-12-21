@@ -18,10 +18,8 @@ import matsu.num.transform.fft.component.FourierType;
 
 /**
  * {@link PrimeInnerFFTExecutor}クラスのテスト.
- * 
- * @author Matsuura Y.
  */
-public class PrimeInnerFFTExecutorTest {
+final class PrimeInnerFFTExecutorTest {
 
     public static final Class<?> TEST_CLASS = PrimeInnerFFTExecutor.class;
 

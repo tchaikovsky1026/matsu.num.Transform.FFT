@@ -2,8 +2,6 @@ package matsu.num.transform.fft.lib;
 
 /**
  * テスト用三角関数ライブラリ.
- * 
- * @author Matsuura Y.
  */
 public final class TrigonometryForTesting implements Trigonometry{
 

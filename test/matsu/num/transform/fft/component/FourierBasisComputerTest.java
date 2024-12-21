@@ -13,14 +13,12 @@ import org.junit.runner.RunWith;
 
 /**
  * {@link FourierBasisComputer}クラスのテスト.
- * 
- * @author Matsuura Y.
  */
 @RunWith(Enclosed.class)
-public class FourierBasisComputerTest {
+final class FourierBasisComputerTest {
 
     public static final Class<?> TEST_CLASS = FourierBasisComputer.class;
-    
+
     private static final FourierBasisComputer.Supplier DEFAULT_SUPPLIER =
             FourierBasisComputerSupplierDefaultHolder.INSTANCE;
 

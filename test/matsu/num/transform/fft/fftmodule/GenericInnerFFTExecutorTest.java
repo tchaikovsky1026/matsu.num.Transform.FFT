@@ -19,11 +19,9 @@ import matsu.num.transform.fft.component.FourierType;
 
 /**
  * {@link GenericInnerFFTExecutor}クラスのテスト.
- * 
- * @author Matsuura Y.
  */
 @RunWith(Enclosed.class)
-public class GenericInnerFFTExecutorTest {
+final class GenericInnerFFTExecutorTest {
 
     public static final Class<?> TEST_CLASS = GenericInnerFFTExecutor.class;
 

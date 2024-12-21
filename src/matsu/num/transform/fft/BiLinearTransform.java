@@ -5,7 +5,7 @@
  * http://opensource.org/licenses/mit-license.php
  */
 /*
- * 2024.10.26
+ * 2024.12.20
  */
 package matsu.num.transform.fft;
 
@@ -57,9 +57,10 @@ import matsu.num.transform.fft.validation.StructureAcceptance;
  * </p>
  * 
  * @author Matsuura Y.
- * @version 21.1
+ * @version 22.1
  */
-public sealed interface BiLinearTransform permits CyclicConvolutionExecutor, BiLinearByScalingStability{
+public sealed interface BiLinearTransform extends FFTModuleExecutor
+        permits CyclicConvolutionExecutor, BiLinearByScalingStability {
 
     /**
      * <p>

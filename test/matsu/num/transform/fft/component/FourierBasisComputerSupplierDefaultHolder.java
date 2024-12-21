@@ -6,8 +6,6 @@ import matsu.num.transform.fft.lib.TrigonometryForTesting;
 
 /**
  * Fourier基底コンピュータのデフォルトサプライヤのホルダ.
- * 
- * @author Matsuura Y.
  */
 @Ignore
 public final class FourierBasisComputerSupplierDefaultHolder {

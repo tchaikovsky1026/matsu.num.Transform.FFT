@@ -5,24 +5,26 @@
  * http://opensource.org/licenses/mit-license.php
  */
 /*
- * 2024.9.30
+ * 2024.12.21
  */
 package matsu.num.transform.fft.service;
 
 import java.util.Objects;
 import java.util.function.Function;
 
+import matsu.num.transform.fft.FFTModuleExecutor;
+
 /**
  * このモジュールが提供するエグゼキュータのタイプを表す.
  * 
  * @author Matsuura Y.
- * @version 21.0
+ * @version 22.1
  * @param <T> このタイプが返却するエグゼキュータの型
  */
-public final class ExecutorType<T> {
+public final class ExecutorType<T extends FFTModuleExecutor> {
 
     private final Class<T> executorClass;
-    private final Function<CommonLib, T> getter;
+    private final Function<FFTModuleExecutorProvider, T> getter;
     private final String typeName;
 
     /**
@@ -33,30 +35,31 @@ public final class ExecutorType<T> {
      * @param getter
      * @param typeName
      */
-    ExecutorType(Class<T> executorClass, Function<CommonLib, T> getter, String typeName) {
+    ExecutorType(String typeName, Class<T> executorClass, Function<FFTModuleExecutorProvider, T> getter) {
         this.executorClass = Objects.requireNonNull(executorClass);
         this.getter = Objects.requireNonNull(getter);
         this.typeName = Objects.requireNonNull(typeName);
     }
 
     /**
-     * ライブラリを与えてエグゼキュータを生成する.
+     * プロバイダからファクトリを生成する.
      * 
-     * @param lib ライブラリ
-     * @return エグゼキュータ
+     * @param provider プロバイダ
+     * @return ファクトリ
      */
-    T createExecutor(CommonLib lib) {
-        Objects.requireNonNull(lib);
-        return this.getter.apply(lib);
+    T get(FFTModuleExecutorProvider provider) {
+        return this.getter.apply(provider);
     }
 
     /**
-     * エグゼキュータのクラス定義を取得する.
+     * キャストするためのメソッド. <br>
+     * このパッケージ内部から呼ばれ, 必ず成功することが想定されている.
      * 
-     * @return クラス定義
+     * @param obj (キャスト可能な)オブジェクト
+     * @return キャストしたオブジェクト
      */
-    Class<T> executorClass() {
-        return this.executorClass;
+    T cast(Object obj) {
+        return this.executorClass.cast(obj);
     }
 
     /**

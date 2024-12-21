@@ -2,18 +2,37 @@
  * 高速Fourier変換(Fast Fourier transform, FFT)に関する機能を提供するモジュール.
  * 
  * <p>
- * 各機能 (エグゼキュータ) はインターフェースとして公開されている. <br>
+ * このモジュールは, 各計算
+ * (離散Fourier変換, 離散cosine &middot; sine変換, 巡回畳み込み 等)
+ * の実行を表現するインターフェースが定義されたパッケージと, <br>
+ * そのインターフェースを実装した具象クラスのインスタンスを取得するためのサービスパッケージから構成されている.
+ * </p>
+ * 
+ * <p>
+ * 各計算を実行するインターフェースは,
+ * 多くは {@code XxxExecutor}
+ * といったインターフェース名である.
+ * </p>
+ * 
+ * <p>
+ * {@link matsu.num.transform.fft.service} パッケージには,
+ * 前述の計算実行インスタンスを取得するための仕組みが用意されている. <br>
+ * ユーザーは
  * {@link matsu.num.transform.fft.service.FFTModuleExecutorProvider}
- * のメソッドを経由して各エグゼキュータのインスタンスを取得するのが,
- * 標準的な利用方法である.
+ * のメソッドを経由して各インスタンスを取得する.
+ * </p>
+ * 
+ * <p>
+ * 詳しくは, 各パッケージの説明文を参照すること.
  * </p>
  * 
  * <p>
  * <i>依存モジュール:</i> <br>
+ * (無し)
  * </p>
  * 
  * @author Matsuura Y.
- * @version 22.0
+ * @version 22.1
  */
 module matsu.num.transform.FFT {
 
