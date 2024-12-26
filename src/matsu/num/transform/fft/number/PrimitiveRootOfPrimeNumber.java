@@ -5,7 +5,7 @@
  * http://opensource.org/licenses/mit-license.php
  */
 /*
- * 2024.4.4
+ * 2024.12.26
  */
 package matsu.num.transform.fft.number;
 
@@ -17,7 +17,7 @@ package matsu.num.transform.fft.number;
  * </p>
  * 
  * @author Matsuura Y.
- * @version 20.0
+ * @version 22.2
  */
 public final class PrimitiveRootOfPrimeNumber {
 
@@ -151,7 +151,8 @@ public final class PrimitiveRootOfPrimeNumber {
 
     @Override
     public int hashCode() {
-        int result = Integer.hashCode(this.prime);
+        int result = 1;
+        result = 31 * result + Integer.hashCode(this.prime);
         result = 31 * result + Integer.hashCode(this.primitiveRoot);
 
         return result;

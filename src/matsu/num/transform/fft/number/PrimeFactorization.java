@@ -5,7 +5,7 @@
  * http://opensource.org/licenses/mit-license.php
  */
 /*
- * 2024.4.4
+ * 2024.12.26
  */
 package matsu.num.transform.fft.number;
 
@@ -24,7 +24,7 @@ import java.util.Objects;
  * </p>
  * 
  * @author Matsuura Y.
- * @version 20.0
+ * @version 22.2
  */
 public final class PrimeFactorization {
 
@@ -169,7 +169,9 @@ public final class PrimeFactorization {
      */
     @Override
     public int hashCode() {
-        return Integer.hashCode(this.original);
+        int result = 1;
+        result = 31 * result + Integer.hashCode(this.original);
+        return result;
     }
 
     /**

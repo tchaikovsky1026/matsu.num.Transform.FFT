@@ -5,7 +5,7 @@
  * http://opensource.org/licenses/mit-license.php
  */
 /*
- * 2024.4.4
+ * 2024.12.26
  */
 package matsu.num.transform.fft.component;
 
@@ -23,7 +23,7 @@ import java.util.Objects;
  * </p>
  * 
  * @author Matsuura Y.
- * @version 20.0
+ * @version 22.2
  */
 public final class ComplexNumber {
 
@@ -99,7 +99,8 @@ public final class ComplexNumber {
     }
 
     private int calcHashCode() {
-        int result = Double.hashCode(this.real);
+        int result = 1;
+        result = 31 * result + Double.hashCode(this.real);
         result = 31 * result + Double.hashCode(this.imaginary);
         return result;
     }
