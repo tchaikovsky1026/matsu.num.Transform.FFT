@@ -8,7 +8,7 @@
 - 高速な離散 Fourier 変換とそれに関連する計算
     - 複素数列の DFT, IDFT (離散 Fourier 変換, 逆離散 Fourier 変換)
     - 実数列の DCT, DST (離散 cosine 変換, 離散 sine 変換)
-    - 実数列の巡回畳み込み
+    - 実数列の巡回畳み込み (Cyclic convolution)
 
 ## History
 更新履歴は history.txt を参照のこと.
