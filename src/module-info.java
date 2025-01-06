@@ -1,5 +1,5 @@
 /**
- * 高速Fourier変換(Fast Fourier transform, FFT)に関する機能を提供するモジュール.
+ * 高速Fourier変換(Fast Fourier transform, FFT) に関する機能を提供するモジュール.
  * 
  * <p>
  * このモジュールは, 各計算
@@ -32,9 +32,9 @@
  * </p>
  * 
  * @author Matsuura Y.
- * @version 22.2
+ * @version 23.0
  */
-module matsu.num.transform.FFT {
+module matsu.num.Transform.FFT {
 
     exports matsu.num.transform.fft;
     exports matsu.num.transform.fft.convolution;
