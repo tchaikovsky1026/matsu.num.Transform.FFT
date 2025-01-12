@@ -4,10 +4,6 @@
  * This software is released under the MIT License.
  * http://opensource.org/licenses/mit-license.php
  */
-
-/**
- * 2024.2.19
- */
 package matsu.num.transform.fft;
 
 import org.junit.Ignore;
@@ -17,9 +13,6 @@ import matsu.num.transform.fft.dto.ComplexNumberArrayDTO;
 
 /**
  * 実数列, 複素数列のダミーデータを作成するクラス.
- * 
- * @author Matsuura Y.
- * @version 18.0
  */
 @Ignore
 public final class NumberArrayDataCreator {
@@ -28,7 +21,7 @@ public final class NumberArrayDataCreator {
         //インスタンス化不可
         throw new AssertionError();
     }
-    
+
     @SuppressWarnings(value = "exports")
     public static ComplexNumber[] createComplexArrayData(int size) {
         ComplexNumber[] data = new ComplexNumber[size];
@@ -37,7 +30,7 @@ public final class NumberArrayDataCreator {
         }
         return data;
     }
-    
+
     public static ComplexNumberArrayDTO createComplexArrayDTO(int size) {
         ComplexNumberArrayDTO out = ComplexNumberArrayDTO.zeroFilledOf(size);
         for (int i = 0; i < size; i++) {
@@ -46,7 +39,7 @@ public final class NumberArrayDataCreator {
         }
         return out;
     }
-    
+
     public static double[] createArrayData(int size) {
         double[] data = new double[size];
         for (int i = 0; i < size; i++) {
