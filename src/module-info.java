@@ -1,3 +1,10 @@
+/*
+ * Copyright © 2024 Matsuura Y.
+ * 
+ * This software is released under the MIT License.
+ * http://opensource.org/licenses/mit-license.php
+ */
+
 /**
  * 高速Fourier変換(Fast Fourier transform, FFT) に関する機能を提供するモジュール.
  * 

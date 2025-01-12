@@ -1,3 +1,10 @@
+/*
+ * Copyright © 2024 Matsuura Y.
+ * 
+ * This software is released under the MIT License.
+ * http://opensource.org/licenses/mit-license.php
+ */
+
 /**
  * このモジュールで実装された機能を外部向けに提供するパッケージ.
  * 
