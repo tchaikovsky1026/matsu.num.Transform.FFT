@@ -23,7 +23,6 @@ import matsu.num.transform.fft.lib.privatelib.ArraysUtil;
  * {@link GenericDST4Executor} の実装.
  * 
  * @author Matsuura Y.
- * @version 21.1
  */
 public final class GenericDST4ExecutorImpl
         extends LinearByScalingStability implements GenericDST4Executor {

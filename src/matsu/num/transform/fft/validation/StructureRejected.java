@@ -16,7 +16,6 @@ import java.util.function.Supplier;
  * 拒絶を表す {@link StructureAcceptance} を扱う.
  * 
  * @author Matsuura Y.
- * @version 20.0
  */
 public final class StructureRejected extends StructureAcceptance {
 

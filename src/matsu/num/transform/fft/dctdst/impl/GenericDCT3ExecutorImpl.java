@@ -23,7 +23,6 @@ import matsu.num.transform.fft.lib.privatelib.ArraysUtil;
  * {@link GenericDCT3Executor} の実装.
  * 
  * @author Matsuura Y.
- * @version 21.1
  */
 public final class GenericDCT3ExecutorImpl
         extends LinearByScalingStability implements GenericDCT3Executor {

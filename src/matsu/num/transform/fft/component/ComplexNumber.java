@@ -23,7 +23,6 @@ import java.util.Objects;
  * </p>
  * 
  * @author Matsuura Y.
- * @version 22.2
  */
 public final class ComplexNumber {
 

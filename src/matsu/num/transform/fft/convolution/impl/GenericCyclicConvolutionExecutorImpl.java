@@ -21,7 +21,6 @@ import matsu.num.transform.fft.lib.privatelib.ArraysUtil;
  * {@link GenericCyclicConvolutionExecutor} の実装.
  * 
  * @author Matsuura Y.
- * @version 21.1
  */
 public final class GenericCyclicConvolutionExecutorImpl
         extends BiLinearByScalingStability

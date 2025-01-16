@@ -44,7 +44,6 @@ import matsu.num.transform.fft.validation.StructureAcceptance;
  * </ul>
  * 
  * @author Matsuura Y.
- * @version 21.1
  */
 public sealed interface CyclicConvolutionExecutor
         extends BiLinearTransform permits GenericCyclicConvolutionExecutor, Power2CyclicConvolutionExecutor {

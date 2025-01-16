@@ -26,7 +26,6 @@ package matsu.num.transform.fft.component;
  * </p>
  * 
  * @author Matsuura Y.
- * @version 20.0
  */
 public final class FourierBasis {
 

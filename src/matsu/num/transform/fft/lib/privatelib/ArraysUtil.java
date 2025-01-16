@@ -16,7 +16,6 @@ package matsu.num.transform.fft.lib.privatelib;
  * </p>
  *
  * @author Matsuura Y.
- * @version 20.0
  */
 public interface ArraysUtil {
 

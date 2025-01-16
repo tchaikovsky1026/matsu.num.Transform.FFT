@@ -20,7 +20,6 @@ import matsu.num.transform.fft.number.Power2Util;
  * 2の累乗のデータサイズに特化した, 複素数列の巡回畳み込みを扱う.
  * 
  * @author Matsuura Y.
- * @version 20.0
  */
 public final class Power2CyclicConvolutionModule {
 

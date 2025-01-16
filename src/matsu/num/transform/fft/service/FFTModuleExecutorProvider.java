@@ -43,7 +43,6 @@ import matsu.num.transform.fft.FFTModuleExecutor;
  * </ul>
  * 
  * @author Matsuura Y.
- * @version 22.1
  */
 public final class FFTModuleExecutorProvider {
 

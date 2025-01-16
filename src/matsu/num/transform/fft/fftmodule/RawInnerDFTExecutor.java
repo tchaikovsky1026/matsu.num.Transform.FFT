@@ -17,7 +17,6 @@ import matsu.num.transform.fft.component.FourierBasisComputer;
  * 直接的な離散Fourier変換/逆変換を扱う.
  * 
  * @author Matsuura Y.
- * @version 20.0
  */
 public final class RawInnerDFTExecutor implements InnerDFTExecutor {
 

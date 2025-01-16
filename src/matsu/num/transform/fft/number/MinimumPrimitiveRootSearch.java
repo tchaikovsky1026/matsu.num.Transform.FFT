@@ -17,7 +17,6 @@ import java.util.Set;
  * 3以上の素数の原始根の最小値の検索.
  * 
  * @author Matsuura Y.
- * @version 20.0
  */
 final class MinimumPrimitiveRootSearch {
 

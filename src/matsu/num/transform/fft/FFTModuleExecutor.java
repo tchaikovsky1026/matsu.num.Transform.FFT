@@ -22,7 +22,6 @@ package matsu.num.transform.fft;
  * </p>
  * 
  * @author Matsuura Y.
- * @version 22.1
  */
 public interface FFTModuleExecutor {
 

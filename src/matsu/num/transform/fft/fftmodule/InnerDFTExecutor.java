@@ -39,7 +39,6 @@ import matsu.num.transform.fft.component.FourierBasisComputer;
  * </p>
  * 
  * @author Matsuura Y.
- * @version 20.0
  */
 interface InnerDFTExecutor {
 

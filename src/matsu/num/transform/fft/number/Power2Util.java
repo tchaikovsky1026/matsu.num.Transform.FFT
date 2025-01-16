@@ -13,7 +13,6 @@ package matsu.num.transform.fft.number;
  * 2のべき乗の整数に関する計算補助.
  * 
  * @author Matsuura Y.
- * @version 20.0
  */
 public final class Power2Util {
     private Power2Util() {

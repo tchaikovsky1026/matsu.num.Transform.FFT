@@ -16,7 +16,6 @@ import matsu.num.transform.fft.lib.privatelib.ArraysUtil;
  * 
  * 
  * @author Matsuura Y.
- * @version 20.0
  */
 final class ArrayUtilSimpleImpl implements ArraysUtil {
 

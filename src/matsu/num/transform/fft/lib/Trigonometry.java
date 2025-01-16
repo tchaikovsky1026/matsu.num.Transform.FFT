@@ -52,7 +52,6 @@ package matsu.num.transform.fft.lib;
  * </p>
  * 
  * @author Matsuura Y.
- * @version 22.1
  */
 public interface Trigonometry {
 

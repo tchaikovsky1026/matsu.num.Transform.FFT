@@ -60,7 +60,6 @@ import matsu.num.transform.fft.validation.StructureAcceptance;
  * </p>
  * 
  * @author Matsuura Y.
- * @version 22.1
  * @see ComplexNumberArrayDTO
  */
 public sealed interface ComplexLinearTransform extends FFTModuleExecutor

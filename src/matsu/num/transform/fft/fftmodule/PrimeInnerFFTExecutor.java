@@ -35,7 +35,6 @@ import matsu.num.transform.fft.number.PrimitiveRootOfPrimeNumber;
  * </p>
  * 
  * @author Matsuura Y.
- * @version 20.0
  */
 public final class PrimeInnerFFTExecutor implements InnerDFTExecutor {
 

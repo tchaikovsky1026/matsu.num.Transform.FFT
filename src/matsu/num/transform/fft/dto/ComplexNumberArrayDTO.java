@@ -19,7 +19,6 @@ package matsu.num.transform.fft.dto;
  * </p>
  * 
  * @author Matsuura Y.
- * @version 20.0
  */
 public final class ComplexNumberArrayDTO {
 

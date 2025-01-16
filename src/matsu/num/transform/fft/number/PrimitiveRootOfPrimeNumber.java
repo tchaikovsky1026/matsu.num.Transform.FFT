@@ -17,7 +17,6 @@ package matsu.num.transform.fft.number;
  * </p>
  * 
  * @author Matsuura Y.
- * @version 22.2
  */
 public final class PrimitiveRootOfPrimeNumber {
 

@@ -83,7 +83,6 @@ import matsu.num.transform.fft.validation.StructureAcceptance;
  * </p>
  * 
  * @author Matsuura Y.
- * @version 21.1
  */
 public sealed interface DST2Executor extends LinearTransform permits GenericDST2Executor {
 

@@ -38,7 +38,6 @@ import matsu.num.transform.fft.lib.Trigonometry;
  * </p>
  * 
  * @author Matsuura Y.
- * @version 20.0
  */
 public final class FourierBasisComputer {
 

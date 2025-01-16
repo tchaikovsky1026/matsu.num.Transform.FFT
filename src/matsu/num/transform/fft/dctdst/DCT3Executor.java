@@ -89,7 +89,6 @@ import matsu.num.transform.fft.validation.StructureAcceptance;
  * </p>
  * 
  * @author Matsuura Y.
- * @version 21.1
  */
 public sealed interface DCT3Executor extends LinearTransform permits GenericDCT3Executor {
 

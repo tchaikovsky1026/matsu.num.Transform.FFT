@@ -57,7 +57,6 @@ import matsu.num.transform.fft.validation.StructureAcceptance;
  * </p>
  * 
  * @author Matsuura Y.
- * @version 22.1
  */
 public sealed interface BiLinearTransform extends FFTModuleExecutor
         permits CyclicConvolutionExecutor, BiLinearByScalingStability {

@@ -18,7 +18,6 @@ import matsu.num.transform.fft.FFTModuleExecutor;
  * このモジュールが提供するエグゼキュータのタイプを表す.
  * 
  * @author Matsuura Y.
- * @version 22.1
  * @param <T> このタイプが返却するエグゼキュータの型
  */
 public final class ExecutorType<T extends FFTModuleExecutor> {

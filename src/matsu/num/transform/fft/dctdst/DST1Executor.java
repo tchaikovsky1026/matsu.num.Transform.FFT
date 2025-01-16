@@ -84,7 +84,6 @@ import matsu.num.transform.fft.validation.StructureAcceptance;
  * </p>
  * 
  * @author Matsuura Y.
- * @version 21.1
  */
 public sealed interface DST1Executor extends LinearTransform permits GenericDST1Executor {
 

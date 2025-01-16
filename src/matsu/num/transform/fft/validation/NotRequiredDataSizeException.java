@@ -13,7 +13,6 @@ package matsu.num.transform.fft.validation;
  * 必要なデータサイズが無いことを通知する例外クラス.
  * 
  * @author Matsuura Y.
- * @version 20.0
  */
 public class NotRequiredDataSizeException extends IllegalArgumentException {
 

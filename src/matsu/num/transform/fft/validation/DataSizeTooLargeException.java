@@ -13,7 +13,6 @@ package matsu.num.transform.fft.validation;
  * データサイズが大きすぎることを通知する例外クラス.
  * 
  * @author Matsuura Y.
- * @version 20.0
  */
 public class DataSizeTooLargeException extends IllegalArgumentException {
 

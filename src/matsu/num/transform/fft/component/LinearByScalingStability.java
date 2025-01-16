@@ -29,7 +29,6 @@ import matsu.num.transform.fft.validation.StructureAcceptance;
  * </p>
  * 
  * @author Matsuura Y.
- * @version 21.1
  */
 public abstract non-sealed class LinearByScalingStability implements LinearTransform {
 

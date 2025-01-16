@@ -52,7 +52,6 @@ import matsu.num.transform.fft.validation.StructureRejected;
  * </p>
  * 
  * @author Matsuura Y.
- * @version 21.1
  */
 public final class DataSizeContract {
 

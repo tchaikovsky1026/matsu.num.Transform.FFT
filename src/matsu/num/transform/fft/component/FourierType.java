@@ -13,7 +13,6 @@ package matsu.num.transform.fft.component;
  * 離散Fourier変換に関する基底関数の種類を表す列挙型.
  * 
  * @author Matsuura Y.
- * @version 20.0
  */
 public enum FourierType {
 

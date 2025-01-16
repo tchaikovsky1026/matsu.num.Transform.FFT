@@ -19,7 +19,6 @@ import matsu.num.transform.fft.number.Power2Util;
  * 複素数列の巡回畳み込みを扱う.
  * 
  * @author Matsuura Y.
- * @version 20.0
  */
 public final class CyclicConvolutionModule {
 

@@ -16,7 +16,6 @@ import matsu.num.transform.fft.lib.privatelib.ArraysUtil;
  * {@link CommonLib} のデフォルト実装のホルダ.
  * 
  * @author Matsuura Y.
- * @version 20.0
  */
 final class CommonLibDefaultHolder {
 

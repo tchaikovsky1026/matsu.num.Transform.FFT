@@ -23,7 +23,6 @@ import matsu.num.transform.fft.convolution.impl.Power2CyclicConvolutionExecutorI
  * {@link ExecutorType} 型の巡回畳み込みに関する定数を取りまとめるクラス.
  * 
  * @author Matsuura Y.
- * @version 22.1
  */
 public final class CyclicConvolutionTypes {
 

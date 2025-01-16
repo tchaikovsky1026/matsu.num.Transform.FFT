@@ -23,7 +23,6 @@ import matsu.num.transform.fft.lib.privatelib.ArraysUtil;
  * {@link GenericIDFTExecutor} の実装.
  * 
  * @author Matsuura Y.
- * @version 21.1
  */
 public final class GenericIDFTExecutorImpl
         extends ComplexLinearByScalingStability implements GenericIDFTExecutor {

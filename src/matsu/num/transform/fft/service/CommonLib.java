@@ -30,7 +30,6 @@ import matsu.num.transform.fft.lib.privatelib.ArraysUtil;
  * </p>
  * 
  * @author Matsuura Y.
- * @version 22.1
  */
 public abstract class CommonLib {
 

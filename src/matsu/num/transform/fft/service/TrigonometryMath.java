@@ -15,7 +15,6 @@ import matsu.num.transform.fft.lib.Trigonometry;
  * {@link Math} ライブラリを用いた {@link Trigonometry}.
  * 
  * @author Matsuura Y.
- * @version 20.0
  */
 final class TrigonometryMath implements Trigonometry {
 

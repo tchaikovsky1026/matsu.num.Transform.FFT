@@ -35,7 +35,6 @@ import matsu.num.transform.fft.dctdst.impl.GenericDST4ExecutorImpl;
  * {@link ExecutorType} 型の離散cosine/sine変換に関する定数を取りまとめるクラス.
  * 
  * @author Matsuura Y.
- * @version 22.1
  */
 public final class DctDstTypes {
 

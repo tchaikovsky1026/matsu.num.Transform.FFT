@@ -24,7 +24,6 @@ import matsu.num.transform.fft.number.Power2Util;
  * </p>
  * 
  * @author Matsuura Y.
- * @version 20.0
  */
 public final class Power2InnerFFTExecutor implements InnerDFTExecutor {
 

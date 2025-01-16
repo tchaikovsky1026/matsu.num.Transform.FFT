@@ -64,7 +64,6 @@ import matsu.num.transform.fft.validation.StructureAcceptance;
  * </p>
  * 
  * @author Matsuura Y.
- * @version 22.1
  */
 public sealed interface LinearTransform extends FFTModuleExecutor
         permits DCT1Executor, DCT2Executor, DCT3Executor, DCT4Executor, DST1Executor, DST2Executor, DST3Executor,

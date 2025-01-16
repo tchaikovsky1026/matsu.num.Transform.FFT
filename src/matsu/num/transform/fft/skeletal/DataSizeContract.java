@@ -55,7 +55,6 @@ import matsu.num.transform.fft.validation.StructureRejected;
  * </p>
  * 
  * @author Matsuura Y.
- * @version 20.0
  * @deprecated データサイズの契約を抽象クラスにするのは構造が複雑になるので, 分離を行った. このクラスは使われていない.
  */
 @Deprecated

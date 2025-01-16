@@ -24,7 +24,6 @@ import matsu.num.transform.fft.validation.StructureRejected;
  * {@link Power2CyclicConvolutionExecutor} の実装.
  * 
  * @author Matsuura Y.
- * @version 21.1
  */
 public final class Power2CyclicConvolutionExecutorImpl
         extends BiLinearByScalingStability implements Power2CyclicConvolutionExecutor {

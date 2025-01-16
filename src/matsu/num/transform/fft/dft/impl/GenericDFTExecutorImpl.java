@@ -23,7 +23,6 @@ import matsu.num.transform.fft.lib.privatelib.ArraysUtil;
  * {@link GenericDFTExecutor} の実装.
  * 
  * @author Matsuura Y.
- * @version 21.1
  */
 public final class GenericDFTExecutorImpl
         extends ComplexLinearByScalingStability implements GenericDFTExecutor {
