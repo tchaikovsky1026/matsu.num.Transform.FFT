@@ -38,15 +38,9 @@ import matsu.num.transform.fft.validation.StructureRejected;
  * 
  * @author Matsuura Y.
  */
-@SuppressWarnings("removal")
 public final class Power2CyclicConvolutionExecutor
         extends BiLinearByScalingStability
-        implements CyclicConvolutionExecutor,
-        matsu.num.transform.fft.convolution.Power2CyclicConvolutionExecutor {
-
-    /*
-     * deprecated(removal)は, インターフェース削除後にスーパーインターフェースに変更する(v25以降).
-     */
+        implements CyclicConvolutionExecutor {
 
     private final FourierBasisComputer.Supplier computerSupplier;
     private final Power2CyclicConvolutionModule module;

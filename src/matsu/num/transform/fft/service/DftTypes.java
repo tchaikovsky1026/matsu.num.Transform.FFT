@@ -14,6 +14,8 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
+import matsu.num.transform.fft.DFTExecutor;
+import matsu.num.transform.fft.IDFTExecutor;
 import matsu.num.transform.fft.dft.impl.GenericDFTExecutor;
 import matsu.num.transform.fft.dft.impl.GenericIDFTExecutor;
 
@@ -22,7 +24,6 @@ import matsu.num.transform.fft.dft.impl.GenericIDFTExecutor;
  * 
  * @author Matsuura Y.
  */
-@SuppressWarnings("removal")
 public final class DftTypes {
 
     /*
@@ -37,12 +38,12 @@ public final class DftTypes {
     /**
      * 任意サイズに対応するDFTの実行手段を表す.
      */
-    public static final ExecutorType<matsu.num.transform.fft.GenericDFTExecutor> GENERIC_DFT_EXECUTOR;
+    public static final ExecutorType<DFTExecutor> GENERIC_DFT_EXECUTOR;
 
     /**
      * 任意サイズに対応するIDFTの実行手段を表す.
      */
-    public static final ExecutorType<matsu.num.transform.fft.GenericIDFTExecutor> GENERIC_IDFT_EXECUTOR;
+    public static final ExecutorType<IDFTExecutor> GENERIC_IDFT_EXECUTOR;
 
     private static final Collection<ExecutorType<?>> values;
 
@@ -50,12 +51,12 @@ public final class DftTypes {
         List<ExecutorType<?>> list = new ArrayList<>();
 
         GENERIC_DFT_EXECUTOR = new ExecutorType<>(
-                "GENERIC_DFT_EXECUTOR", matsu.num.transform.fft.GenericDFTExecutor.class,
+                "GENERIC_DFT_EXECUTOR", DFTExecutor.class,
                 p -> new GenericDFTExecutor(p.lib().trigonometry(), p.lib().arrayUtil()));
         list.add(GENERIC_DFT_EXECUTOR);
 
         GENERIC_IDFT_EXECUTOR = new ExecutorType<>(
-                "GENERIC_IDFT_EXECUTOR", matsu.num.transform.fft.GenericIDFTExecutor.class,
+                "GENERIC_IDFT_EXECUTOR", IDFTExecutor.class,
                 p -> new GenericIDFTExecutor(p.lib().trigonometry(), p.lib().arrayUtil()));
         list.add(GENERIC_IDFT_EXECUTOR);
 
