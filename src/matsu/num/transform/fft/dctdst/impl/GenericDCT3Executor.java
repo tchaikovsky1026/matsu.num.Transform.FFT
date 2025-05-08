@@ -5,7 +5,7 @@
  * http://opensource.org/licenses/mit-license.php
  */
 /*
- * 2024.10.1
+ * 2025.5.8
  */
 package matsu.num.transform.fft.dctdst.impl;
 

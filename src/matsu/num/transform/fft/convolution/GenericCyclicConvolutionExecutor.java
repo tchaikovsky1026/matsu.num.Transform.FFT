@@ -4,9 +4,6 @@
  * This software is released under the MIT License.
  * http://opensource.org/licenses/mit-license.php
  */
-/*
- * 2024.10.26
- */
 package matsu.num.transform.fft.convolution;
 
 import matsu.num.transform.fft.validation.StructureAcceptance;
