@@ -36,7 +36,7 @@ import matsu.num.transform.fft.validation.StructureAcceptance;
  * 
  * @author Matsuura Y.
  */
-public abstract non-sealed class ComplexLinearByScalingStability implements ComplexLinearTransform {
+public abstract class ComplexLinearByScalingStability implements ComplexLinearTransform {
 
     protected final DataSizeContract dataSizeContract = new DataSizeContract();
 

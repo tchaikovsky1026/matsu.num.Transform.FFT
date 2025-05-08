@@ -5,7 +5,7 @@
  * http://opensource.org/licenses/mit-license.php
  */
 /*
- * 2024.10.1
+ * 2025.5.8
  */
 package matsu.num.transform.fft.dctdst.impl;
 
@@ -14,31 +14,38 @@ import matsu.num.transform.fft.component.FourierBasis;
 import matsu.num.transform.fft.component.FourierBasisComputer;
 import matsu.num.transform.fft.component.FourierType;
 import matsu.num.transform.fft.component.LinearByScalingStability;
-import matsu.num.transform.fft.dctdst.GenericDCT4Executor;
+import matsu.num.transform.fft.dctdst.DST4Executor;
 import matsu.num.transform.fft.fftmodule.GenericInnerFFTExecutor;
 import matsu.num.transform.fft.lib.Trigonometry;
 import matsu.num.transform.fft.lib.privatelib.ArraysUtil;
 
 /**
- * {@link GenericDCT4Executor} の実装.
+ * {@link DST4Executor} の実装.
  * 
  * @author Matsuura Y.
  */
-public final class GenericDCT4ExecutorImpl
-        extends LinearByScalingStability implements GenericDCT4Executor {
+@SuppressWarnings("removal")
+public final class GenericDST4Executor
+        extends LinearByScalingStability
+        implements DST4Executor,
+        matsu.num.transform.fft.dctdst.GenericDST4Executor {
+
+    /*
+     * deprecated(removal)は, インターフェース削除後にスーパーインターフェースに変更する(v25以降).
+     */
 
     private final Trigonometry trigonometry;
     private final FourierBasisComputer.Supplier computerSupplier;
     private final GenericInnerFFTExecutor fftExecutor;
 
     /**
-     * DCT4Executorを構築する.
+     * DST4Executorを構築する.
      * 
      * @param trigonometry 三角関数ライブラリ
      * @param arraysUtil 配列ユーティリティ
      * @throws NullPointerException 引数にnullが含まれる場合
      */
-    public GenericDCT4ExecutorImpl(Trigonometry trigonometry, ArraysUtil arraysUtil) {
+    public GenericDST4Executor(Trigonometry trigonometry, ArraysUtil arraysUtil) {
         super(arraysUtil);
         this.trigonometry = trigonometry;
         this.computerSupplier = new FourierBasisComputer.Supplier(this.trigonometry);
@@ -49,19 +56,19 @@ public final class GenericDCT4ExecutorImpl
 
     @Override
     protected double[] applyInner(double[] data) {
-
         int size = data.length;
 
         /*
-         * DCT-4は2N個の実数データ点a,
+         * DST-4は2N個の実数データ点a,
          * a[j] = x[j] * exp(-i * 2pi * j/(4N)) * exp(-i * pi/(4N))
          * (j=0,...,N-1),
-         * a[2N - 1 - j] = x[j] * exp(-i * 2pi * (4N - j)/(4N)) * exp(i
-         * * pi/(4N)) (j=0,...,N-1),
+         * a[2N - 1 - j] = x[j] * exp(-i * 2pi *(2N - j)/(4N)) * exp(i *
+         * pi/(4N)) (j=0,...,N-1),
          * に対してFFTを実行し,
-         * X[k] = 0.5 * exp[-i*2pi*k/(4N)] * A[k]
+         * X[k] = (i/2) * exp[-i*2pi*k/(4N)] * A[k]
          * とすればよい.
          */
+
         int fftSize = size * 2;
         FourierBasisComputer dftBasisComputer = this.computerSupplier.covering(2 * fftSize, FourierType.DFT);
 
@@ -88,20 +95,18 @@ public final class GenericDCT4ExecutorImpl
                     .timesReal(data[j]);
         }
         for (int j = 0; j < size; j++) {
-            //exp(-i * 2pi * (4N - j)/(4N))が位相2πになる(IndexOutOfBoundsEx)のを回避するため, 
-            //x[j]を(-1)倍し, exp(-i * 2pi * (2N - j)/(4N))の回転にする
             a[fftSize - 1 - j] = invRot_quarter
                     .times(dftBasis_4N.valueAt(fftSize - j))
-                    .timesReal(-data[j]);
+                    .timesReal(data[j]);
         }
 
         /* FFT実行 */
         ComplexNumber[] A = this.fftExecutor.compute(a, dftBasisComputer);
 
-        /* 結果をDCT-4に変換 */
+        /* 結果をDST-4に変換 */
         double[] result = new double[size];
         for (int k = 0; k < size; k++) {
-            result[k] = 0.5 * A[k].times(dftBasis_4N.valueAt(k)).real();
+            result[k] = -0.5 * A[k].times(dftBasis_4N.valueAt(k)).imaginary();
         }
 
         return result;
@@ -109,6 +114,6 @@ public final class GenericDCT4ExecutorImpl
 
     @Override
     public String toString() {
-        return "GenericDCT4Executor";
+        return "GenericDST4Executor";
     }
 }

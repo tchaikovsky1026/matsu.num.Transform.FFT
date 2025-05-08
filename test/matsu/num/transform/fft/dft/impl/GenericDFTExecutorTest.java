@@ -21,7 +21,6 @@ import org.junit.experimental.theories.Theory;
 import org.junit.runner.RunWith;
 
 import matsu.num.transform.fft.DFTExecutor;
-import matsu.num.transform.fft.GenericDFTExecutor;
 import matsu.num.transform.fft.component.ComplexNumber;
 import matsu.num.transform.fft.component.FourierBasisComputer;
 import matsu.num.transform.fft.component.FourierBasisComputerSupplierDefaultHolder;
@@ -33,13 +32,13 @@ import matsu.num.transform.fft.lib.privatelib.ArraysUtilForTesting;
 import matsu.num.transform.fft.validation.NotRequiredDataSizeException;
 
 /**
- * {@link GenericDFTExecutorImpl} クラスのテスト.
+ * {@link GenericDFTExecutor} クラスのテスト.
  */
 @RunWith(Enclosed.class)
-final class GenericDFTExecutorImplTest {
+final class GenericDFTExecutorTest {
 
-    public static final Class<?> TEST_CLASS = GenericDFTExecutorImpl.class;
-    private static final GenericDFTExecutor EXECUTOR_NEW = new GenericDFTExecutorImpl(
+    public static final Class<?> TEST_CLASS = GenericDFTExecutor.class;
+    private static final DFTExecutor EXECUTOR_NEW = new GenericDFTExecutor(
             TrigonometryForTesting.INSTANCE, ArraysUtilForTesting.INSTANCE);
 
     private static final FourierBasisComputer.Supplier COMPUTER_SUPPLIER =

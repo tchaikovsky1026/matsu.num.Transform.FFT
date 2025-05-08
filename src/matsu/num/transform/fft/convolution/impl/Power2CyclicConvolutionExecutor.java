@@ -5,14 +5,14 @@
  * http://opensource.org/licenses/mit-license.php
  */
 /*
- * 2024.10.1
+ * 2025.5.8
  */
 package matsu.num.transform.fft.convolution.impl;
 
 import matsu.num.transform.fft.component.BiLinearByScalingStability;
 import matsu.num.transform.fft.component.ComplexNumber;
 import matsu.num.transform.fft.component.FourierBasisComputer;
-import matsu.num.transform.fft.convolution.Power2CyclicConvolutionExecutor;
+import matsu.num.transform.fft.convolution.CyclicConvolutionExecutor;
 import matsu.num.transform.fft.fftmodule.Power2CyclicConvolutionModule;
 import matsu.num.transform.fft.lib.Trigonometry;
 import matsu.num.transform.fft.lib.privatelib.ArraysUtil;
@@ -21,12 +21,32 @@ import matsu.num.transform.fft.validation.DataSizeNotMismatchException;
 import matsu.num.transform.fft.validation.StructureRejected;
 
 /**
- * {@link Power2CyclicConvolutionExecutor} の実装.
+ * {@link CyclicConvolutionExecutor} の実装. <br>
+ * 2の累乗のデータサイズにのみ対応する.
+ * 
+ * <p>
+ * このインターフェースにおいて,
+ * {@link #accepts(double[], double[])}
+ * のreject条件は,
+ * {@link CyclicConvolutionExecutor}
+ * に対して次が追加される.
+ * </p>
+ * 
+ * <ul>
+ * <li>データサイズが2の累乗でない場合</li>
+ * </ul>
  * 
  * @author Matsuura Y.
  */
-public final class Power2CyclicConvolutionExecutorImpl
-        extends BiLinearByScalingStability implements Power2CyclicConvolutionExecutor {
+@SuppressWarnings("removal")
+public final class Power2CyclicConvolutionExecutor
+        extends BiLinearByScalingStability
+        implements CyclicConvolutionExecutor,
+        matsu.num.transform.fft.convolution.Power2CyclicConvolutionExecutor {
+
+    /*
+     * deprecated(removal)は, インターフェース削除後にスーパーインターフェースに変更する(v25以降).
+     */
 
     private final FourierBasisComputer.Supplier computerSupplier;
     private final Power2CyclicConvolutionModule module;
@@ -38,7 +58,7 @@ public final class Power2CyclicConvolutionExecutorImpl
      * @param arraysUtil 配列ユーティリティ
      * @throws NullPointerException 引数にnullが含まれる場合
      */
-    public Power2CyclicConvolutionExecutorImpl(Trigonometry trigonometry, ArraysUtil arraysUtil) {
+    public Power2CyclicConvolutionExecutor(Trigonometry trigonometry, ArraysUtil arraysUtil) {
         super(arraysUtil);
         this.computerSupplier = new FourierBasisComputer.Supplier(trigonometry);
         this.module = new Power2CyclicConvolutionModule(this.computerSupplier);

@@ -4,9 +4,6 @@
  * This software is released under the MIT License.
  * http://opensource.org/licenses/mit-license.php
  */
-/*
- * 2024.10.26
- */
 package matsu.num.transform.fft.dctdst;
 
 import matsu.num.transform.fft.validation.StructureAcceptance;
@@ -30,8 +27,12 @@ import matsu.num.transform.fft.validation.StructureAcceptance;
  * </p>
  * 
  * @author Matsuura Y.
+ * @deprecated
+ *                 このインターフェースは version 25 以降削除予定である. <br>
+ *                 スーパーインターフェースにより取り扱うように変更すべきである.
  */
-public non-sealed interface GenericDCT2Executor extends DCT2Executor {
+@Deprecated(forRemoval = true)
+public interface GenericDCT2Executor extends DCT2Executor {
 
     /**
      * {@inheritDoc}

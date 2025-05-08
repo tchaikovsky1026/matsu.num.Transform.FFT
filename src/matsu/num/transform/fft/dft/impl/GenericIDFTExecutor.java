@@ -5,11 +5,11 @@
  * http://opensource.org/licenses/mit-license.php
  */
 /*
- * 2024.10.1
+ * 2025.5.8
  */
 package matsu.num.transform.fft.dft.impl;
 
-import matsu.num.transform.fft.GenericDFTExecutor;
+import matsu.num.transform.fft.IDFTExecutor;
 import matsu.num.transform.fft.component.ComplexLinearByScalingStability;
 import matsu.num.transform.fft.component.ComplexNumber;
 import matsu.num.transform.fft.component.FourierBasisComputer;
@@ -20,26 +20,34 @@ import matsu.num.transform.fft.lib.Trigonometry;
 import matsu.num.transform.fft.lib.privatelib.ArraysUtil;
 
 /**
- * {@link GenericDFTExecutor} の実装.
+ * {@link IDFTExecutor} の実装. <br>
+ * 任意のサイズで実行できる.
  * 
  * @author Matsuura Y.
  */
-public final class GenericDFTExecutorImpl
-        extends ComplexLinearByScalingStability implements GenericDFTExecutor {
+@SuppressWarnings("removal")
+public final class GenericIDFTExecutor
+        extends ComplexLinearByScalingStability
+        implements IDFTExecutor,
+        matsu.num.transform.fft.GenericIDFTExecutor {
+
+    /*
+     * deprecated(removal)は, インターフェース削除後にスーパーインターフェースに変更する(v25以降).
+     */
+
+    private static final FourierType TYPE = FourierType.IDFT;
 
     private final FourierBasisComputer.Supplier computerSupplier;
     private final GenericInnerFFTExecutor innerDFTExecutor;
 
-    private static final FourierType TYPE = FourierType.DFT;
-
     /**
-     * インスタンスを構築する.
+     * IDFTExecutorを構築する.
      * 
      * @param trigonometry 三角関数ライブラリ
      * @param arraysUtil 配列ユーティリティ
      * @throws NullPointerException 引数にnullが含まれる場合
      */
-    public GenericDFTExecutorImpl(Trigonometry trigonometry, ArraysUtil arraysUtil) {
+    public GenericIDFTExecutor(Trigonometry trigonometry, ArraysUtil arraysUtil) {
         super(arraysUtil);
         this.computerSupplier = new FourierBasisComputer.Supplier(trigonometry);
         this.innerDFTExecutor = new GenericInnerFFTExecutor(this.computerSupplier);
@@ -73,6 +81,6 @@ public final class GenericDFTExecutorImpl
 
     @Override
     public String toString() {
-        return "GenericDFTExecutor";
+        return "GenericIDFTExecutor";
     }
 }
