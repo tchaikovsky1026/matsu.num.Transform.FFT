@@ -15,9 +15,9 @@ import java.util.Collections;
 import java.util.List;
 
 import matsu.num.transform.fft.DFTExecutor;
-import matsu.num.transform.fft.GenericIDFTExecutor;
+import matsu.num.transform.fft.IDFTExecutor;
 import matsu.num.transform.fft.dft.impl.GenericDFTExecutor;
-import matsu.num.transform.fft.dft.impl.GenericIDFTExecutorImpl;
+import matsu.num.transform.fft.dft.impl.GenericIDFTExecutor;
 
 /**
  * {@link ExecutorType} 型の離散Fourier変換と逆変換に関する定数を取りまとめるクラス.
@@ -39,7 +39,7 @@ public final class DftTypes {
     /**
      * 任意サイズに対応するIDFTの実行手段を表す.
      */
-    public static final ExecutorType<GenericIDFTExecutor> GENERIC_IDFT_EXECUTOR;
+    public static final ExecutorType<IDFTExecutor> GENERIC_IDFT_EXECUTOR;
 
     private static final Collection<ExecutorType<?>> values;
 
@@ -52,8 +52,8 @@ public final class DftTypes {
         list.add(GENERIC_DFT_EXECUTOR);
 
         GENERIC_IDFT_EXECUTOR = new ExecutorType<>(
-                "GENERIC_IDFT_EXECUTOR", GenericIDFTExecutor.class,
-                p -> new GenericIDFTExecutorImpl(p.lib().trigonometry(), p.lib().arrayUtil()));
+                "GENERIC_IDFT_EXECUTOR", IDFTExecutor.class,
+                p -> new GenericIDFTExecutor(p.lib().trigonometry(), p.lib().arrayUtil()));
         list.add(GENERIC_IDFT_EXECUTOR);
 
         values = Collections.unmodifiableList(list);

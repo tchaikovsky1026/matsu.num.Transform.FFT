@@ -9,7 +9,7 @@
  */
 package matsu.num.transform.fft.dft.impl;
 
-import matsu.num.transform.fft.GenericIDFTExecutor;
+import matsu.num.transform.fft.IDFTExecutor;
 import matsu.num.transform.fft.component.ComplexLinearByScalingStability;
 import matsu.num.transform.fft.component.ComplexNumber;
 import matsu.num.transform.fft.component.FourierBasisComputer;
@@ -20,12 +20,13 @@ import matsu.num.transform.fft.lib.Trigonometry;
 import matsu.num.transform.fft.lib.privatelib.ArraysUtil;
 
 /**
- * {@link GenericIDFTExecutor} の実装.
+ * {@link IDFTExecutor} の実装. <br>
+ * 任意のサイズで実行できる.
  * 
  * @author Matsuura Y.
  */
-public final class GenericIDFTExecutorImpl
-        extends ComplexLinearByScalingStability implements GenericIDFTExecutor {
+public final class GenericIDFTExecutor
+        extends ComplexLinearByScalingStability implements IDFTExecutor {
 
     private static final FourierType TYPE = FourierType.IDFT;
 
@@ -39,7 +40,7 @@ public final class GenericIDFTExecutorImpl
      * @param arraysUtil 配列ユーティリティ
      * @throws NullPointerException 引数にnullが含まれる場合
      */
-    public GenericIDFTExecutorImpl(Trigonometry trigonometry, ArraysUtil arraysUtil) {
+    public GenericIDFTExecutor(Trigonometry trigonometry, ArraysUtil arraysUtil) {
         super(arraysUtil);
         this.computerSupplier = new FourierBasisComputer.Supplier(trigonometry);
         this.innerDFTExecutor = new GenericInnerFFTExecutor(this.computerSupplier);

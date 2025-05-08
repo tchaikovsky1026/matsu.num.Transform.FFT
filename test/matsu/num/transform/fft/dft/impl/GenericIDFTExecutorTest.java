@@ -32,13 +32,13 @@ import matsu.num.transform.fft.lib.privatelib.ArraysUtilForTesting;
 import matsu.num.transform.fft.validation.NotRequiredDataSizeException;
 
 /**
- * {@link GenericIDFTExecutorImpl}クラスのテスト.
+ * {@link GenericIDFTExecutor}クラスのテスト.
  */
 @RunWith(Enclosed.class)
-final class GenericIDFTExecutorImplTest {
+final class GenericIDFTExecutorTest {
 
-    public static final Class<?> TEST_CLASS = GenericIDFTExecutorImpl.class;
-    public static final IDFTExecutor EXECUTOR_NEW = new GenericIDFTExecutorImpl(
+    public static final Class<?> TEST_CLASS = GenericIDFTExecutor.class;
+    public static final IDFTExecutor EXECUTOR_NEW = new GenericIDFTExecutor(
             TrigonometryForTesting.INSTANCE, ArraysUtilForTesting.INSTANCE);
 
     private static final FourierBasisComputer.Supplier COMPUTER_SUPPLIER =
