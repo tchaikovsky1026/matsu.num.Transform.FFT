@@ -25,15 +25,9 @@ import matsu.num.transform.fft.lib.privatelib.ArraysUtil;
  * 
  * @author Matsuura Y.
  */
-@SuppressWarnings("removal")
 public final class GenericDFTExecutor
         extends ComplexLinearByScalingStability
-        implements DFTExecutor,
-        matsu.num.transform.fft.GenericDFTExecutor {
-
-    /*
-     * deprecated(removal)は, インターフェース削除後にスーパーインターフェースに変更する(v25以降).
-     */
+        implements DFTExecutor {
 
     private final FourierBasisComputer.Supplier computerSupplier;
     private final GenericInnerFFTExecutor innerDFTExecutor;

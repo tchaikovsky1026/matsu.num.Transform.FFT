@@ -14,6 +14,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
+import matsu.num.transform.fft.convolution.CyclicConvolutionExecutor;
 import matsu.num.transform.fft.convolution.impl.GenericCyclicConvolutionExecutor;
 import matsu.num.transform.fft.convolution.impl.Power2CyclicConvolutionExecutor;
 
@@ -22,7 +23,6 @@ import matsu.num.transform.fft.convolution.impl.Power2CyclicConvolutionExecutor;
  * 
  * @author Matsuura Y.
  */
-@SuppressWarnings("removal")
 public final class CyclicConvolutionTypes {
 
     /*
@@ -37,14 +37,12 @@ public final class CyclicConvolutionTypes {
     /**
      * 任意サイズの実数列に対応する巡回畳み込みの実行手段を表す.
      */
-    public static final ExecutorType<
-            matsu.num.transform.fft.convolution.GenericCyclicConvolutionExecutor> GENERIC_CYCLIC_CONVOLUTION_EXECUTOR;
+    public static final ExecutorType<CyclicConvolutionExecutor> GENERIC_CYCLIC_CONVOLUTION_EXECUTOR;
 
     /**
      * 2の累乗サイズの実数列に対応する巡回畳み込みの実行手段を表す.
      */
-    public static final ExecutorType<
-            matsu.num.transform.fft.convolution.Power2CyclicConvolutionExecutor> POWER2_CYCLIC_CONVOLUTION_EXECUTOR;
+    public static final ExecutorType<CyclicConvolutionExecutor> POWER2_CYCLIC_CONVOLUTION_EXECUTOR;
 
     private static final Collection<ExecutorType<?>> values;
 
@@ -54,7 +52,7 @@ public final class CyclicConvolutionTypes {
         GENERIC_CYCLIC_CONVOLUTION_EXECUTOR =
                 new ExecutorType<>(
                         "GENERIC_CYCLIC_CONVOLUTION_EXECUTOR",
-                        matsu.num.transform.fft.convolution.GenericCyclicConvolutionExecutor.class,
+                        CyclicConvolutionExecutor.class,
                         p -> new GenericCyclicConvolutionExecutor(
                                 p.lib().trigonometry(), p.lib().arrayUtil()));
         list.add(GENERIC_CYCLIC_CONVOLUTION_EXECUTOR);
@@ -62,7 +60,7 @@ public final class CyclicConvolutionTypes {
         POWER2_CYCLIC_CONVOLUTION_EXECUTOR =
                 new ExecutorType<>(
                         "POWER2_CYCLIC_CONVOLUTION_EXECUTOR",
-                        matsu.num.transform.fft.convolution.Power2CyclicConvolutionExecutor.class,
+                        CyclicConvolutionExecutor.class,
                         p -> new Power2CyclicConvolutionExecutor(
                                 p.lib().trigonometry(), p.lib().arrayUtil()));
         list.add(POWER2_CYCLIC_CONVOLUTION_EXECUTOR);

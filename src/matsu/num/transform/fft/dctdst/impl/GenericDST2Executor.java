@@ -24,15 +24,9 @@ import matsu.num.transform.fft.lib.privatelib.ArraysUtil;
  * 
  * @author Matsuura Y.
  */
-@SuppressWarnings("removal")
 public final class GenericDST2Executor
         extends LinearByScalingStability
-        implements DST2Executor,
-        matsu.num.transform.fft.dctdst.GenericDST2Executor {
-
-    /*
-     * deprecated(removal)は, インターフェース削除後にスーパーインターフェースに変更する(v25以降).
-     */
+        implements DST2Executor {
 
     private final FourierBasisComputer.Supplier computerSupplier;
     private final GenericInnerFFTExecutor fftExecutor;
