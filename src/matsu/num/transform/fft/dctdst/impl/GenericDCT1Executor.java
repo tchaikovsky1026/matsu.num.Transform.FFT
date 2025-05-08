@@ -5,7 +5,7 @@
  * http://opensource.org/licenses/mit-license.php
  */
 /*
- * 2024.10.1
+ * 2025.5.8
  */
 package matsu.num.transform.fft.dctdst.impl;
 
@@ -13,18 +13,25 @@ import matsu.num.transform.fft.component.ComplexNumber;
 import matsu.num.transform.fft.component.FourierBasisComputer;
 import matsu.num.transform.fft.component.FourierType;
 import matsu.num.transform.fft.component.LinearByScalingStability;
-import matsu.num.transform.fft.dctdst.GenericDCT1Executor;
+import matsu.num.transform.fft.dctdst.DCT1Executor;
 import matsu.num.transform.fft.fftmodule.GenericInnerFFTExecutor;
 import matsu.num.transform.fft.lib.Trigonometry;
 import matsu.num.transform.fft.lib.privatelib.ArraysUtil;
 
 /**
- * {@link GenericDCT1Executor} の実装.
+ * {@link DCT1Executor} の実装.
  * 
  * @author Matsuura Y.
  */
-public final class GenericDCT1ExecutorImpl
-        extends LinearByScalingStability implements GenericDCT1Executor {
+@SuppressWarnings("removal")
+public final class GenericDCT1Executor
+        extends LinearByScalingStability
+        implements DCT1Executor,
+        matsu.num.transform.fft.dctdst.GenericDCT1Executor {
+
+    /*
+     * deprecated(removal)は, インターフェース削除後にスーパーインターフェースに変更する(v25以降).
+     */
 
     private final FourierBasisComputer.Supplier computerSupplier;
     private final GenericInnerFFTExecutor fftExecutor;
@@ -36,7 +43,7 @@ public final class GenericDCT1ExecutorImpl
      * @param arraysUtil 配列ユーティリティ
      * @throws NullPointerException 引数にnullが含まれる場合
      */
-    public GenericDCT1ExecutorImpl(Trigonometry trigonometry, ArraysUtil arraysUtil) {
+    public GenericDCT1Executor(Trigonometry trigonometry, ArraysUtil arraysUtil) {
         super(arraysUtil);
         this.computerSupplier = new FourierBasisComputer.Supplier(trigonometry);
         this.fftExecutor = new GenericInnerFFTExecutor(this.computerSupplier);

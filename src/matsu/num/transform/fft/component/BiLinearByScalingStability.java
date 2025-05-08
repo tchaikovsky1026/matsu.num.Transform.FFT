@@ -32,7 +32,7 @@ import matsu.num.transform.fft.validation.StructureRejected;
  * 
  * @author Matsuura Y.
  */
-public abstract non-sealed class BiLinearByScalingStability implements BiLinearTransform {
+public abstract class BiLinearByScalingStability implements BiLinearTransform {
 
     protected final DataSizeContract dataSizeContract = new DataSizeContract();
 

@@ -29,21 +29,26 @@ import matsu.num.transform.fft.validation.DataSizeNotMismatchException;
 import matsu.num.transform.fft.validation.NotRequiredDataSizeException;
 
 /**
- * {@link GenericCyclicConvolutionExecutorImpl}クラスのテスト.
+ * {@link Power2CyclicConvolutionExecutor}クラスのテスト.
  */
 @RunWith(Enclosed.class)
-final class GenericCyclicConvolutionExecutorImplTest {
+final class Power2CyclicConvolutionExecutorTest {
 
-    public static final Class<?> TEST_CLASS = GenericCyclicConvolutionExecutorImpl.class;
+    public static final Class<?> TEST_CLASS = Power2CyclicConvolutionExecutor.class;
 
-    public static final GenericCyclicConvolutionExecutorImpl EXECUTOR_NEW =
-            new GenericCyclicConvolutionExecutorImpl(TrigonometryForTesting.INSTANCE, ArraysUtilForTesting.INSTANCE);
+    private static final Power2CyclicConvolutionExecutor EXECUTOR_NEW =
+            new Power2CyclicConvolutionExecutor(TrigonometryForTesting.INSTANCE, ArraysUtilForTesting.INSTANCE);
 
     public static class 事前条件テスト {
 
         @Test(expected = DataSizeNotMismatchException.class)
-        public void test_サイズが整合しない場合はDSNMEx() {
+        public void test_サイズが整合しない場合はDSMNEx() {
             EXECUTOR_NEW.apply(new double[4], new double[8]);
+        }
+
+        @Test(expected = DataSizeNotMismatchException.class)
+        public void test_2の累乗でない場合はDSMNEx() {
+            EXECUTOR_NEW.apply(new double[5], new double[5]);
         }
 
         @Test(expected = NotRequiredDataSizeException.class)
@@ -64,7 +69,7 @@ final class GenericCyclicConvolutionExecutorImplTest {
         public static final CyclicConvolutionExecutor executorNew = EXECUTOR_NEW;
 
         /**
-         * [f, g]
+         * [f, g, expected_conv_fg]
          */
         @DataPoint
         public static double[][] data1;
@@ -72,13 +77,13 @@ final class GenericCyclicConvolutionExecutorImplTest {
         public static double[][] data2;
 
         @BeforeClass
-        public static void before_data1準備_サイズ5() {
-            data1 = new double[][] { createArrayData(5), createArrayData(5) };
+        public static void before_data1準備_size_8() {
+            data1 = new double[][] { createArrayData(8), createArrayData(8) };
         }
 
         @BeforeClass
-        public static void before_data2準備_サイズ8() {
-            data2 = new double[][] { createArrayData(8), createArrayData(8) };
+        public static void before_data2準備_size_1() {
+            data2 = new double[][] { createArrayData(1), createArrayData(1) };
         }
 
         @Theory
@@ -86,7 +91,6 @@ final class GenericCyclicConvolutionExecutorImplTest {
 
             double[] f = data[0];
             double[] g = data[1];
-
             double[] expected_conv_fg = RealCyclicConvMoch.instance().apply(f, g);
 
             double[] result = executor.apply(f, g);
@@ -108,4 +112,5 @@ final class GenericCyclicConvolutionExecutorImplTest {
             System.out.println();
         }
     }
+
 }

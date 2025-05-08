@@ -5,11 +5,10 @@
  * http://opensource.org/licenses/mit-license.php
  */
 /*
- * 2024.12.20
+ * 2025.5.8
  */
 package matsu.num.transform.fft;
 
-import matsu.num.transform.fft.component.ComplexLinearByScalingStability;
 import matsu.num.transform.fft.dto.ComplexNumberArrayDTO;
 import matsu.num.transform.fft.validation.StructureAcceptance;
 
@@ -43,27 +42,13 @@ import matsu.num.transform.fft.validation.StructureAcceptance;
  * <li>例: 入力の長さは2の累乗でなければならない.</li>
  * </ul>
  * 
- * <p>
- * このインターフェースのサブタイプは実質的にイミュータブルであり,
- * すべてのメソッドは副作用無し,
- * スレッドセーフ, 参照透過であることが保証される.
- * </p>
- * 
- * 
- * <p>
- * <i><u>
- * このインターフェース, およびサブインターフェースは実装を隠ぺいして型を公開するためのものである. <br>
- * モジュールの外部で実装することを禁止する. <br>
- * バージョン間で継承階層に互換性があるとは限らないので,
- * シールインターフェースであるが {@code instanceof} 比較による分岐は危険である.
- * </u></i>
- * </p>
+ * @implSpec
+ *               このインターフェースをモジュール外で継承・実装してはいけない.
  * 
  * @author Matsuura Y.
  * @see ComplexNumberArrayDTO
  */
-public sealed interface ComplexLinearTransform extends FFTModuleExecutor
-        permits DFTExecutor, IDFTExecutor, ComplexLinearByScalingStability {
+public interface ComplexLinearTransform extends FFTModuleExecutor {
 
     /**
      * <p>

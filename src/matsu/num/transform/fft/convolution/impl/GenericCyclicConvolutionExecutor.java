@@ -5,26 +5,32 @@
  * http://opensource.org/licenses/mit-license.php
  */
 /*
- * 2024.10.1
+ * 2025.5.8
  */
 package matsu.num.transform.fft.convolution.impl;
 
 import matsu.num.transform.fft.component.BiLinearByScalingStability;
 import matsu.num.transform.fft.component.ComplexNumber;
 import matsu.num.transform.fft.component.FourierBasisComputer;
-import matsu.num.transform.fft.convolution.GenericCyclicConvolutionExecutor;
+import matsu.num.transform.fft.convolution.CyclicConvolutionExecutor;
 import matsu.num.transform.fft.fftmodule.CyclicConvolutionModule;
 import matsu.num.transform.fft.lib.Trigonometry;
 import matsu.num.transform.fft.lib.privatelib.ArraysUtil;
 
 /**
- * {@link GenericCyclicConvolutionExecutor} の実装.
+ * {@link CyclicConvolutionExecutor} の実装.
  * 
  * @author Matsuura Y.
  */
-public final class GenericCyclicConvolutionExecutorImpl
+@SuppressWarnings("removal")
+public final class GenericCyclicConvolutionExecutor
         extends BiLinearByScalingStability
-        implements GenericCyclicConvolutionExecutor {
+        implements CyclicConvolutionExecutor,
+        matsu.num.transform.fft.convolution.GenericCyclicConvolutionExecutor {
+
+    /*
+     * deprecated(removal)は, インターフェース削除後にスーパーインターフェースに変更する(v25以降).
+     */
 
     private final FourierBasisComputer.Supplier computerSupplier;
     private final CyclicConvolutionModule module;
@@ -36,7 +42,7 @@ public final class GenericCyclicConvolutionExecutorImpl
      * @param arraysUtil 配列ユーティリティ
      * @throws NullPointerException 引数にnullが含まれる場合
      */
-    public GenericCyclicConvolutionExecutorImpl(Trigonometry trigonometry, ArraysUtil arraysUtil) {
+    public GenericCyclicConvolutionExecutor(Trigonometry trigonometry, ArraysUtil arraysUtil) {
         super(arraysUtil);
         this.computerSupplier = new FourierBasisComputer.Supplier(trigonometry);
         this.module = new CyclicConvolutionModule(this.computerSupplier);

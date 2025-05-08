@@ -27,15 +27,15 @@ import matsu.num.transform.fft.lib.privatelib.ArraysUtilForTesting;
 import matsu.num.transform.fft.validation.NotRequiredDataSizeException;
 
 /**
- * {@link GenericDCT1ExecutorImpl}クラスのテスト.
+ * {@link GenericDCT1Executor}クラスのテスト.
  */
 @RunWith(Enclosed.class)
-final class GenericDCT1ExecutorImplTest {
+final class GenericDCT1ExecutorTest {
 
-    public static final Class<?> TEST_CLASS = GenericDCT1ExecutorImpl.class;
+    public static final Class<?> TEST_CLASS = GenericDCT1Executor.class;
 
-    private static final GenericDCT1ExecutorImpl EXECUTOR_NEW =
-            new GenericDCT1ExecutorImpl(TrigonometryForTesting.INSTANCE, ArraysUtilForTesting.INSTANCE);
+    private static final GenericDCT1Executor EXECUTOR_NEW =
+            new GenericDCT1Executor(TrigonometryForTesting.INSTANCE, ArraysUtilForTesting.INSTANCE);
 
     public static class 入力サイズの検証 {
 

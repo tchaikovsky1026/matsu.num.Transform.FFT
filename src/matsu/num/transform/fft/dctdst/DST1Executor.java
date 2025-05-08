@@ -5,7 +5,7 @@
  * http://opensource.org/licenses/mit-license.php
  */
 /*
- * 2024.10.26
+ * 2025.5.8
  */
 package matsu.num.transform.fft.dctdst;
 
@@ -83,9 +83,12 @@ import matsu.num.transform.fft.validation.StructureAcceptance;
  * が成立する.
  * </p>
  * 
+ * @implSpec
+ *               このインターフェースをモジュール外で継承・実装してはいけない.
+ * 
  * @author Matsuura Y.
  */
-public sealed interface DST1Executor extends LinearTransform permits GenericDST1Executor {
+public interface DST1Executor extends LinearTransform {
 
     /**
      * 扱うことができるデータサイズの最大値: 2<sup>27</sup> - 1
