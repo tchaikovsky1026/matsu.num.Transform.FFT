@@ -12,24 +12,22 @@ package matsu.num.transform.fft.convolution.impl;
 import matsu.num.transform.fft.component.BiLinearByScalingStability;
 import matsu.num.transform.fft.component.ComplexNumber;
 import matsu.num.transform.fft.component.FourierBasisComputer;
-import matsu.num.transform.fft.convolution.Power2CyclicConvolutionExecutor;
-import matsu.num.transform.fft.fftmodule.Power2CyclicConvolutionModule;
+import matsu.num.transform.fft.convolution.CyclicConvolutionExecutor;
+import matsu.num.transform.fft.fftmodule.CyclicConvolutionModule;
 import matsu.num.transform.fft.lib.Trigonometry;
 import matsu.num.transform.fft.lib.privatelib.ArraysUtil;
-import matsu.num.transform.fft.number.Power2Util;
-import matsu.num.transform.fft.validation.DataSizeNotMismatchException;
-import matsu.num.transform.fft.validation.StructureRejected;
 
 /**
- * {@link Power2CyclicConvolutionExecutor} の実装.
+ * {@link CyclicConvolutionExecutor} の実装.
  * 
  * @author Matsuura Y.
  */
-public final class Power2CyclicConvolutionExecutorImpl
-        extends BiLinearByScalingStability implements Power2CyclicConvolutionExecutor {
+public final class GenericCyclicConvolutionExecutor
+        extends BiLinearByScalingStability
+        implements CyclicConvolutionExecutor {
 
     private final FourierBasisComputer.Supplier computerSupplier;
-    private final Power2CyclicConvolutionModule module;
+    private final CyclicConvolutionModule module;
 
     /**
      * 巡回畳み込みを構築する.
@@ -38,16 +36,12 @@ public final class Power2CyclicConvolutionExecutorImpl
      * @param arraysUtil 配列ユーティリティ
      * @throws NullPointerException 引数にnullが含まれる場合
      */
-    public Power2CyclicConvolutionExecutorImpl(Trigonometry trigonometry, ArraysUtil arraysUtil) {
+    public GenericCyclicConvolutionExecutor(Trigonometry trigonometry, ArraysUtil arraysUtil) {
         super(arraysUtil);
         this.computerSupplier = new FourierBasisComputer.Supplier(trigonometry);
-        this.module = new Power2CyclicConvolutionModule(this.computerSupplier);
+        this.module = new CyclicConvolutionModule(this.computerSupplier);
 
         this.dataSizeContract.bindUpperLimitSize(MAX_DATA_SIZE);
-        this.dataSizeContract.addRejectionContract(
-                size -> !Power2Util.isPowerOf2(size),
-                StructureRejected
-                        .by(() -> new DataSizeNotMismatchException("データサイズが2の累乗でない"), "REJECT_BY_NOT_POWER_OF_2"));
     }
 
     @Override
@@ -60,5 +54,10 @@ public final class Power2CyclicConvolutionExecutorImpl
 
         ComplexNumber[] complexResult = this.module.compute(complexF, complexG);
         return ComplexNumber.separateToArrays(complexResult)[0];
+    }
+
+    @Override
+    public String toString() {
+        return "GenericCyclicConvolutionExecutor";
     }
 }

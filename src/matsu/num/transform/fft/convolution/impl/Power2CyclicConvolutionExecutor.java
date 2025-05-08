@@ -12,22 +12,37 @@ package matsu.num.transform.fft.convolution.impl;
 import matsu.num.transform.fft.component.BiLinearByScalingStability;
 import matsu.num.transform.fft.component.ComplexNumber;
 import matsu.num.transform.fft.component.FourierBasisComputer;
-import matsu.num.transform.fft.convolution.GenericCyclicConvolutionExecutor;
-import matsu.num.transform.fft.fftmodule.CyclicConvolutionModule;
+import matsu.num.transform.fft.convolution.CyclicConvolutionExecutor;
+import matsu.num.transform.fft.fftmodule.Power2CyclicConvolutionModule;
 import matsu.num.transform.fft.lib.Trigonometry;
 import matsu.num.transform.fft.lib.privatelib.ArraysUtil;
+import matsu.num.transform.fft.number.Power2Util;
+import matsu.num.transform.fft.validation.DataSizeNotMismatchException;
+import matsu.num.transform.fft.validation.StructureRejected;
 
 /**
- * {@link GenericCyclicConvolutionExecutor} の実装.
+ * {@link CyclicConvolutionExecutor} の実装. <br>
+ * 2の累乗のデータサイズにのみ対応する.
+ * 
+ * <p>
+ * このインターフェースにおいて,
+ * {@link #accepts(double[], double[])}
+ * のreject条件は,
+ * {@link CyclicConvolutionExecutor}
+ * に対して次が追加される.
+ * </p>
+ * 
+ * <ul>
+ * <li>データサイズが2の累乗でない場合</li>
+ * </ul>
  * 
  * @author Matsuura Y.
  */
-public final class GenericCyclicConvolutionExecutorImpl
-        extends BiLinearByScalingStability
-        implements GenericCyclicConvolutionExecutor {
+public final class Power2CyclicConvolutionExecutor
+        extends BiLinearByScalingStability implements CyclicConvolutionExecutor {
 
     private final FourierBasisComputer.Supplier computerSupplier;
-    private final CyclicConvolutionModule module;
+    private final Power2CyclicConvolutionModule module;
 
     /**
      * 巡回畳み込みを構築する.
@@ -36,12 +51,16 @@ public final class GenericCyclicConvolutionExecutorImpl
      * @param arraysUtil 配列ユーティリティ
      * @throws NullPointerException 引数にnullが含まれる場合
      */
-    public GenericCyclicConvolutionExecutorImpl(Trigonometry trigonometry, ArraysUtil arraysUtil) {
+    public Power2CyclicConvolutionExecutor(Trigonometry trigonometry, ArraysUtil arraysUtil) {
         super(arraysUtil);
         this.computerSupplier = new FourierBasisComputer.Supplier(trigonometry);
-        this.module = new CyclicConvolutionModule(this.computerSupplier);
+        this.module = new Power2CyclicConvolutionModule(this.computerSupplier);
 
         this.dataSizeContract.bindUpperLimitSize(MAX_DATA_SIZE);
+        this.dataSizeContract.addRejectionContract(
+                size -> !Power2Util.isPowerOf2(size),
+                StructureRejected
+                        .by(() -> new DataSizeNotMismatchException("データサイズが2の累乗でない"), "REJECT_BY_NOT_POWER_OF_2"));
     }
 
     @Override
@@ -54,10 +73,5 @@ public final class GenericCyclicConvolutionExecutorImpl
 
         ComplexNumber[] complexResult = this.module.compute(complexF, complexG);
         return ComplexNumber.separateToArrays(complexResult)[0];
-    }
-
-    @Override
-    public String toString() {
-        return "GenericCyclicConvolutionExecutor";
     }
 }
