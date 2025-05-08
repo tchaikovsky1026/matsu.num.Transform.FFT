@@ -1,6 +1,9 @@
+develop/next-generation:
+削除予定のインターフェースを削除.
+
+
 develop:
 リファクタリング(クラス構造, sealed修飾の削除).
-
 
 24:
 24.0.0: Semantic versioning.
