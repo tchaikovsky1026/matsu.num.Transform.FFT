@@ -22,9 +22,15 @@ import matsu.num.transform.fft.lib.privatelib.ArraysUtil;
  * 
  * @author Matsuura Y.
  */
+@SuppressWarnings("removal")
 public final class GenericCyclicConvolutionExecutor
         extends BiLinearByScalingStability
-        implements CyclicConvolutionExecutor {
+        implements CyclicConvolutionExecutor,
+        matsu.num.transform.fft.convolution.GenericCyclicConvolutionExecutor {
+
+    /*
+     * deprecated(removal)は, インターフェース削除後にスーパーインターフェースに変更する(v25以降).
+     */
 
     private final FourierBasisComputer.Supplier computerSupplier;
     private final CyclicConvolutionModule module;
