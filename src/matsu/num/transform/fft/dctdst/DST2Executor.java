@@ -82,6 +82,9 @@ import matsu.num.transform.fft.validation.StructureAcceptance;
  * が成立する.
  * </p>
  * 
+ * @implSpec
+ *               このインターフェースをモジュール外で継承・実装してはいけない.
+ * 
  * @author Matsuura Y.
  */
 public sealed interface DST2Executor extends LinearTransform permits GenericDST2Executor {

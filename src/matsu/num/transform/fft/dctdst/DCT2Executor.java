@@ -80,6 +80,9 @@ import matsu.num.transform.fft.validation.StructureAcceptance;
  * が成立する.
  * </p>
  * 
+ * @implSpec
+ *               このインターフェースをモジュール外で継承・実装してはいけない.
+ * 
  * @author Matsuura Y.
  */
 public sealed interface DCT2Executor extends LinearTransform permits GenericDCT2Executor {

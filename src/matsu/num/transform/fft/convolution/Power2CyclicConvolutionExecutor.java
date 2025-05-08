@@ -34,6 +34,9 @@ import matsu.num.transform.fft.validation.StructureAcceptance;
  * </u></i>
  * </p>
  * 
+ * @implSpec
+ *               このインターフェースをモジュール外で継承・実装してはいけない.
+ * 
  * @author Matsuura Y.
  */
 public non-sealed interface Power2CyclicConvolutionExecutor extends CyclicConvolutionExecutor {

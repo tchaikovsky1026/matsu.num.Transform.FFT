@@ -43,6 +43,9 @@ import matsu.num.transform.fft.validation.StructureAcceptance;
  * <li>データサイズが {@link #MAX_DATA_SIZE} を超過する場合</li>
  * </ul>
  * 
+ * @implSpec
+ *               このインターフェースをモジュール外で継承・実装してはいけない.
+ * 
  * @author Matsuura Y.
  */
 public sealed interface CyclicConvolutionExecutor

@@ -50,6 +50,9 @@ import matsu.num.transform.fft.validation.StructureAcceptance;
  * (see {@link IDFTExecutor})
  * </p>
  * 
+ * @implSpec
+ *               このインターフェースをモジュール外で継承・実装してはいけない.
+ * 
  * @author Matsuura Y.
  */
 public sealed interface DFTExecutor extends ComplexLinearTransform permits GenericDFTExecutor {
