@@ -17,7 +17,7 @@ import matsu.num.transform.fft.lib.privatelib.ArraysUtilForTesting;
  * 実用的でない(低速な)DST-2.
  */
 @Ignore
-public final class DST2Moch extends LinearByScalingStability implements GenericDST2Executor {
+public final class DST2Moch extends LinearByScalingStability implements DST2Executor {
 
     private static final Trigonometry TRIGONOMETRY = TrigonometryForTesting.INSTANCE;
 

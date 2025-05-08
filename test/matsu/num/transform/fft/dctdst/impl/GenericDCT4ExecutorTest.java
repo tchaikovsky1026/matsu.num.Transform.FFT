@@ -20,21 +20,21 @@ import org.junit.experimental.theories.Theories;
 import org.junit.experimental.theories.Theory;
 import org.junit.runner.RunWith;
 
-import matsu.num.transform.fft.dctdst.DST4Executor;
-import matsu.num.transform.fft.dctdst.DST4Moch;
+import matsu.num.transform.fft.dctdst.DCT4Executor;
+import matsu.num.transform.fft.dctdst.DCT4Moch;
 import matsu.num.transform.fft.lib.TrigonometryForTesting;
 import matsu.num.transform.fft.lib.privatelib.ArraysUtilForTesting;
 import matsu.num.transform.fft.validation.NotRequiredDataSizeException;
 
 /**
- * {@link GenericDST4ExecutorImpl}クラスのテスト.
+ * {@link GenericDCT4Executor}クラスのテスト.
  */
 @RunWith(Enclosed.class)
-final class GenericDST4ExecutorImplTest {
+final class GenericDCT4ExecutorTest {
 
-    public static final Class<?> TEST_CLASS = GenericDST4ExecutorImpl.class;
-    private static final GenericDST4ExecutorImpl EXECUTOR_NEW =
-            new GenericDST4ExecutorImpl(TrigonometryForTesting.INSTANCE, ArraysUtilForTesting.INSTANCE);
+    public static final Class<?> TEST_CLASS = GenericDCT4Executor.class;
+    private static final GenericDCT4Executor EXECUTOR_NEW =
+            new GenericDCT4Executor(TrigonometryForTesting.INSTANCE, ArraysUtilForTesting.INSTANCE);
 
     public static class 入力サイズの検証 {
 
@@ -50,10 +50,10 @@ final class GenericDST4ExecutorImplTest {
     }
 
     @RunWith(Theories.class)
-    public static class DST4検証 {
+    public static class DCT4検証 {
 
         @DataPoint
-        public static final DST4Executor executorNew = EXECUTOR_NEW;
+        public static final DCT4Executor executorNew = EXECUTOR_NEW;
 
         @DataPoint
         public static double[] data1;
@@ -71,9 +71,9 @@ final class GenericDST4ExecutorImplTest {
         }
 
         @Theory
-        public void test_DST4の実行(DST4Executor executor, double[] data) {
+        public void test_DCT4の実行(DCT4Executor executor, double[] data) {
             double[] result = executor.apply(data);
-            double[] expected = new DST4Moch().apply(data);
+            double[] expected = new DCT4Moch().apply(data);
 
             double[] res = result.clone();
             subtract(res, expected);

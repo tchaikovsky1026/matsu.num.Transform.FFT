@@ -14,30 +14,30 @@ import matsu.num.transform.fft.component.FourierBasis;
 import matsu.num.transform.fft.component.FourierBasisComputer;
 import matsu.num.transform.fft.component.FourierType;
 import matsu.num.transform.fft.component.LinearByScalingStability;
-import matsu.num.transform.fft.dctdst.GenericDST3Executor;
+import matsu.num.transform.fft.dctdst.DCT3Executor;
 import matsu.num.transform.fft.fftmodule.GenericInnerFFTExecutor;
 import matsu.num.transform.fft.lib.Trigonometry;
 import matsu.num.transform.fft.lib.privatelib.ArraysUtil;
 
 /**
- * {@link GenericDST3Executor} の実装.
+ * {@link DCT3Executor} の実装.
  * 
  * @author Matsuura Y.
  */
-public final class GenericDST3ExecutorImpl
-        extends LinearByScalingStability implements GenericDST3Executor {
+public final class GenericDCT3Executor
+        extends LinearByScalingStability implements DCT3Executor {
 
     private final FourierBasisComputer.Supplier computerSupplier;
     private final GenericInnerFFTExecutor fftExecutor;
 
     /**
-     * DST3Executorを構築する.
+     * DCT3Executorを構築する.
      * 
      * @param trigonometry 三角関数ライブラリ
      * @param arraysUtil 配列ユーティリティ
      * @throws NullPointerException 引数にnullが含まれる場合
      */
-    public GenericDST3ExecutorImpl(Trigonometry trigonometry, ArraysUtil arraysUtil) {
+    public GenericDCT3Executor(Trigonometry trigonometry, ArraysUtil arraysUtil) {
         super(arraysUtil);
         this.computerSupplier = new FourierBasisComputer.Supplier(trigonometry);
         this.fftExecutor = new GenericInnerFFTExecutor(this.computerSupplier);
@@ -50,41 +50,42 @@ public final class GenericDST3ExecutorImpl
         int size = data.length;
 
         /*
-         * DST-3は2N個の実数データ点a,
-         * a[0] = 0;
-         * a[j + 1] = x[j]exp[-i * 2pi * (j + 1) / (4N)] (j=0,...,N-1)
-         * a[2N - 1 - j] = x[j]exp[-i * 2pi * (2N - 1 - j) / (4N)]
-         * (j=0,...,N-2)
+         * DCT-3は2N個の実数データ点a,
+         * a[0] = x[0],
+         * a[j] = x[j] * exp(-i * 2pi * j/(4N)) (j=1,...,N-1),
+         * a[N] = 0;
+         * a[2N - j] = x[j] * exp(i * 2pi * j/(4N)) (j=1,...,N-1),
          * に対してFFTを実行し,
-         * X[k] = (i/2) * A[k]
+         * X[k] = 0.5 * A[k]
          * とすればよい.
          */
 
-        int fftSize = size * 2;
-        FourierBasisComputer dftBasisComputer =
-                this.computerSupplier.covering(2 * fftSize, FourierType.DFT);
-
         /* FFT用のデータ作成 */
-        //exp[-i*2pi*j/(4N)]型の計算をするため, 4NサイズのDFT基底を得る
-        FourierBasis dftBasis_4N = dftBasisComputer.getBasis(2 * fftSize);
         //fftSizeの上限が　FFTExecutor.MAX_DATA_SIZE　になっている
+        int fftSize = 2 * size;
+        //DCT3サイズの4倍 = fftSizeの2倍を表す(最大2^29). 
+        //前処理/後処理のための係数を得るために必要.
+        int N4 = fftSize * 2;
+        FourierBasisComputer dftBasisComputer = this.computerSupplier.covering(N4, FourierType.DFT);
+        FourierBasis dftBasis_4N = dftBasisComputer.getBasis(N4);
+
         ComplexNumber[] a = new ComplexNumber[fftSize];
-        a[0] = ComplexNumber.ZERO;
-        for (int j = 0; j < size; j++) {
-            a[j + 1] = dftBasis_4N.valueAt(j + 1).timesReal(data[j]);
+        a[0] = ComplexNumber.of(data[0], 0);
+        for (int j = 1; j < size; j++) {
+            a[j] = dftBasis_4N.valueAt(j).timesReal(data[j]);
         }
-        for (int j = 0; j < size - 1; j++) {
-            a[fftSize - 1 - j] = dftBasis_4N.valueAt(fftSize - 1 - j).timesReal(data[j]);
+        a[size] = ComplexNumber.ZERO;
+        for (int j = 1; j < size; j++) {
+            a[fftSize - j] = dftBasis_4N.valueAt(N4 - j).timesReal(data[j]);
         }
 
         /* FFT実行 */
-        //前処理/後処理のための係数を得るために必要.
         ComplexNumber[] A = this.fftExecutor.compute(a, dftBasisComputer);
 
-        /* 結果をDST-3に変換 */
+        /* 結果をDCT-3に変換 */
         double[] result = new double[size];
         for (int k = 0; k < size; k++) {
-            result[k] = -0.5 * A[k].imaginary();
+            result[k] = 0.5 * A[k].real();
         }
 
         return result;
@@ -92,6 +93,6 @@ public final class GenericDST3ExecutorImpl
 
     @Override
     public String toString() {
-        return "GenericDST3Executor";
+        return "GenericDCT3Executor";
     }
 }

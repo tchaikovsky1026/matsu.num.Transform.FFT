@@ -15,18 +15,18 @@ import matsu.num.transform.fft.component.ComplexNumber;
 import matsu.num.transform.fft.component.FourierBasisComputer;
 import matsu.num.transform.fft.component.FourierType;
 import matsu.num.transform.fft.component.LinearByScalingStability;
-import matsu.num.transform.fft.dctdst.GenericDST1Executor;
+import matsu.num.transform.fft.dctdst.DST1Executor;
 import matsu.num.transform.fft.fftmodule.GenericInnerFFTExecutor;
 import matsu.num.transform.fft.lib.Trigonometry;
 import matsu.num.transform.fft.lib.privatelib.ArraysUtil;
 
 /**
- * {@link GenericDST1Executor} の実装.
+ * {@link DST1Executor} の実装.
  * 
  * @author Matsuura Y.
  */
-public final class GenericDST1ExecutorImpl
-        extends LinearByScalingStability implements GenericDST1Executor {
+public final class GenericDST1Executor
+        extends LinearByScalingStability implements DST1Executor {
 
     private final FourierBasisComputer.Supplier computerSupplier;
     private final GenericInnerFFTExecutor fftExecutor;
@@ -38,7 +38,7 @@ public final class GenericDST1ExecutorImpl
      * @param arraysUtil 配列ユーティリティ
      * @throws NullPointerException 引数にnullが含まれる場合
      */
-    public GenericDST1ExecutorImpl(Trigonometry trigonometry, ArraysUtil arraysUtil) {
+    public GenericDST1Executor(Trigonometry trigonometry, ArraysUtil arraysUtil) {
         super(arraysUtil);
         this.computerSupplier = new FourierBasisComputer.Supplier(trigonometry);
         this.fftExecutor = new GenericInnerFFTExecutor(this.computerSupplier);
