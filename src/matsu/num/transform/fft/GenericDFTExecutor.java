@@ -32,7 +32,7 @@ import matsu.num.transform.fft.validation.StructureAcceptance;
  * 
  * @author Matsuura Y.
  */
-public non-sealed interface GenericDFTExecutor extends DFTExecutor {
+public interface GenericDFTExecutor extends DFTExecutor {
 
     /**
      * {@inheritDoc}

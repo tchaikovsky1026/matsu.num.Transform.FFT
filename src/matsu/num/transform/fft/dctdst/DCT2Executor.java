@@ -85,7 +85,7 @@ import matsu.num.transform.fft.validation.StructureAcceptance;
  * 
  * @author Matsuura Y.
  */
-public sealed interface DCT2Executor extends LinearTransform permits GenericDCT2Executor {
+public interface DCT2Executor extends LinearTransform {
 
     /**
      * 扱うことができるデータサイズの最大値: 2<sup>27</sup>

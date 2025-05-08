@@ -48,8 +48,7 @@ import matsu.num.transform.fft.validation.StructureAcceptance;
  * 
  * @author Matsuura Y.
  */
-public sealed interface CyclicConvolutionExecutor
-        extends BiLinearTransform permits GenericCyclicConvolutionExecutor, Power2CyclicConvolutionExecutor {
+public interface CyclicConvolutionExecutor extends BiLinearTransform {
 
     /**
      * 扱うことができるデータサイズの最大値: 2<sup>28</sup>

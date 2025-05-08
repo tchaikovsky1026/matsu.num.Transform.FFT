@@ -9,7 +9,6 @@
  */
 package matsu.num.transform.fft;
 
-import matsu.num.transform.fft.component.ComplexLinearByScalingStability;
 import matsu.num.transform.fft.dto.ComplexNumberArrayDTO;
 import matsu.num.transform.fft.validation.StructureAcceptance;
 
@@ -65,8 +64,7 @@ import matsu.num.transform.fft.validation.StructureAcceptance;
  * @author Matsuura Y.
  * @see ComplexNumberArrayDTO
  */
-public sealed interface ComplexLinearTransform extends FFTModuleExecutor
-        permits DFTExecutor, IDFTExecutor, ComplexLinearByScalingStability {
+public interface ComplexLinearTransform extends FFTModuleExecutor {
 
     /**
      * <p>

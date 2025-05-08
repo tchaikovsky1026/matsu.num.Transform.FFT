@@ -55,7 +55,7 @@ import matsu.num.transform.fft.validation.StructureAcceptance;
  * 
  * @author Matsuura Y.
  */
-public sealed interface DFTExecutor extends ComplexLinearTransform permits GenericDFTExecutor {
+public interface DFTExecutor extends ComplexLinearTransform {
 
     /**
      * 扱うことができるデータサイズの最大値: 2<sup>28</sup>

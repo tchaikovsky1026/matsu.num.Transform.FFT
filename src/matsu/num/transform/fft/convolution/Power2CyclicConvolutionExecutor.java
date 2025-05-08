@@ -39,7 +39,7 @@ import matsu.num.transform.fft.validation.StructureAcceptance;
  * 
  * @author Matsuura Y.
  */
-public non-sealed interface Power2CyclicConvolutionExecutor extends CyclicConvolutionExecutor {
+public interface Power2CyclicConvolutionExecutor extends CyclicConvolutionExecutor {
 
     /**
      * {@inheritDoc}

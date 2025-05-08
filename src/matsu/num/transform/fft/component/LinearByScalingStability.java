@@ -30,7 +30,7 @@ import matsu.num.transform.fft.validation.StructureAcceptance;
  * 
  * @author Matsuura Y.
  */
-public abstract non-sealed class LinearByScalingStability implements LinearTransform {
+public abstract class LinearByScalingStability implements LinearTransform {
 
     protected final DataSizeContract dataSizeContract = new DataSizeContract();
 

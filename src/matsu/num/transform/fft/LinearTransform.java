@@ -9,15 +9,6 @@
  */
 package matsu.num.transform.fft;
 
-import matsu.num.transform.fft.component.LinearByScalingStability;
-import matsu.num.transform.fft.dctdst.DCT1Executor;
-import matsu.num.transform.fft.dctdst.DCT2Executor;
-import matsu.num.transform.fft.dctdst.DCT3Executor;
-import matsu.num.transform.fft.dctdst.DCT4Executor;
-import matsu.num.transform.fft.dctdst.DST1Executor;
-import matsu.num.transform.fft.dctdst.DST2Executor;
-import matsu.num.transform.fft.dctdst.DST3Executor;
-import matsu.num.transform.fft.dctdst.DST4Executor;
 import matsu.num.transform.fft.validation.StructureAcceptance;
 
 /**
@@ -68,9 +59,7 @@ import matsu.num.transform.fft.validation.StructureAcceptance;
  * 
  * @author Matsuura Y.
  */
-public sealed interface LinearTransform extends FFTModuleExecutor
-        permits DCT1Executor, DCT2Executor, DCT3Executor, DCT4Executor, DST1Executor, DST2Executor, DST3Executor,
-        DST4Executor, LinearByScalingStability {
+public interface LinearTransform extends FFTModuleExecutor {
 
     /**
      * <p>

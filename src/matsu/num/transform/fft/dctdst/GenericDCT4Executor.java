@@ -31,7 +31,7 @@ import matsu.num.transform.fft.validation.StructureAcceptance;
  * 
  * @author Matsuura Y.
  */
-public non-sealed interface GenericDCT4Executor extends DCT4Executor {
+public interface GenericDCT4Executor extends DCT4Executor {
 
     /**
      * {@inheritDoc}

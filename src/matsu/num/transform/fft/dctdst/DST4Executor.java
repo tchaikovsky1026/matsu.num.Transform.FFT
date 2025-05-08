@@ -89,7 +89,7 @@ import matsu.num.transform.fft.validation.StructureAcceptance;
  * 
  * @author Matsuura Y.
  */
-public sealed interface DST4Executor extends LinearTransform permits GenericDST4Executor {
+public interface DST4Executor extends LinearTransform {
 
     /**
      * 扱うことができるデータサイズの最大値: 2<sup>27</sup>

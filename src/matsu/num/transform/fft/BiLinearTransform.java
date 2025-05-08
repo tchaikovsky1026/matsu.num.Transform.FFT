@@ -9,8 +9,6 @@
  */
 package matsu.num.transform.fft;
 
-import matsu.num.transform.fft.component.BiLinearByScalingStability;
-import matsu.num.transform.fft.convolution.CyclicConvolutionExecutor;
 import matsu.num.transform.fft.validation.StructureAcceptance;
 
 /**
@@ -61,8 +59,7 @@ import matsu.num.transform.fft.validation.StructureAcceptance;
  * 
  * @author Matsuura Y.
  */
-public sealed interface BiLinearTransform extends FFTModuleExecutor
-        permits CyclicConvolutionExecutor, BiLinearByScalingStability {
+public interface BiLinearTransform extends FFTModuleExecutor {
 
     /**
      * <p>

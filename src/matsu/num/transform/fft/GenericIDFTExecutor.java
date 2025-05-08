@@ -32,7 +32,7 @@ import matsu.num.transform.fft.validation.StructureAcceptance;
  * 
  * @author Matsuura Y.
  */
-public non-sealed interface GenericIDFTExecutor extends IDFTExecutor {
+public interface GenericIDFTExecutor extends IDFTExecutor {
 
     /**
      * {@inheritDoc}
