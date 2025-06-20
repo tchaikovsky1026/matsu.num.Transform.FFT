@@ -6,8 +6,6 @@
  */
 package matsu.num.transform.fft.dctdst;
 
-import matsu.num.transform.fft.validation.StructureAcceptance;
-
 /**
  * 任意のデータサイズに適用可能なDST-2.
  * 
@@ -34,15 +32,4 @@ import matsu.num.transform.fft.validation.StructureAcceptance;
 @Deprecated(forRemoval = true)
 public interface GenericDST2Executor extends DST2Executor {
 
-    /**
-     * {@inheritDoc}
-     * 
-     * <p>
-     * {@link GenericDST2Executor} でaccept条件とreject条件が共に確定 (固定) される.
-     * </p>
-     * 
-     * @throws NullPointerException {@inheritDoc}
-     */
-    @Override
-    public abstract StructureAcceptance accepts(double[] data);
 }

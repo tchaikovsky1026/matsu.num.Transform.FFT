@@ -5,12 +5,11 @@
  * http://opensource.org/licenses/mit-license.php
  */
 /*
- * 2025.5.8
+ * 2025.6.20
  */
 package matsu.num.transform.fft.convolution;
 
 import matsu.num.transform.fft.BiLinearTransform;
-import matsu.num.transform.fft.validation.StructureAcceptance;
 
 /**
  * 実数列の巡回畳み込みを扱う.
@@ -32,7 +31,7 @@ import matsu.num.transform.fft.validation.StructureAcceptance;
  * </p>
  * 
  * <p>
- * このインターフェースにおいて,
+ * このインターフェースでは,
  * {@link #accepts(double[], double[])}
  * のreject条件は,
  * {@link BiLinearTransform}
@@ -55,17 +54,4 @@ public interface CyclicConvolutionExecutor extends BiLinearTransform {
      */
     public static final int MAX_DATA_SIZE = 0x1000_0000;
 
-    /**
-     * {@inheritDoc}
-     * 
-     * <p>
-     * {@link CyclicConvolutionExecutor} ではデータサイズが
-     * {@link #MAX_DATA_SIZE}
-     * を超過する場合にrejectされる.
-     * </p>
-     * 
-     * @throws NullPointerException {@inheritDoc}
-     */
-    @Override
-    public abstract StructureAcceptance accepts(double[] f, double[] g);
 }
