@@ -5,10 +5,11 @@
  * http://opensource.org/licenses/mit-license.php
  */
 /*
- * 2025.6.19
+ * 2025.6.20
  */
 package matsu.num.transform.fft.service;
 
+import matsu.num.transform.fft.convolution.CyclicConvolutionExecutor;
 import matsu.num.transform.fft.convolution.impl.GenericCyclicConvolutionExecutor;
 import matsu.num.transform.fft.convolution.impl.Power2CyclicConvolutionExecutor;
 
@@ -31,12 +32,25 @@ public final class CyclicConvolutionTypes {
 
     /**
      * 任意サイズの実数列に対応する巡回畳み込みの実行手段を表す.
+     * 
+     * <p>
+     * {@link CyclicConvolutionExecutor#accepts(double[], double[])}
+     * で受け入れられる入力は, <br>
+     * {@link CyclicConvolutionExecutor} と同一である.
+     * </p>
      */
     public static final ExecutorType<
             matsu.num.transform.fft.convolution.GenericCyclicConvolutionExecutor> GENERIC_CYCLIC_CONVOLUTION_EXECUTOR;
 
     /**
      * 2の累乗サイズの実数列に対応する巡回畳み込みの実行手段を表す.
+     * 
+     * <p>
+     * {@link CyclicConvolutionExecutor#accepts(double[], double[])}
+     * で受け入れられる入力は, <br>
+     * {@link CyclicConvolutionExecutor} に加えて
+     * 2の累乗サイズでなければならない.
+     * </p>
      */
     public static final ExecutorType<
             matsu.num.transform.fft.convolution.Power2CyclicConvolutionExecutor> POWER2_CYCLIC_CONVOLUTION_EXECUTOR;

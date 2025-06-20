@@ -6,8 +6,6 @@
  */
 package matsu.num.transform.fft.convolution;
 
-import matsu.num.transform.fft.validation.StructureAcceptance;
-
 /**
  * 2の累乗のデータサイズに特化した実数列の巡回畳み込み.
  * 
@@ -16,8 +14,7 @@ import matsu.num.transform.fft.validation.StructureAcceptance;
  * {@link #accepts(double[], double[])}
  * のreject条件は,
  * {@link CyclicConvolutionExecutor}
- * に対して次が追加される. <br>
- * このインターフェースのサブタイプではこれ以上reject条件を緩めて (accept条件を強めて) いないことを保証する.
+ * に対して次が追加される.
  * </p>
  * 
  * <ul>
@@ -39,18 +36,4 @@ import matsu.num.transform.fft.validation.StructureAcceptance;
 @Deprecated(forRemoval = true)
 public interface Power2CyclicConvolutionExecutor extends CyclicConvolutionExecutor {
 
-    /**
-     * {@inheritDoc}
-     * 
-     * <p>
-     * {@link Power2CyclicConvolutionExecutor}
-     * ではデータサイズが2の累乗でない場合にrejectされる. <br>
-     * {@link Power2CyclicConvolutionExecutor}
-     * でaccept条件とreject条件が共に確定 (固定) される.
-     * </p>
-     * 
-     * @throws NullPointerException {@inheritDoc}
-     */
-    @Override
-    public abstract StructureAcceptance accepts(double[] f, double[] g);
 }

@@ -5,12 +5,11 @@
  * http://opensource.org/licenses/mit-license.php
  */
 /*
- * 2025.5.8
+ * 2025.6.20
  */
 package matsu.num.transform.fft;
 
 import matsu.num.transform.fft.dto.ComplexNumberArrayDTO;
-import matsu.num.transform.fft.validation.StructureAcceptance;
 
 /**
  * 離散Fourier変換 (DFT) を扱う.
@@ -24,7 +23,7 @@ import matsu.num.transform.fft.validation.StructureAcceptance;
  * </p>
  * 
  * <p>
- * このインターフェースにおいて,
+ * このインターフェースでは,
  * {@link #accepts(ComplexNumberArrayDTO)}
  * のreject条件は,
  * {@link ComplexLinearTransform}
@@ -61,18 +60,5 @@ public interface DFTExecutor extends ComplexLinearTransform {
      * 扱うことができるデータサイズの最大値: 2<sup>28</sup>
      */
     public static final int MAX_DATA_SIZE = 0x1000_0000;
-
-    /**
-     * {@inheritDoc}
-     * 
-     * <p>
-     * {@link DFTExecutor} ではデータサイズが {@link #MAX_DATA_SIZE}
-     * を超過する場合にrejectされる.
-     * </p>
-     * 
-     * @throws NullPointerException {@inheritDoc}
-     */
-    @Override
-    public abstract StructureAcceptance accepts(ComplexNumberArrayDTO complexNumberArray);
 
 }
