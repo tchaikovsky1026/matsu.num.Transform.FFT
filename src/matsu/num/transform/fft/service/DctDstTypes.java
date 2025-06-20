@@ -5,14 +5,9 @@
  * http://opensource.org/licenses/mit-license.php
  */
 /*
- * 2025.5.8
+ * 2025.6.20
  */
 package matsu.num.transform.fft.service;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
 
 import matsu.num.transform.fft.dctdst.DCT1Executor;
 import matsu.num.transform.fft.dctdst.DCT2Executor;
@@ -49,98 +44,123 @@ public final class DctDstTypes {
 
     /**
      * 任意サイズに対応するDCT-1の実行手段を表す.
+     * 
+     * <p>
+     * {@link DCT1Executor#accepts(double[])}
+     * で受け入れられる入力は, <br>
+     * {@link DCT1Executor} と同一である.
+     * </p>
      */
     public static final ExecutorType<DCT1Executor> GENERIC_DCT1_EXECUTOR;
 
     /**
      * 任意サイズに対応するDCT-2の実行手段を表す.
+     * 
+     * <p>
+     * {@link DCT2Executor#accepts(double[])}
+     * で受け入れられる入力は, <br>
+     * {@link DCT2Executor} と同一である.
+     * </p>
      */
     public static final ExecutorType<DCT2Executor> GENERIC_DCT2_EXECUTOR;
 
     /**
      * 任意サイズに対応するDCT-3の実行手段を表す.
+     * 
+     * <p>
+     * {@link DCT3Executor#accepts(double[])}
+     * で受け入れられる入力は, <br>
+     * {@link DCT3Executor} と同一である.
+     * </p>
      */
     public static final ExecutorType<DCT3Executor> GENERIC_DCT3_EXECUTOR;
 
     /**
      * 任意サイズに対応するDCT-4の実行手段を表す.
+     * 
+     * <p>
+     * {@link DCT4Executor#accepts(double[])}
+     * で受け入れられる入力は, <br>
+     * {@link DCT4Executor} と同一である.
+     * </p>
      */
     public static final ExecutorType<DCT4Executor> GENERIC_DCT4_EXECUTOR;
 
     /**
      * 任意サイズに対応するDST-1の実行手段を表す.
+     * 
+     * <p>
+     * {@link DST1Executor#accepts(double[])}
+     * で受け入れられる入力は, <br>
+     * {@link DST1Executor} と同一である.
+     * </p>
      */
     public static final ExecutorType<DST1Executor> GENERIC_DST1_EXECUTOR;
 
     /**
      * 任意サイズに対応するDST-2の実行手段を表す.
+     * 
+     * <p>
+     * {@link DST2Executor#accepts(double[])}
+     * で受け入れられる入力は, <br>
+     * {@link DST2Executor} と同一である.
+     * </p>
      */
     public static final ExecutorType<DST2Executor> GENERIC_DST2_EXECUTOR;
 
     /**
      * 任意サイズに対応するDST-3の実行手段を表す.
+     * 
+     * <p>
+     * {@link DST3Executor#accepts(double[])}
+     * で受け入れられる入力は, <br>
+     * {@link DST3Executor} と同一である.
+     * </p>
      */
     public static final ExecutorType<DST3Executor> GENERIC_DST3_EXECUTOR;
 
     /**
      * 任意サイズに対応するDST-4の実行手段を表す.
+     * 
+     * <p>
+     * {@link DST4Executor#accepts(double[])}
+     * で受け入れられる入力は, <br>
+     * {@link DST4Executor} と同一である.
+     * </p>
      */
     public static final ExecutorType<DST4Executor> GENERIC_DST4_EXECUTOR;
 
-    private static final Collection<ExecutorType<?>> values;
-
     static {
-        List<ExecutorType<?>> list = new ArrayList<>();
-
         GENERIC_DCT1_EXECUTOR = new ExecutorType<>(
                 "GENERIC_DCT1_EXECUTOR", DCT1Executor.class,
                 p -> new GenericDCT1Executor(p.lib().trigonometry(), p.lib().arrayUtil()));
-        list.add(GENERIC_DCT1_EXECUTOR);
 
         GENERIC_DCT2_EXECUTOR = new ExecutorType<>(
                 "GENERIC_DCT2_EXECUTOR", DCT2Executor.class,
                 p -> new GenericDCT2Executor(p.lib().trigonometry(), p.lib().arrayUtil()));
-        list.add(GENERIC_DCT2_EXECUTOR);
 
         GENERIC_DCT3_EXECUTOR = new ExecutorType<>(
                 "GENERIC_DCT3_EXECUTOR", DCT3Executor.class,
                 p -> new GenericDCT3Executor(p.lib().trigonometry(), p.lib().arrayUtil()));
-        list.add(GENERIC_DCT3_EXECUTOR);
 
         GENERIC_DCT4_EXECUTOR = new ExecutorType<>(
                 "GENERIC_DCT4_EXECUTOR", DCT4Executor.class,
                 p -> new GenericDCT4Executor(p.lib().trigonometry(), p.lib().arrayUtil()));
-        list.add(GENERIC_DCT4_EXECUTOR);
 
         GENERIC_DST1_EXECUTOR = new ExecutorType<>(
                 "GENERIC_DST1_EXECUTOR", DST1Executor.class,
                 p -> new GenericDST1Executor(p.lib().trigonometry(), p.lib().arrayUtil()));
-        list.add(GENERIC_DST1_EXECUTOR);
 
         GENERIC_DST2_EXECUTOR = new ExecutorType<>(
                 "GENERIC_DST2_EXECUTOR", DST2Executor.class,
                 p -> new GenericDST2Executor(p.lib().trigonometry(), p.lib().arrayUtil()));
-        list.add(GENERIC_DST2_EXECUTOR);
 
         GENERIC_DST3_EXECUTOR = new ExecutorType<>(
                 "GENERIC_DST3_EXECUTOR", DST3Executor.class,
                 p -> new GenericDST3Executor(p.lib().trigonometry(), p.lib().arrayUtil()));
-        list.add(GENERIC_DST3_EXECUTOR);
 
         GENERIC_DST4_EXECUTOR = new ExecutorType<>(
                 "GENERIC_DST4_EXECUTOR", DST4Executor.class,
                 p -> new GenericDST4Executor(p.lib().trigonometry(), p.lib().arrayUtil()));
-        list.add(GENERIC_DST4_EXECUTOR);
-
-        values = Collections.unmodifiableList(list);
-    }
-
-    /**
-     * このクラスが管理するエグゼキュータタイプのコレクションを返す.
-     * 
-     * @return エグゼキュータタイプのコレクション
-     */
-    static Collection<ExecutorType<?>> values() {
-        return values;
     }
 }

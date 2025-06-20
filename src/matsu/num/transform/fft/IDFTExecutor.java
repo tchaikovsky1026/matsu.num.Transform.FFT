@@ -10,7 +10,6 @@
 package matsu.num.transform.fft;
 
 import matsu.num.transform.fft.dto.ComplexNumberArrayDTO;
-import matsu.num.transform.fft.validation.StructureAcceptance;
 
 /**
  * 逆離散Fourier変換 (IDFT) を扱う.
@@ -24,7 +23,7 @@ import matsu.num.transform.fft.validation.StructureAcceptance;
  * </p>
  * 
  * <p>
- * このインターフェースにおいて,
+ * このインターフェースでは,
  * {@link #accepts(ComplexNumberArrayDTO)}
  * のreject条件は,
  * {@link ComplexLinearTransform}
@@ -62,16 +61,4 @@ public interface IDFTExecutor extends ComplexLinearTransform {
      */
     public static final int MAX_DATA_SIZE = 0x1000_0000;
 
-    /**
-     * {@inheritDoc}
-     * 
-     * <p>
-     * {@link IDFTExecutor} ではデータサイズが {@link #MAX_DATA_SIZE}
-     * を超過する場合にrejectされる.
-     * </p>
-     * 
-     * @throws NullPointerException {@inheritDoc}
-     */
-    @Override
-    public abstract StructureAcceptance accepts(ComplexNumberArrayDTO complexNumberArray);
 }
