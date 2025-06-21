@@ -1,5 +1,5 @@
 /*
- * Copyright © 2024 Matsuura Y.
+ * Copyright © 2025 Matsuura Y.
  * 
  * This software is released under the MIT License.
  * http://opensource.org/licenses/mit-license.php
@@ -27,12 +27,12 @@ import org.junit.experimental.theories.Theory;
 import org.junit.runner.RunWith;
 
 /**
- * {@link DftTypes} クラスのテスト.
+ * {@link DctDstExecutors} クラスのテスト.
  */
 @RunWith(Enclosed.class)
-final class DftTypesTest {
+final class DctDstExecutorsTest {
 
-    public static final Class<?> TEST_CLASS = DftTypes.class;
+    public static final Class<?> TEST_CLASS = DctDstExecutors.class;
 
     @RunWith(Theories.class)
     public static class エグゼキュータの生成のテスト {

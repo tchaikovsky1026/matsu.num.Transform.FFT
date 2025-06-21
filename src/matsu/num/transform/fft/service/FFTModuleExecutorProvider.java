@@ -37,9 +37,9 @@ import matsu.num.transform.fft.FFTModuleExecutor;
  * </p>
  * 
  * <ul>
- * <li>{@link DftTypes}</li>
- * <li>{@link DctDstTypes}</li>
- * <li>{@link CyclicConvolutionTypes}</li>
+ * <li>{@link DftExecutors}</li>
+ * <li>{@link DctDstExecutors}</li>
+ * <li>{@link CyclicConvolutionExecutors}</li>
  * </ul>
  * 
  * @author Matsuura Y.
