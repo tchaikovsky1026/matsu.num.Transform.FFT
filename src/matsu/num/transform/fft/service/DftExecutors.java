@@ -5,7 +5,7 @@
  * http://opensource.org/licenses/mit-license.php
  */
 /*
- * 2025.6.20
+ * 2025.6.21
  */
 package matsu.num.transform.fft.service;
 
@@ -19,12 +19,10 @@ import matsu.num.transform.fft.dto.ComplexNumberArrayDTO;
  * {@link ExecutorType} 型の離散Fourier変換と逆変換に関する定数を取りまとめるクラス.
  * 
  * @author Matsuura Y.
- * @deprecated このクラスは v25以降に削除される. {@link DftExecutors} が全く同じ定数を提供する.
  */
-@Deprecated(forRemoval = true)
-public final class DftTypes {
+public final class DftExecutors {
 
-    private DftTypes() {
+    private DftExecutors() {
         //インスタンス化不可
         throw new AssertionError();
     }
@@ -38,7 +36,7 @@ public final class DftTypes {
      * {@link DFTExecutor} と同一である.
      * </p>
      */
-    public static final ExecutorType<matsu.num.transform.fft.GenericDFTExecutor> GENERIC_DFT_EXECUTOR;
+    public static final ExecutorType<DFTExecutor> GENERIC_DFT_EXECUTOR;
 
     /**
      * 任意サイズに対応するIDFTの実行手段を表す.
@@ -49,15 +47,15 @@ public final class DftTypes {
      * {@link IDFTExecutor} と同一である.
      * </p>
      */
-    public static final ExecutorType<matsu.num.transform.fft.GenericIDFTExecutor> GENERIC_IDFT_EXECUTOR;
+    public static final ExecutorType<IDFTExecutor> GENERIC_IDFT_EXECUTOR;
 
     static {
         GENERIC_DFT_EXECUTOR = new ExecutorType<>(
-                "GENERIC_DFT_EXECUTOR", matsu.num.transform.fft.GenericDFTExecutor.class,
+                "GENERIC_DFT_EXECUTOR", DFTExecutor.class,
                 p -> new GenericDFTExecutor(p.lib().trigonometry(), p.lib().arrayUtil()));
 
         GENERIC_IDFT_EXECUTOR = new ExecutorType<>(
-                "GENERIC_IDFT_EXECUTOR", matsu.num.transform.fft.GenericIDFTExecutor.class,
+                "GENERIC_IDFT_EXECUTOR", IDFTExecutor.class,
                 p -> new GenericIDFTExecutor(p.lib().trigonometry(), p.lib().arrayUtil()));
     }
 }

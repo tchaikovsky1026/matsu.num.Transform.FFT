@@ -1,3 +1,6 @@
+develop:
+サービス定数の置き換え準備.
+
 24:
 24.1.0: リファクタリング(クラス構造, sealed修飾の削除).
 24.0.0: Semantic versioning.
