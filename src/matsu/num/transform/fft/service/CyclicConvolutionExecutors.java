@@ -1,11 +1,12 @@
 /*
- * Copyright © 2024 Matsuura Y.
+ * Copyright © 2025 Matsuura Y.
  * 
  * This software is released under the MIT License.
  * http://opensource.org/licenses/mit-license.php
  */
+
 /*
- * 2025.6.20
+ * 2025.6.21
  */
 package matsu.num.transform.fft.service;
 
@@ -18,13 +19,9 @@ import matsu.num.transform.fft.convolution.impl.Power2CyclicConvolutionExecutor;
  * 
  * @author Matsuura Y.
  */
-public final class CyclicConvolutionTypes {
+public final class CyclicConvolutionExecutors {
 
-    /*
-     * deprecated(removal)は, インターフェース削除後にスーパーインターフェースに変更する(v25以降).
-     */
-
-    private CyclicConvolutionTypes() {
+    private CyclicConvolutionExecutors() {
         //インスタンス化不可
         throw new AssertionError();
     }

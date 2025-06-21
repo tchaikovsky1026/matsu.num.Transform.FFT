@@ -5,7 +5,7 @@
  * http://opensource.org/licenses/mit-license.php
  */
 /*
- * 2025.6.20
+ * 2025.6.21
  */
 package matsu.num.transform.fft.service;
 
@@ -20,13 +20,9 @@ import matsu.num.transform.fft.dto.ComplexNumberArrayDTO;
  * 
  * @author Matsuura Y.
  */
-public final class DftTypes {
+public final class DftExecutors {
 
-    /*
-     * deprecated(removal)は, インターフェース削除後にスーパーインターフェースに変更する(v25以降).
-     */
-
-    private DftTypes() {
+    private DftExecutors() {
         //インスタンス化不可
         throw new AssertionError();
     }

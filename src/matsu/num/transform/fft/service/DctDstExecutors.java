@@ -1,11 +1,12 @@
 /*
- * Copyright © 2024 Matsuura Y.
+ * Copyright © 2025 Matsuura Y.
  * 
  * This software is released under the MIT License.
  * http://opensource.org/licenses/mit-license.php
  */
+
 /*
- * 2025.6.20
+ * 2025.6.21
  */
 package matsu.num.transform.fft.service;
 
@@ -31,13 +32,9 @@ import matsu.num.transform.fft.dctdst.impl.GenericDST4Executor;
  * 
  * @author Matsuura Y.
  */
-public final class DctDstTypes {
+public final class DctDstExecutors {
 
-    /*
-     * deprecated(removal)は, インターフェース削除後にスーパーインターフェースに変更する(v25以降).
-     */
-
-    private DctDstTypes() {
+    private DctDstExecutors() {
         //インスタンス化不可
         throw new AssertionError();
     }

@@ -11,7 +11,7 @@ import org.junit.Ignore;
 import matsu.num.transform.fft.DFTExecutor;
 import matsu.num.transform.fft.dto.ComplexNumberArrayDTO;
 import matsu.num.transform.fft.service.CommonLib;
-import matsu.num.transform.fft.service.DftTypes;
+import matsu.num.transform.fft.service.DftExecutors;
 import matsu.num.transform.fft.service.FFTModuleExecutorProvider;
 
 /**
@@ -23,7 +23,8 @@ final class GenericDFTPerformance {
     private static final int BASE_ITERATION = 400;
 
     private final DFTExecutor dftExecutor =
-            FFTModuleExecutorProvider.by(CommonLib.defaultImplemented()).get(DftTypes.GENERIC_DFT_EXECUTOR);
+            FFTModuleExecutorProvider.by(CommonLib.defaultImplemented())
+                    .get(DftExecutors.GENERIC_DFT_EXECUTOR);
 
     private final int minLength;
     private final int maxLength;

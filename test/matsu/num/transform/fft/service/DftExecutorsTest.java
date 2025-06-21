@@ -27,12 +27,12 @@ import org.junit.experimental.theories.Theory;
 import org.junit.runner.RunWith;
 
 /**
- * {@link CyclicConvolutionTypes} クラスのテスト.
+ * {@link DftExecutors} クラスのテスト.
  */
 @RunWith(Enclosed.class)
-final class CyclicConvolutionTypesTest {
+final class DftExecutorsTest {
 
-    public static final Class<?> TEST_CLASS = CyclicConvolutionTypes.class;
+    public static final Class<?> TEST_CLASS = DftExecutors.class;
 
     @RunWith(Theories.class)
     public static class エグゼキュータの生成のテスト {
