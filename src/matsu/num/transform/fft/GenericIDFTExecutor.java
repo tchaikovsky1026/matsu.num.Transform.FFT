@@ -7,7 +7,6 @@
 package matsu.num.transform.fft;
 
 import matsu.num.transform.fft.dto.ComplexNumberArrayDTO;
-import matsu.num.transform.fft.validation.StructureAcceptance;
 
 /**
  * 任意のデータサイズに適用可能なIDFT.
@@ -35,15 +34,4 @@ import matsu.num.transform.fft.validation.StructureAcceptance;
 @Deprecated(forRemoval = true)
 public interface GenericIDFTExecutor extends IDFTExecutor {
 
-    /**
-     * {@inheritDoc}
-     * 
-     * <p>
-     * {@link GenericIDFTExecutor} でaccept条件とreject条件が共に確定 (固定) される.
-     * </p>
-     * 
-     * @throws NullPointerException {@inheritDoc}
-     */
-    @Override
-    public abstract StructureAcceptance accepts(ComplexNumberArrayDTO complexNumberArray);
 }

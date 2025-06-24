@@ -6,8 +6,6 @@
  */
 package matsu.num.transform.fft.dctdst;
 
-import matsu.num.transform.fft.validation.StructureAcceptance;
-
 /**
  * 任意のデータサイズに適用可能なDCT-1.
  * 
@@ -34,15 +32,4 @@ import matsu.num.transform.fft.validation.StructureAcceptance;
 @Deprecated(forRemoval = true)
 public interface GenericDCT1Executor extends DCT1Executor {
 
-    /**
-     * {@inheritDoc}
-     * 
-     * <p>
-     * {@link GenericDCT1Executor} でaccept条件とreject条件が共に確定 (固定) される.
-     * </p>
-     * 
-     * @throws NullPointerException {@inheritDoc}
-     */
-    @Override
-    public abstract StructureAcceptance accepts(double[] data);
 }

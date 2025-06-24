@@ -1,11 +1,12 @@
 /*
- * Copyright © 2024 Matsuura Y.
+ * Copyright © 2025 Matsuura Y.
  * 
  * This software is released under the MIT License.
  * http://opensource.org/licenses/mit-license.php
  */
+
 /*
- * 2025.6.20
+ * 2025.6.21
  */
 package matsu.num.transform.fft.service;
 
@@ -30,12 +31,10 @@ import matsu.num.transform.fft.dctdst.impl.GenericDST4Executor;
  * {@link ExecutorType} 型の離散cosine/sine変換に関する定数を取りまとめるクラス.
  * 
  * @author Matsuura Y.
- * @deprecated このクラスは v25以降に削除される. {@link DctDstExecutors} が全く同じ定数を提供する.
  */
-@Deprecated(forRemoval = true)
-public final class DctDstTypes {
+public final class DctDstExecutors {
 
-    private DctDstTypes() {
+    private DctDstExecutors() {
         //インスタンス化不可
         throw new AssertionError();
     }
@@ -49,7 +48,7 @@ public final class DctDstTypes {
      * {@link DCT1Executor} と同一である.
      * </p>
      */
-    public static final ExecutorType<matsu.num.transform.fft.dctdst.GenericDCT1Executor> GENERIC_DCT1_EXECUTOR;
+    public static final ExecutorType<DCT1Executor> GENERIC_DCT1_EXECUTOR;
 
     /**
      * 任意サイズに対応するDCT-2の実行手段を表す.
@@ -60,7 +59,7 @@ public final class DctDstTypes {
      * {@link DCT2Executor} と同一である.
      * </p>
      */
-    public static final ExecutorType<matsu.num.transform.fft.dctdst.GenericDCT2Executor> GENERIC_DCT2_EXECUTOR;
+    public static final ExecutorType<DCT2Executor> GENERIC_DCT2_EXECUTOR;
 
     /**
      * 任意サイズに対応するDCT-3の実行手段を表す.
@@ -71,7 +70,7 @@ public final class DctDstTypes {
      * {@link DCT3Executor} と同一である.
      * </p>
      */
-    public static final ExecutorType<matsu.num.transform.fft.dctdst.GenericDCT3Executor> GENERIC_DCT3_EXECUTOR;
+    public static final ExecutorType<DCT3Executor> GENERIC_DCT3_EXECUTOR;
 
     /**
      * 任意サイズに対応するDCT-4の実行手段を表す.
@@ -82,7 +81,7 @@ public final class DctDstTypes {
      * {@link DCT4Executor} と同一である.
      * </p>
      */
-    public static final ExecutorType<matsu.num.transform.fft.dctdst.GenericDCT4Executor> GENERIC_DCT4_EXECUTOR;
+    public static final ExecutorType<DCT4Executor> GENERIC_DCT4_EXECUTOR;
 
     /**
      * 任意サイズに対応するDST-1の実行手段を表す.
@@ -93,7 +92,7 @@ public final class DctDstTypes {
      * {@link DST1Executor} と同一である.
      * </p>
      */
-    public static final ExecutorType<matsu.num.transform.fft.dctdst.GenericDST1Executor> GENERIC_DST1_EXECUTOR;
+    public static final ExecutorType<DST1Executor> GENERIC_DST1_EXECUTOR;
 
     /**
      * 任意サイズに対応するDST-2の実行手段を表す.
@@ -104,7 +103,7 @@ public final class DctDstTypes {
      * {@link DST2Executor} と同一である.
      * </p>
      */
-    public static final ExecutorType<matsu.num.transform.fft.dctdst.GenericDST2Executor> GENERIC_DST2_EXECUTOR;
+    public static final ExecutorType<DST2Executor> GENERIC_DST2_EXECUTOR;
 
     /**
      * 任意サイズに対応するDST-3の実行手段を表す.
@@ -115,7 +114,7 @@ public final class DctDstTypes {
      * {@link DST3Executor} と同一である.
      * </p>
      */
-    public static final ExecutorType<matsu.num.transform.fft.dctdst.GenericDST3Executor> GENERIC_DST3_EXECUTOR;
+    public static final ExecutorType<DST3Executor> GENERIC_DST3_EXECUTOR;
 
     /**
      * 任意サイズに対応するDST-4の実行手段を表す.
@@ -126,39 +125,39 @@ public final class DctDstTypes {
      * {@link DST4Executor} と同一である.
      * </p>
      */
-    public static final ExecutorType<matsu.num.transform.fft.dctdst.GenericDST4Executor> GENERIC_DST4_EXECUTOR;
+    public static final ExecutorType<DST4Executor> GENERIC_DST4_EXECUTOR;
 
     static {
         GENERIC_DCT1_EXECUTOR = new ExecutorType<>(
-                "GENERIC_DCT1_EXECUTOR", matsu.num.transform.fft.dctdst.GenericDCT1Executor.class,
+                "GENERIC_DCT1_EXECUTOR", DCT1Executor.class,
                 p -> new GenericDCT1Executor(p.lib().trigonometry(), p.lib().arrayUtil()));
 
         GENERIC_DCT2_EXECUTOR = new ExecutorType<>(
-                "GENERIC_DCT2_EXECUTOR", matsu.num.transform.fft.dctdst.GenericDCT2Executor.class,
+                "GENERIC_DCT2_EXECUTOR", DCT2Executor.class,
                 p -> new GenericDCT2Executor(p.lib().trigonometry(), p.lib().arrayUtil()));
 
         GENERIC_DCT3_EXECUTOR = new ExecutorType<>(
-                "GENERIC_DCT3_EXECUTOR", matsu.num.transform.fft.dctdst.GenericDCT3Executor.class,
+                "GENERIC_DCT3_EXECUTOR", DCT3Executor.class,
                 p -> new GenericDCT3Executor(p.lib().trigonometry(), p.lib().arrayUtil()));
 
         GENERIC_DCT4_EXECUTOR = new ExecutorType<>(
-                "GENERIC_DCT4_EXECUTOR", matsu.num.transform.fft.dctdst.GenericDCT4Executor.class,
+                "GENERIC_DCT4_EXECUTOR", DCT4Executor.class,
                 p -> new GenericDCT4Executor(p.lib().trigonometry(), p.lib().arrayUtil()));
 
         GENERIC_DST1_EXECUTOR = new ExecutorType<>(
-                "GENERIC_DST1_EXECUTOR", matsu.num.transform.fft.dctdst.GenericDST1Executor.class,
+                "GENERIC_DST1_EXECUTOR", DST1Executor.class,
                 p -> new GenericDST1Executor(p.lib().trigonometry(), p.lib().arrayUtil()));
 
         GENERIC_DST2_EXECUTOR = new ExecutorType<>(
-                "GENERIC_DST2_EXECUTOR", matsu.num.transform.fft.dctdst.GenericDST2Executor.class,
+                "GENERIC_DST2_EXECUTOR", DST2Executor.class,
                 p -> new GenericDST2Executor(p.lib().trigonometry(), p.lib().arrayUtil()));
 
         GENERIC_DST3_EXECUTOR = new ExecutorType<>(
-                "GENERIC_DST3_EXECUTOR", matsu.num.transform.fft.dctdst.GenericDST3Executor.class,
+                "GENERIC_DST3_EXECUTOR", DST3Executor.class,
                 p -> new GenericDST3Executor(p.lib().trigonometry(), p.lib().arrayUtil()));
 
         GENERIC_DST4_EXECUTOR = new ExecutorType<>(
-                "GENERIC_DST4_EXECUTOR", matsu.num.transform.fft.dctdst.GenericDST4Executor.class,
+                "GENERIC_DST4_EXECUTOR", DST4Executor.class,
                 p -> new GenericDST4Executor(p.lib().trigonometry(), p.lib().arrayUtil()));
     }
 }

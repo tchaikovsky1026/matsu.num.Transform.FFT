@@ -6,8 +6,6 @@
  */
 package matsu.num.transform.fft.convolution;
 
-import matsu.num.transform.fft.validation.StructureAcceptance;
-
 /**
  * 任意のデータサイズに適用可能な実数列の巡回畳み込み.
  * 
@@ -15,8 +13,7 @@ import matsu.num.transform.fft.validation.StructureAcceptance;
  * このインターフェースにおいて,
  * {@link #accepts(double[], double[])}
  * のreject条件は,
- * {@link CyclicConvolutionExecutor} と同等である. <br>
- * このインターフェースのサブタイプではこれ以上reject条件を緩めて (accept条件を強めて) いないことを保証する.
+ * {@link CyclicConvolutionExecutor} と同等である.
  * </p>
  * 
  * <p>
@@ -34,16 +31,4 @@ import matsu.num.transform.fft.validation.StructureAcceptance;
 @Deprecated(forRemoval = true)
 public interface GenericCyclicConvolutionExecutor extends CyclicConvolutionExecutor {
 
-    /**
-     * {@inheritDoc}
-     * 
-     * <p>
-     * {@link GenericCyclicConvolutionExecutor} でaccept条件とreject条件が共に確定 (固定)
-     * される.
-     * </p>
-     * 
-     * @throws NullPointerException {@inheritDoc}
-     */
-    @Override
-    public abstract StructureAcceptance accepts(double[] f, double[] g);
 }
