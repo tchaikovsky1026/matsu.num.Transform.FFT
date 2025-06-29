@@ -25,15 +25,9 @@ import matsu.num.transform.fft.lib.privatelib.ArraysUtil;
  * 
  * @author Matsuura Y.
  */
-@SuppressWarnings("removal")
 public final class GenericIDFTExecutor
         extends ComplexLinearByScalingStability
-        implements IDFTExecutor,
-        matsu.num.transform.fft.GenericIDFTExecutor {
-
-    /*
-     * deprecated(removal)は, インターフェース削除後にスーパーインターフェースに変更する(v25以降).
-     */
+        implements IDFTExecutor {
 
     private static final FourierType TYPE = FourierType.IDFT;
 

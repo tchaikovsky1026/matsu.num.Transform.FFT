@@ -24,15 +24,9 @@ import matsu.num.transform.fft.lib.privatelib.ArraysUtil;
  * 
  * @author Matsuura Y.
  */
-@SuppressWarnings("removal")
 public final class GenericDCT4Executor
         extends LinearByScalingStability
-        implements DCT4Executor,
-        matsu.num.transform.fft.dctdst.GenericDCT4Executor {
-
-    /*
-     * deprecated(removal)は, インターフェース削除後にスーパーインターフェースに変更する(v25以降).
-     */
+        implements DCT4Executor {
 
     private final Trigonometry trigonometry;
     private final FourierBasisComputer.Supplier computerSupplier;
