@@ -25,22 +25,24 @@ final class ArrayUtilSimpleImpl implements ArraysUtil {
 
     @Override
     public double normMax(double[] vector) {
-        double outputValue = 0.0;
+
+        /*
+         * 4系列を分離することで, 並列化される可能性がある.
+         */
+        double v0 = 0d;
+        double v1 = 0d;
+        double v2 = 0d;
+        double v3 = 0d;
         int index;
         for (index = vector.length - 1; index >= 3; index -= 4) {
-            double v0 = Math.abs(vector[index]);
-            double v1 = Math.abs(vector[index - 1]);
-            double v2 = Math.abs(vector[index - 2]);
-            double v3 = Math.abs(vector[index - 3]);
-            double v01 = Math.max(v0, v1);
-            double v23 = Math.max(v2, v3);
-            outputValue = Math.max(outputValue, Math.max(v01, v23));
+            v0 = Math.max(v0, Math.abs(vector[index]));
+            v1 = Math.max(v1, Math.abs(vector[index - 1]));
+            v2 = Math.max(v2, Math.abs(vector[index - 2]));
+            v3 = Math.max(v3, Math.abs(vector[index - 3]));
         }
         for (; index >= 0; index--) {
-            double v0 = Math.abs(vector[index]);
-            outputValue = Math.max(outputValue, v0);
+            v0 = Math.max(v0, Math.abs(vector[index]));
         }
-        return outputValue;
+        return Math.max(Math.max(v0, v1), Math.max(v2, v3));
     }
-
 }
