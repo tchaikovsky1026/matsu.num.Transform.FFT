@@ -5,7 +5,7 @@
  * http://opensource.org/licenses/mit-license.php
  */
 /*
- * 2024.4.4
+ * 2025.8.19
  */
 package matsu.num.transform.fft.number;
 
@@ -150,7 +150,7 @@ final class MinimumPrimitiveRootSearch {
             int r = a;
             for (int i = 0; i < power2Modular.length; i++) {
                 power2Modular[i] = r;
-                r = r * r % p;
+                r = (int) ((long) r * r % p);
             }
         }
         for (int j = 0; j < exponent.length; j++) {
@@ -163,7 +163,7 @@ final class MinimumPrimitiveRootSearch {
             int r = 1;
             for (int shift = 0; shift <= shiftMax; shift++) {
                 if ((exp & 1) == 1) {
-                    r = r * power2Modular[shift] % p;
+                    r = (int) ((long) r * power2Modular[shift] % p);
                 }
                 exp = exp >> 1;
             }
@@ -175,4 +175,11 @@ final class MinimumPrimitiveRootSearch {
         return true;
     }
 
+    public static void main(String[] args) {
+        int p = 1000000033;
+        MinimumPrimitiveRootSearch rootSearch = new MinimumPrimitiveRootSearch(p);
+
+        System.out.println(rootSearch.prime());
+        System.out.println(rootSearch.primitiveRoot());
+    }
 }

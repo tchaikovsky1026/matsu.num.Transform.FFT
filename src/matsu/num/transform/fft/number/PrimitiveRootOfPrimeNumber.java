@@ -5,7 +5,7 @@
  * http://opensource.org/licenses/mit-license.php
  */
 /*
- * 2024.12.26
+ * 2025.8.19
  */
 package matsu.num.transform.fft.number;
 
@@ -51,6 +51,7 @@ public final class PrimitiveRootOfPrimeNumber {
     }
 
     private int[] calcExpMapping() {
+
         int[] mapping = new int[this.prime - 1];
 
         final int a = this.primitiveRoot;
@@ -59,7 +60,7 @@ public final class PrimitiveRootOfPrimeNumber {
         int a_n = 1;
         for (int i = 0; i < mapping.length; i++) {
             mapping[i] = a_n;
-            a_n = a_n * a % p;
+            a_n = (int) ((long) a_n * a % p);
         }
 
         return mapping;
