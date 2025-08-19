@@ -139,6 +139,10 @@ final class MinimumPrimitiveRootSearch {
      */
     private static boolean isPrimitiveRoot(int a, int p, int[] exponent) {
 
+        /*
+         * TODO: aの積剰余を計算することにおける, オーバーフローリスクを調査する.
+         */
+
         int maxExp = exponent[exponent.length - 1];
 
         /* a^1, a^2, a^4, a^8,...を格納する配列 */

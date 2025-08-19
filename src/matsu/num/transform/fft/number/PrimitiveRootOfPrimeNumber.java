@@ -51,6 +51,11 @@ public final class PrimitiveRootOfPrimeNumber {
     }
 
     private int[] calcExpMapping() {
+
+        /*
+         * TODO: aの積剰余を計算することにおける, オーバーフローリスクを調査する.
+         */
+
         int[] mapping = new int[this.prime - 1];
 
         final int a = this.primitiveRoot;
