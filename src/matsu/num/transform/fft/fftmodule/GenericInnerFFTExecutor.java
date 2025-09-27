@@ -5,7 +5,7 @@
  * http://opensource.org/licenses/mit-license.php
  */
 /*
- * 2024.4.4
+ * 2025.9.27
  */
 package matsu.num.transform.fft.fftmodule;
 
@@ -13,7 +13,6 @@ import matsu.num.transform.fft.component.ComplexNumber;
 import matsu.num.transform.fft.component.FourierBasis;
 import matsu.num.transform.fft.component.FourierBasisComputer;
 import matsu.num.transform.fft.number.PrimeFactorization;
-import matsu.num.transform.fft.number.PrimeFactorization.Separated;
 
 /**
  * 高速なDFT,IDFTの実行を扱う.
@@ -89,6 +88,18 @@ public final class GenericInnerFFTExecutor implements InnerDFTExecutor {
          */
         private static final int PRIME_FFT_THRESHOLD = 320;
 
+        /**
+         * DFTをまとめて処理できるサイズの上限.
+         * 
+         * <p>
+         * Cooley-Tukey型では, 小さい因数は合成数であってもRawに処理したほうが良い. <br>
+         * この定数はその合成数の上界を与える. <br>
+         * Rawアルゴリズムを強制するため, この値は
+         * {@link #PRIME_FFT_THRESHOLD} 未満である必要がある.
+         * </p>
+         */
+        private static final int COMPOSITE_N1_MAX = 30;
+
         private final int entireSize;
 
         private final ComplexNumber[] data;
@@ -139,19 +150,25 @@ public final class GenericInnerFFTExecutor implements InnerDFTExecutor {
              * N1が直接DFT, N2が再帰的FFTのサイズ
              */
             int N = primeFactorization.original();
-            Separated separated = primeFactorization.separateLowest();
-            int N1 = separated.separatedValue();
-            // N2の素因数分解
-            PrimeFactorization primeFact_N2 = separated.child();
-            int N2 = primeFact_N2.original();
 
-            //素因数2が2個以上取れる場合, サイズ4のDFTに置き換える
-            if (N2 >= 2) {
-                if (N1 == 2 && primeFact_N2.separateLowest().separatedValue() == 2) {
-                    N1 = 4;
-                    primeFact_N2 = primeFact_N2.separateLowest().child();
-                    N2 = primeFact_N2.original();
+            // mergeN1Max < PRIME_FFT_THRESHOLD が必要
+            PrimeFactorization primeFact_N2;
+            int N2;
+            int N1;
+            { // このブロックで, N1 * N2 = N となるN1, N2を決定する
+                primeFact_N2 = primeFactorization.child();
+                int currentN1 = primeFactorization.separatedValue();
+                while (primeFact_N2.original() > 1) {
+                    int f = primeFact_N2.separatedValue();
+                    if (currentN1 * f > COMPOSITE_N1_MAX) {
+                        break;
+                    }
+                    currentN1 *= f;
+                    primeFact_N2 = primeFact_N2.child();
                 }
+
+                N2 = primeFact_N2.original();
+                N1 = N / N2;
             }
 
             /* dataからN2飛ばしでデータ抽出し, サイズN1の系列をN2個作る */
