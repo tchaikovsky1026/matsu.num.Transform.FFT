@@ -47,7 +47,7 @@ public final class GenericInnerFFTExecutor implements InnerDFTExecutor {
     /**
      * 扱うことができるデータサイズの最大値: 2<sup>28</sup>
      */
-    public static final int MAX_DATA_SIZE = PrimeInnerFFTExecutor.MAX_DATA_SIZE;
+    public static final int MAX_DATA_SIZE = PrimeRaderInnerFFTExecutor.MAX_DATA_SIZE;
 
     private final InnerDFTExecutor rawDFT;
     private final InnerDFTExecutor primeFFT;
@@ -60,7 +60,7 @@ public final class GenericInnerFFTExecutor implements InnerDFTExecutor {
      */
     public GenericInnerFFTExecutor(FourierBasisComputer.Supplier computerSuppier) {
         super();
-        this.primeFFT = new PrimeInnerFFTExecutor(computerSuppier);
+        this.primeFFT = new PrimeRaderInnerFFTExecutor(computerSuppier);
         this.rawDFT = new RawInnerDFTExecutor();
     }
 

@@ -26,7 +26,6 @@ import matsu.num.transform.fft.component.FourierBasisComputer;
 import matsu.num.transform.fft.component.FourierBasisComputerSupplierDefaultHolder;
 import matsu.num.transform.fft.component.FourierType;
 import matsu.num.transform.fft.dto.ComplexNumberArrayDTO;
-import matsu.num.transform.fft.fftmodule.RawInnerDFTExecutor;
 import matsu.num.transform.fft.lib.TrigonometryForTesting;
 import matsu.num.transform.fft.lib.privatelib.ArraysUtilForTesting;
 import matsu.num.transform.fft.validation.NotRequiredDataSizeException;
@@ -43,7 +42,7 @@ final class GenericIDFTExecutorTest {
 
     private static final FourierBasisComputer.Supplier COMPUTER_SUPPLIER =
             FourierBasisComputerSupplierDefaultHolder.INSTANCE;
-    private static final RawInnerDFTExecutor RAW_DFT_EXECUTOR = new RawInnerDFTExecutor();
+    private static final RawDFTExecutorForTesting RAW_DFT_EXECUTOR = new RawDFTExecutorForTesting();
 
     public static class 入力サイズの検証 {
 
