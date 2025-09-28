@@ -7,31 +7,36 @@
 /*
  * 2024.4.4
  */
-package matsu.num.transform.fft.fftmodule;
+package matsu.num.transform.fft.dft.impl;
 
 import matsu.num.transform.fft.component.ComplexNumber;
 import matsu.num.transform.fft.component.FourierBasis;
 import matsu.num.transform.fft.component.FourierBasisComputer;
 
 /**
- * 直接的な離散Fourier変換/逆変換を扱う.
+ * テスト用の, Rawな方法によるDFT/IDFT.
  * 
  * @author Matsuura Y.
  */
-final class RawInnerDFTExecutor implements InnerDFTExecutor {
+final class RawDFTExecutorForTesting {
 
     /**
      * このクラスのインスタンスを構築する.
      */
-    RawInnerDFTExecutor() {
+    RawDFTExecutorForTesting() {
         super();
     }
 
     /**
-     * @throws IllegalArgumentException {@inheritDoc}
-     * @throws NullPointerException {@inheritDoc}
+     * 与えられたデータに対してDFT/IDFTをcomputeする.
+     * 
+     * @param data データ
+     * @param basisComputer Fourier基底生成器
+     * @return DFT/IDFTの結果
+     * @throws IllegalArgumentException サイズが0の場合, サイズが大きすぎる場合,
+     *             基底生成器がdata.lengthに対応していない場合
+     * @throws NullPointerException 引数にnullが含まれる場合
      */
-    @Override
     public ComplexNumber[] compute(ComplexNumber[] data, FourierBasisComputer basisComputer) {
 
         //ここでbasisComputerのサイズが整合しないことに対する例外をスロー

@@ -15,10 +15,9 @@ import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.Test.None;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
-
-import matsu.num.transform.fft.number.PrimeFactorization.Separated;
 
 /**
  * {@link PrimeFactorization}クラスのテスト.
@@ -37,9 +36,14 @@ final class PrimeFactorizationTest {
             factorization = PrimeFactorization.of(1);
         }
 
-        @Test
-        public void test_素因数は0個() {
-            assertThat(factorization.numberOfFactors(), is(0));
+        @Test(expected = IllegalStateException.class)
+        public void test_分離不可_value() {
+            factorization.separatedValue();
+        }
+
+        @Test(expected = IllegalStateException.class)
+        public void test_分離不可_child() {
+            factorization.child();
         }
     }
 
@@ -53,22 +57,17 @@ final class PrimeFactorizationTest {
         }
 
         @Test
-        public void test_素因数は3個() {
-            assertThat(factorization.numberOfFactors(), is(3));
-        }
-
-        @Test
         public void test_素因数は2_2_3() {
             int[] expected = { 2, 2, 3 };
             Arrays.sort(expected);
 
             PrimeFactorization current = factorization;
             List<Integer> resultList = new ArrayList<>();
-            while (current.numberOfFactors() > 0) {
-                Separated separated = current.separate();
-                current = separated.child();
-                resultList.add(separated.separatedValue());
+            while (current.original() > 1) {
+                resultList.add(current.separatedValue());
+                current = current.child();
             }
+
             int[] result = new int[resultList.size()];
             {
                 int i = 0;
@@ -84,58 +83,18 @@ final class PrimeFactorizationTest {
 
         }
 
-        @Test
-        public void test_3回separate可能() {
-            factorization.separate().child().separate().child().separate();
+        @Test(expected = None.class)
+        public void test_3回分離可能() {
+            factorization.child().child().child();
         }
 
         @Test(expected = IllegalStateException.class)
-        public void test_4回separateは不可() {
-            factorization.separate().child().separate().child().separate().child().separate();
+        public void test_4回分離は不可() {
+            factorization.child().child().child().child();
         }
     }
 
-    public static class Separatedのテスト_上から {
-
-        private PrimeFactorization factorization;
-
-        @Before
-        public void before_12を素因数分解する() {
-            factorization = PrimeFactorization.of(12);
-        }
-
-        @Test
-        public void test_1度目は3が分離() {
-            Separated separated = factorization.separateHighest();
-
-            assertThat(separated.separatedValue(), is(3));
-            assertThat(separated.child().original(), is(4));
-        }
-
-        @Test
-        public void test_2度目は2が分離() {
-            Separated separated = factorization.separateHighest().child().separateHighest();
-
-            assertThat(separated.separatedValue(), is(2));
-            assertThat(separated.child().original(), is(2));
-        }
-
-        @Test
-        public void test_3度目は2が分離() {
-            Separated separated = factorization.separateHighest().child().separateHighest().child().separateHighest();
-
-            assertThat(separated.separatedValue(), is(2));
-            assertThat(separated.child().original(), is(1));
-        }
-
-        @Test
-        public void test_複数回の呼び出しで同一インスタンス_実装の詳細に依存() {
-            assertThat(factorization.separateHighest() == factorization.separateHighest(), is(true));
-        }
-
-    }
-
-    public static class Separatedのテスト_下から {
+    public static class 分離のテスト {
 
         private PrimeFactorization factorization;
 
@@ -146,51 +105,26 @@ final class PrimeFactorizationTest {
 
         @Test
         public void test_1度目は2が分離() {
-            Separated separated = factorization.separateLowest();
+            PrimeFactorization child = factorization;
 
-            assertThat(separated.separatedValue(), is(2));
-            assertThat(separated.child().original(), is(6));
+            assertThat(child.separatedValue(), is(2));
+            assertThat(child.child().original(), is(6));
         }
 
         @Test
         public void test_2度目は2が分離() {
-            Separated separated = factorization.separateLowest().child().separateLowest();
+            PrimeFactorization child = factorization.child();
 
-            assertThat(separated.separatedValue(), is(2));
-            assertThat(separated.child().original(), is(3));
+            assertThat(child.separatedValue(), is(2));
+            assertThat(child.child().original(), is(3));
         }
 
         @Test
         public void test_3度目は3が分離() {
-            Separated separated = factorization.separateLowest().child().separateLowest().child().separateLowest();
+            PrimeFactorization child = factorization.child().child();
 
-            assertThat(separated.separatedValue(), is(3));
-            assertThat(separated.child().original(), is(1));
+            assertThat(child.separatedValue(), is(3));
+            assertThat(child.child().original(), is(1));
         }
-
-        @Test
-        public void test_複数回の呼び出しで同一インスタンス_実装の詳細に依存() {
-            assertThat(factorization.separateLowest() == factorization.separateLowest(), is(true));
-        }
-
     }
-
-    public static class Familyのテスト {
-
-        private PrimeFactorization factorization;
-
-        @Before
-        public void before_36を素因数分解する() {
-            factorization = PrimeFactorization.of(36);
-        }
-
-        @Test
-        public void test_分離_上下_と分離_下上_の後の子は同一インスタンス_実装の詳細に依存() {
-            PrimeFactorization lh = factorization.separateLowest().child().separateHighest().child();
-            PrimeFactorization hl = factorization.separateHighest().child().separateLowest().child();
-            assertThat(lh == hl, is(true));
-        }
-
-    }
-
 }
