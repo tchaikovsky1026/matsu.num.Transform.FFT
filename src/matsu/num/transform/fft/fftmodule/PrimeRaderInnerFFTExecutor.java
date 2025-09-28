@@ -5,7 +5,7 @@
  * http://opensource.org/licenses/mit-license.php
  */
 /*
- * 2024.4.4
+ * 2025.9.28
  */
 package matsu.num.transform.fft.fftmodule;
 
@@ -15,7 +15,7 @@ import matsu.num.transform.fft.component.FourierBasisComputer;
 import matsu.num.transform.fft.number.PrimitiveRootOfPrimeNumber;
 
 /**
- * 3以上の素数個の標本サイズのFFTを実行する.
+ * Raderアルゴリズムにより, 3以上の素数個の標本サイズのFFTを実行する.
  * 
  * <p>
  * このクラスが提供する{@link InnerDFTExecutor#compute(ComplexNumber[], FourierBasisComputer)}の事前条件(引数の条件)は以下である.
@@ -36,7 +36,7 @@ import matsu.num.transform.fft.number.PrimitiveRootOfPrimeNumber;
  * 
  * @author Matsuura Y.
  */
-public final class PrimeInnerFFTExecutor implements InnerDFTExecutor {
+final class PrimeRaderInnerFFTExecutor implements InnerDFTExecutor {
 
     /**
      * 扱うことができるデータサイズの最大値: 2<sup>28</sup>
@@ -51,7 +51,7 @@ public final class PrimeInnerFFTExecutor implements InnerDFTExecutor {
      * @param computerSuppier Fourier基底コンピュータのサプライヤ
      * @throws NullPointerException 引数にnullが含まれる場合
      */
-    public PrimeInnerFFTExecutor(FourierBasisComputer.Supplier computerSuppier) {
+    PrimeRaderInnerFFTExecutor(FourierBasisComputer.Supplier computerSuppier) {
         super();
         this.cyclicConvolution = new CyclicConvolutionModule(computerSuppier);
     }
