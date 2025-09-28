@@ -39,7 +39,7 @@
  * </p>
  * 
  * @author Matsuura Y.
- * @version 24.3.1
+ * @version 24.4.0
  */
 module matsu.num.Transform.FFT {
 

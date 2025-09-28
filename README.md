@@ -2,7 +2,7 @@
 `matsu.num.Transform.FFT` は Java 言語向けの数値計算における, 
 高速 Fourier 変換 (Fast Fourier transform, FFT) を扱うライブラリである.
 
-現在のリリースバージョンは 24.3.1 であり, Java 17 に準拠する.
+現在のリリースバージョンは 24.4.0 であり, Java 17 に準拠する.
 このバージョンにおいて, 次がサポートされている.
 
 - 高速な離散 Fourier 変換とそれに関連する計算
