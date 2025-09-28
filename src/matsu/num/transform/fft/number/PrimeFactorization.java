@@ -5,22 +5,20 @@
  * http://opensource.org/licenses/mit-license.php
  */
 /*
- * 2024.12.26
+ * 2025.9.27
  */
 package matsu.num.transform.fft.number;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Objects;
 
 /**
  * 素因数分解を扱う.
  * 
  * <p>
- * このクラスは素因数分解前のオリジナルの値に基づいて等価性を定義する.
+ * このクラスのインスタンスはイミュータブルである. <br>
+ * ただし, マルチスレッドで使用された場合はフィールドの初期化が複数回走る可能性がある.
  * </p>
  * 
  * @author Matsuura Y.
@@ -30,163 +28,62 @@ public final class PrimeFactorization {
     private final int original;
     private final int[] factors;
 
-    //自身のファミリー
-    private final Family family;
+    // この2値は, originalが1のときダミーが入る(外には漏洩しない)
+    private final int separatedValue;
+    private PrimeFactorization child;
 
-    //循環参照が生じ不要な場合もあるため, 遅延初期化
-    private volatile Separated separatedLowest;
-    private volatile Separated separatedHighest;
-
-    //遅延初期化に係るロックオブジェクト
-    private final Object lock = new Object();
-
-    private PrimeFactorization(int original, int[] factors, Family family) {
+    private PrimeFactorization(int original, int[] factors) {
         this.original = original;
         this.factors = factors;
-        this.family = family;
+
+        this.separatedValue = factors.length == 0
+                ? 0
+                : factors[0];
     }
 
+    /**
+     * 自身の値を返す.
+     * 
+     * @return 自身の値
+     */
     public int original() {
         return this.original;
     }
 
-    public int numberOfFactors() {
-        return this.factors.length;
-    }
-
     /**
-     * 素因数を分離する. <br>
+     * 自身から分離される素因数を返す. <br>
      * どの素因数が分離されるかは決定的だが規定されていない.
      * 
-     * 
-     * @return 分離
-     * @throws IllegalStateException originalが1で分解できない場合
+     * @return 分離された素因数
+     * @throws IllegalStateException 自身が1の場合
      */
-    public Separated separate() {
-        return this.separateLowest();
+    public int separatedValue() {
+        if (this.original == 1) {
+            throw new IllegalStateException("original == 1");
+        }
+        return this.separatedValue;
     }
 
     /**
-     * 最小の素因数を分離する.
+     * 素因数を1個分離した残りを返す. <br>
+     * {@link #separatedValue()} と整合する.
      * 
-     * 
-     * @return 分離
-     * @throws IllegalStateException originalが1で分解できない場合
+     * @return 自身から素因数を1個分離した残り
+     * @throws IllegalStateException 自身が1の場合
      */
-    public Separated separateLowest() {
-
-        Separated out = this.separatedLowest;
-        if (Objects.nonNull(out)) {
-            return out;
-        }
-        synchronized (this.lock) {
-            out = this.separatedLowest;
-            if (Objects.nonNull(out)) {
-                return out;
-            }
-            out = this.createSeparatedLowest();
-            this.separatedLowest = out;
-            return out;
-        }
-    }
-
-    /**
-     * 最大の素因数を分離する.
-     * 
-     * 
-     * @return 分離
-     * @throws IllegalStateException originalが1で分解できない場合
-     */
-    public Separated separateHighest() {
-
-        Separated out = this.separatedHighest;
-        if (Objects.nonNull(out)) {
-            return out;
-        }
-        synchronized (this.lock) {
-            out = this.separatedHighest;
-            if (Objects.nonNull(out)) {
-                return out;
-            }
-            out = this.createSeparatedHighest();
-            this.separatedHighest = out;
-            return out;
-        }
-    }
-
-    private Separated createSeparatedLowest() {
-        if (this.factors.length == 0) {
-            throw new IllegalStateException("originalが1である");
+    public PrimeFactorization child() {
+        if (this.original == 1) {
+            throw new IllegalStateException("original == 1");
         }
 
-        //配列の先頭を分離する
-        int separatedValue = this.factors[0];
-        int[] newFact = Arrays.copyOfRange(this.factors, 1, this.factors.length);
+        if (this.child != null) {
+            return this.child;
+        }
+
+        int separatedValue = this.separatedValue;
         int newOriginal = this.original / separatedValue;
-
-        return new Separated(
-                separatedValue, this.family.intern(new PrimeFactorization(newOriginal, newFact, this.family)));
-    }
-
-    private Separated createSeparatedHighest() {
-        if (this.factors.length == 0) {
-            throw new IllegalStateException("originalが1である");
-        }
-
-        //配列の末尾を分離する
-        int[] newFact = Arrays.copyOf(this.factors, this.factors.length - 1);
-        int separatedValue = this.factors[this.factors.length - 1];
-        int newOriginal = this.original / separatedValue;
-
-        return new Separated(
-                separatedValue, this.family.intern(new PrimeFactorization(newOriginal, newFact, this.family)));
-    }
-
-    /**
-     * このインスタンスと引数との等価性を判定する.
-     * 
-     * @return 等価ならtrue
-     */
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (!(obj instanceof PrimeFactorization)) {
-            return false;
-        }
-
-        PrimeFactorization target = (PrimeFactorization) obj;
-
-        return Integer.compare(this.original, target.original) == 0;
-    }
-
-    /**
-     * このインスタンスのハッシュコードを返す.
-     * 
-     * @return ハッシュコード
-     */
-    @Override
-    public int hashCode() {
-        int result = 1;
-        result = 31 * result + Integer.hashCode(this.original);
-        return result;
-    }
-
-    /**
-     * このインスタンスの文字列表現を返す.
-     * 
-     * <p>
-     * おそらく次の形式が適切であろうが, 確実ではなく,
-     * バージョン間の整合性も担保されていない. <br>
-     * {@code [original: %original]}
-     * </p>
-     * 
-     * @return 文字列表現
-     */
-    @Override
-    public String toString() {
-        return String.format("[original:%d]", this.original);
+        int[] newFactors = Arrays.copyOfRange(this.factors, 1, this.factors.length);
+        return this.child = new PrimeFactorization(newOriginal, newFactors);
     }
 
     /**
@@ -241,7 +138,7 @@ public final class PrimeFactorization {
         //outは昇順であるはず
         assert isSorted(out) : "Bug?:outが昇順でない";
 
-        return new PrimeFactorization(original, out, new Family());
+        return new PrimeFactorization(original, out);
     }
 
     /**
@@ -256,67 +153,4 @@ public final class PrimeFactorization {
         Arrays.sort(sorted);
         return Arrays.equals(array, sorted);
     }
-
-    public static final class Separated {
-
-        private int separatedValue;
-        private final PrimeFactorization child;
-
-        private Separated(int separatedValue, PrimeFactorization child) {
-            this.separatedValue = separatedValue;
-            this.child = child;
-        }
-
-        public int separatedValue() {
-            return this.separatedValue;
-        }
-
-        public PrimeFactorization child() {
-            return this.child;
-        }
-    }
-
-    /**
-     * 素因数分解のファミリーを管理する.
-     * 
-     * <p>
-     * {@link PrimeFactorization#separatedLowest},
-     * {@link PrimeFactorization#separatedHighest}によって, <br>
-     * {@link Separated}が2の累乗で爆発するリスクがあるので, <br>
-     * それを管理して無駄な{@link PrimeFactorization}を生成しないための仕組み.
-     * </p>
-     */
-    private static final class Family {
-
-        private final Map<PrimeFactorization, PrimeFactorization> family;
-
-        /**
-         * 新しいファミリーを構築する.
-         */
-        public Family() {
-            this.family = new HashMap<>();
-        }
-
-        /**
-         * 引数を正準表現に直す.
-         * 
-         * <p>
-         * 引数と等価なインスタンスがすでに管理下にある場合は管理下のインスタンスを,
-         * 管理下にない場合は新しく登録し引数と同じ参照を返す.
-         * </p>
-         * 
-         * @param obj obj
-         * @return objの正準表現
-         */
-        public synchronized PrimeFactorization intern(PrimeFactorization obj) {
-
-            assert Objects.nonNull(obj) : "引数がnullである";
-
-            PrimeFactorization interned = this.family.putIfAbsent(obj, obj);
-            return Objects.nonNull(interned)
-                    ? interned
-                    : obj;
-        }
-    }
-
 }

@@ -5,7 +5,7 @@
  * http://opensource.org/licenses/mit-license.php
  */
 /*
- * 2024.4.4
+ * 2025.9.28
  */
 package matsu.num.transform.fft.fftmodule;
 
@@ -25,14 +25,14 @@ import matsu.num.transform.fft.number.Power2Util;
  * 
  * @author Matsuura Y.
  */
-public final class Power2InnerFFTExecutor implements InnerDFTExecutor {
+final class Power2InnerFFTExecutor implements InnerDFTExecutor {
 
     private final RawInnerDFTExecutor rawDFT;
 
     /**
      * このクラスのインスタンスを構築する.
      */
-    public Power2InnerFFTExecutor() {
+    Power2InnerFFTExecutor() {
         super();
         this.rawDFT = new RawInnerDFTExecutor();
     }

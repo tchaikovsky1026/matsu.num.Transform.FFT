@@ -23,15 +23,15 @@ import matsu.num.transform.fft.component.FourierBasisComputerSupplierDefaultHold
 import matsu.num.transform.fft.component.FourierType;
 
 /**
- * {@link PrimeInnerFFTExecutor}クラスのテスト.
+ * {@link PrimeRaderInnerFFTExecutor}クラスのテスト.
  */
-final class PrimeInnerFFTExecutorTest {
+final class PrimeRaderInnerFFTExecutorTest {
 
-    public static final Class<?> TEST_CLASS = PrimeInnerFFTExecutor.class;
+    public static final Class<?> TEST_CLASS = PrimeRaderInnerFFTExecutor.class;
 
     private static final FourierBasisComputer.Supplier COMPUTER_SUPPLIER =
             FourierBasisComputerSupplierDefaultHolder.INSTANCE;
-    private static final PrimeInnerFFTExecutor PRIME_FFT_EXECUTOR = new PrimeInnerFFTExecutor(COMPUTER_SUPPLIER);
+    private static final PrimeRaderInnerFFTExecutor PRIME_FFT_EXECUTOR = new PrimeRaderInnerFFTExecutor(COMPUTER_SUPPLIER);
     private static final RawInnerDFTExecutor RAW_DFT_EXECUTOR = new RawInnerDFTExecutor();
 
     @RunWith(Theories.class)
