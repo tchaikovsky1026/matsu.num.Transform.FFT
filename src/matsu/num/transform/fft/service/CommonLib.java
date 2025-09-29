@@ -55,16 +55,6 @@ public abstract class CommonLib {
     abstract ArraysUtil arrayUtil();
 
     /**
-     * このライブラリの文字列表現.
-     * 
-     * @return 文字列表現
-     */
-    @Override
-    public String toString() {
-        return "CommonLib";
-    }
-
-    /**
      * デフォルトライブラリを返す.
      * 
      * @return デフォルトライブラリ
@@ -172,16 +162,6 @@ public abstract class CommonLib {
             out = new CommonLibImpl(this);
             this.build = out;
             return out;
-        }
-
-        /**
-         * インスタンスの文字列表現.
-         * 
-         * @return 文字列表現
-         */
-        @Override
-        public String toString() {
-            return "LibBuilder";
         }
 
         /**
