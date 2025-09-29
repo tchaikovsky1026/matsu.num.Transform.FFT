@@ -48,6 +48,17 @@ final class Power2InnerFFTExecutor implements InnerDFTExecutor {
 
     private final class Power2FFTHelper {
 
+        /**
+         * DFTをまとめて処理できるサイズの上限.
+         * 
+         * <p>
+         * Cooley-Tukey型では, 小さい因数は合成数であってもRawに処理したほうが良い. <br>
+         * この定数はその合成数の上界を与える. <br>
+         * 2の累乗であることが必要.
+         * </p>
+         */
+        private static final int COMPOSITE_N1_MAX = 1 << 4;
+
         private final FourierBasisComputer fourierBasisComputer;
         private final ComplexNumber[] data;
 
@@ -97,16 +108,17 @@ final class Power2InnerFFTExecutor implements InnerDFTExecutor {
 
             int N = currentData.length;
 
-            /* 標本サイズが4以下ならば直接DFTを呼ぶ */
-            if (N <= 4) {
-                return Power2InnerFFTExecutor.this.rawDFT.compute(currentData, this.fourierBasisComputer);
+            /* 標本サイズが小さい場合は直接DFTを呼ぶ */
+            if (N <= COMPOSITE_N1_MAX) {
+                return Power2InnerFFTExecutor.this.rawDFT
+                        .compute(currentData, this.fourierBasisComputer);
             }
 
             /* 標本サイズが8以上の場合は再帰的FFT */
             /* N1が直接DFT, N2が再帰的FFTのサイズ */
-            int N1 = 4;
+            int N1 = COMPOSITE_N1_MAX;
             //N2は2以上である
-            int N2 = N / 4;
+            int N2 = N / COMPOSITE_N1_MAX;
 
             /* dataからN2飛ばしでデータ抽出し, サイズN1の系列をN2個作る */
             ComplexNumber[][] b = new ComplexNumber[N2][];

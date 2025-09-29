@@ -24,7 +24,7 @@ import matsu.num.transform.fft.number.PrimeFactorization;
  * </p>
  * 
  * <p>
- * 標本サイズ(データサイズ)を<i>N</i>とし, <i>W</i> = exp(-i(2&pi;/<i>N</i>))とする. <br>
+ * 標本サイズ(データサイズ)を<i>N</i>とし, <i>W</i> = exp(-i(2<i>&pi;</i>/<i>N</i>))とする. <br>
  * DFTでは, <i>k</i> = 0,...,<i>N</i> - 1として<br>
  * <i>A</i><sub><i>k</i></sub> =
  * &Sigma;<sub><i>j</i>=0</sub><sup><i>N</i>-1</sup><i>a</i><sub><i>j</i></sub>

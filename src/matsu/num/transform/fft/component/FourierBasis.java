@@ -14,10 +14,10 @@ package matsu.num.transform.fft.component;
  * 
  * <p>
  * DFTの基底関数である,
- * { 1, exp[-i(2&pi;/<i>N</i>)], exp[-i(4&pi;/<i>N</i>)], ... }
+ * { 1, exp[-i(2<i>&pi;</i>/<i>N</i>)], exp[-i(4<i>&pi;</i>/<i>N</i>)], ... }
  * を扱うためのクラスである(<i>N</i>は標本サイズ). <br>
  * また, 同時にIDFTに関する基底:
- * { 1, exp[i(2&pi;/<i>N</i>)], exp[i(4&pi;/<i>N</i>)], ... }
+ * { 1, exp[i(2<i>&pi;</i>/<i>N</i>)], exp[i(4<i>&pi;</i>/<i>N</i>)], ... }
  * も提供する.
  * </p>
  * 

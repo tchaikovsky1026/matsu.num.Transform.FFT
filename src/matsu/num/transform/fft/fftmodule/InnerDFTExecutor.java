@@ -27,12 +27,12 @@ import matsu.num.transform.fft.component.FourierBasisComputer;
  * <i>A</i><sub><i>k</i></sub> = &Sigma;<sub><i>j</i> = 0</sub><sup><i>N</i> -
  * 1</sup>
  * <i>a</i><sub><i>j</i></sub>
- * exp[-i(2&pi;<i>jk</i>/<i>N</i>)], <br>
+ * exp[-i(2<i>&pi;</i><i>jk</i>/<i>N</i>)], <br>
  * IDFTでは, <i>j</i> = 0,...,<i>N</i> - 1として<br>
  * <i>a</i><sub><i>j</i></sub> = &Sigma;<sub><i>k</i> = 0</sub><sup><i>N</i> -
  * 1</sup>
  * <i>A</i><sub><i>k</i></sub>
- * exp[i(2&pi;<i>jk</i>/<i>N</i>)] <br>
+ * exp[i(2<i>&pi;</i><i>jk</i>/<i>N</i>)] <br>
  * である. <br>
  * このインターフェースが扱う変換は, DFTとIDFTが逆関数になっておらず,
  * 両方を作用させると全体が<i>N</i>倍になる.

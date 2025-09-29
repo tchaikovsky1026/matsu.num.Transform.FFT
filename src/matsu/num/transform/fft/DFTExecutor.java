@@ -19,7 +19,7 @@ import matsu.num.transform.fft.dto.ComplexNumberArrayDTO;
  * 標本サイズを <i>N</i> とし, <i>k</i> = 0, ... , <i>N</i> - 1 として, <br>
  * <i>A</i><sub><i>k</i></sub> = &Sigma;<sub><i>j</i> = 0</sub><sup><i>N</i> -
  * 1</sup>
- * <i>a</i><sub><i>j</i></sub> exp[-i(2&pi;<i>jk</i>)/<i>N</i>].
+ * <i>a</i><sub><i>j</i></sub> exp[-i(2<i>&pi;</i><i>jk</i>)/<i>N</i>].
  * </p>
  * 
  * <p>
