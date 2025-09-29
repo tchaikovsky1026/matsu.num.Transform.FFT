@@ -19,7 +19,7 @@ import matsu.num.transform.fft.LinearTransform;
  * 標本サイズ (データサイズ) を <i>N</i> とし, <i>k</i> = 0, ... , <i>N</i> - 1 として, <br>
  * <i>X</i><sub><i>k</i></sub> =
  * &Sigma;<sub><i>j</i> = 0</sub><sup><i>N</i> - 1</sup>
- * <i>x</i><sub><i>j</i></sub> sin[&pi; (<i>j</i> + 1) (<i>k</i> + 1) /
+ * <i>x</i><sub><i>j</i></sub> sin[<i>&pi;</i> (<i>j</i> + 1) (<i>k</i> + 1) /
  * (<i>N</i> + 1)].
  * </p>
  * 
@@ -71,7 +71,7 @@ import matsu.num.transform.fft.LinearTransform;
  * 
  * <i>A</i><sub><i>k</i></sub> =
  * &Sigma;<sub><i>j</i> = 0</sub><sup>2<i>N</i> + 1</sup>
- * <i>a</i><sub><i>j</i></sub> exp[-i (2&pi;<i>j</i><i>k</i>) / (2<i>N</i> + 2)]
+ * <i>a</i><sub><i>j</i></sub> exp[-i (2<i>&pi;</i><i>j</i><i>k</i>) / (2<i>N</i> + 2)]
  * <br>
  * 
  * と定める.

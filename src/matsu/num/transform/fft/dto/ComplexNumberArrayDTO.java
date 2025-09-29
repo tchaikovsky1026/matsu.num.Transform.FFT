@@ -55,8 +55,6 @@ public final class ComplexNumberArrayDTO {
      * <p>
      * 明確に定まっておらず, バージョン間の互換性も保証されていない.
      * </p>
-     * 
-     * @return 文字列表現
      */
     @Override
     public String toString() {

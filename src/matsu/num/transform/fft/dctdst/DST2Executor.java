@@ -20,7 +20,7 @@ import matsu.num.transform.fft.LinearTransform;
  * <i>X</i><sub><i>k</i></sub> = &Sigma;<sub><i>j</i> = 0</sub><sup><i>N</i> -
  * 1</sup>
  * <i>x</i><sub><i>j</i></sub>
- * sin[&pi; (<i>j</i> + (1/2)) (<i>k</i> + 1) / <i>N</i>].
+ * sin[<i>&pi;</i> (<i>j</i> + (1/2)) (<i>k</i> + 1) / <i>N</i>].
  * </p>
  * 
  * <p>
@@ -68,14 +68,14 @@ import matsu.num.transform.fft.LinearTransform;
  * 
  * <i>A</i><sub><i>k</i></sub> =
  * &Sigma;<sub><i>j</i> = 0</sub><sup>2<i>N</i> - 1</sup>
- * <i>a</i><sub><i>j</i></sub> exp[-i (2&pi;<i>j</i><i>k</i>) / (2<i>N</i>)]
+ * <i>a</i><sub><i>j</i></sub> exp[-i (2<i>&pi;</i><i>j</i><i>k</i>) / (2<i>N</i>)]
  * <br>
  * 
  * と定める.
  * このとき, <i>k</i> = 0, ... , <i>N</i> - 1 に対して, <br>
  * 
  * <i>X</i><sub><i>k</i></sub> =
- * (1/2) exp[-i&pi; (<i>k</i> + 1) / (2<i>N</i>)]
+ * (1/2) exp[-i<i>&pi;</i> (<i>k</i> + 1) / (2<i>N</i>)]
  * <i>A</i><sub><i>k</i> + 1</sub> <br>
  * 
  * が成立する.

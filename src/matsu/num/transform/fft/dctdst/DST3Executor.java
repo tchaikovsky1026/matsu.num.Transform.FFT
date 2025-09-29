@@ -20,7 +20,7 @@ import matsu.num.transform.fft.LinearTransform;
  * <i>X</i><sub><i>k</i></sub> =
  * &Sigma;<sub><i>j</i> = 0</sub><sup><i>N</i> - 2</sup>
  * <i>x</i><sub><i>j</i></sub>
- * sin[&pi; (<i>j</i> + 1) (<i>k</i> + (1/2)) / <i>N</i>] +
+ * sin[<i>&pi;</i> (<i>j</i> + 1) (<i>k</i> + (1/2)) / <i>N</i>] +
  * (1/2) (-1)<sup><i>k</i></sup> <i>x</i><sub><i>N</i> - 1</sub>.
  * </p>
  * 
@@ -60,14 +60,14 @@ import matsu.num.transform.fft.LinearTransform;
  * <i>a</i><sub>0</sub> = 0, <br>
  * 
  * <i>a</i><sub>1</sub> = <i>x</i><sub>0</sub>
- * exp[-i&pi; / (2<i>N</i>)], ... ,
+ * exp[-i<i>&pi;</i> / (2<i>N</i>)], ... ,
  * <i>a</i><sub><i>N</i></sub> = <i>x</i><sub><i>N</i> - 1</sub>
- * exp[-i&pi; (<i>N</i>) / (2<i>N</i>)], <br>
+ * exp[-i<i>&pi;</i> (<i>N</i>) / (2<i>N</i>)], <br>
  * 
  * <i>a</i><sub><i>N</i> + 1</sub> = -<i>x</i><sub><i>N</i> - 2</sub>
- * exp[i&pi; (<i>N</i> - 1) / (2<i>N</i>)], ... ,
+ * exp[i<i>&pi;</i> (<i>N</i> - 1) / (2<i>N</i>)], ... ,
  * <i>a</i><sub>2<i>N</i> - 1</sub> = <i>x</i><sub>0</sub>
- * exp[i&pi; / (2<i>N</i>)]<br>
+ * exp[i<i>&pi;</i> / (2<i>N</i>)]<br>
  * 
  * と定める.
  * <i>a</i><sub><i>j</i></sub> に対しDFTを行った結果を <i>A</i><sub><i>k</i></sub> とする.
@@ -75,7 +75,7 @@ import matsu.num.transform.fft.LinearTransform;
  * 
  * <i>A</i><sub><i>k</i></sub> =
  * &Sigma;<sub><i>j</i> = 0</sub><sup>2<i>N</i> - 1</sup>
- * <i>a</i><sub><i>j</i></sub> exp[-i (2&pi;<i>j</i><i>k</i>) / (2<i>N</i>)]
+ * <i>a</i><sub><i>j</i></sub> exp[-i (2<i>&pi;</i><i>j</i><i>k</i>) / (2<i>N</i>)]
  * <br>
  * 
  * と定める.
