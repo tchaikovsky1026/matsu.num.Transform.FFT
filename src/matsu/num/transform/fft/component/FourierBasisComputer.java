@@ -24,7 +24,7 @@ import matsu.num.transform.fft.lib.Trigonometry;
  * </p>
  * 
  * <p>
- * DFTの基底関数を<i>W</i><sub><i>N</i></sub> = exp[-i(2&pi;/<i>N</i>)]とする. <br>
+ * DFTの基底関数を<i>W</i><sub><i>N</i></sub> = exp[-i(2<i>&pi;</i>/<i>N</i>)]とする. <br>
  * <i>N</i>と<i>j</i>が公約数<i>d</i>を持つとき, <br>
  * <i>W</i><sub><i>N</i></sub><sup><i>j</i></sup> =
  * <i>W</i><sub><i>N</i>/<i>d</i></sub><sup><i>j</i>/<i>d</i></sup> <br>

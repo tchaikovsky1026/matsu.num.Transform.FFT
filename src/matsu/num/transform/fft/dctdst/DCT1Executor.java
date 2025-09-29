@@ -21,7 +21,7 @@ import matsu.num.transform.fft.LinearTransform;
  * <i>X</i><sub><i>k</i></sub> =
  * (1/2) <i>x</i><sub>0</sub> +
  * &Sigma;<sub><i>j</i> = 1</sub><sup><i>N</i> - 2</sup>
- * <i>x</i><sub><i>j</i></sub> cos[&pi;<i>j</i><i>k</i> / (<i>N</i> - 1)] +
+ * <i>x</i><sub><i>j</i></sub> cos[<i>&pi;</i><i>j</i><i>k</i> / (<i>N</i> - 1)] +
  * (1/2) (-1)<sup><i>k</i></sup> <i>x</i><sub><i>N</i> - 1</sub>.
  * </p>
  * 
@@ -76,7 +76,7 @@ import matsu.num.transform.fft.LinearTransform;
  * 
  * <i>A</i><sub><i>k</i></sub> =
  * &Sigma;<sub><i>j</i> = 0</sub><sup>2<i>N</i> - 3</sup>
- * <i>a</i><sub><i>j</i></sub> exp[-i (2&pi;<i>j</i><i>k</i>) / (2<i>N</i> - 2)]
+ * <i>a</i><sub><i>j</i></sub> exp[-i (2<i>&pi;</i><i>j</i><i>k</i>) / (2<i>N</i> - 2)]
  * <br>
  * 
  * と定める.

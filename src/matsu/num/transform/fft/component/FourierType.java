@@ -17,7 +17,7 @@ package matsu.num.transform.fft.component;
 public enum FourierType {
 
     /**
-     * Fourier変換: <i>W</i><sub><i>N</i></sub> = exp(-i(2&pi;/<i>N</i>))
+     * Fourier変換: <i>W</i><sub><i>N</i></sub> = exp(-i(2<i>&pi;</i>/<i>N</i>))
      * を扱うことの表示.
      */
     DFT {
@@ -28,7 +28,7 @@ public enum FourierType {
     },
 
     /**
-     * 逆Fourier変換: <i>W</i><sub><i>N</i></sub> = exp(i(2&pi;/<i>N</i>))
+     * 逆Fourier変換: <i>W</i><sub><i>N</i></sub> = exp(i(2<i>&pi;</i>/<i>N</i>))
      * を扱うことの表示.
      */
     IDFT {
@@ -39,7 +39,7 @@ public enum FourierType {
     };
 
     /**
-     * <i>W</i><sub><i>N</i></sub><sup><i>j</i></sup> = exp(i&pi;<i>x</i>)
+     * <i>W</i><sub><i>N</i></sub><sup><i>j</i></sup> = exp(i<i>&pi;</i><i>x</i>)
      * となる<i>x</i>を計算する.
      * 
      * @param N N
