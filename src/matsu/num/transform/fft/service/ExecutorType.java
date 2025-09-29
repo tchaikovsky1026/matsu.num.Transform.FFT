@@ -63,8 +63,6 @@ public final class ExecutorType<T extends FFTModuleExecutor> {
 
     /**
      * このタイプの文字列表現を返す.
-     * 
-     * @return 文字列表現
      */
     @Override
     public String toString() {

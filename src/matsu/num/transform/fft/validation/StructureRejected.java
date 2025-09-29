@@ -57,9 +57,7 @@ public final class StructureRejected extends StructureAcceptance {
     }
 
     /**
-     * このインスタンスの文字列表現
-     * 
-     * @return 文字列表現
+     * このインスタンスの文字列表現を返す.
      */
     @Override
     public String toString() {
