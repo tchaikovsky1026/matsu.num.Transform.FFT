@@ -1,5 +1,14 @@
 develop/next-generation:
-削除予定のインターフェースを削除.
+バージョン25.0.0として, 以下の更新を行う.
+
+25:
+25.0.0: Majorアップ(破壊的変更).
+    - 削除予定のインターフェースを削除
+        - DFT/IDFT系Executorインターフェース: GenericDFTExecutor, GenericIDFTExecutor
+        - CyclicConvolution系Executorインターフェース: GenericCyclicConvolutionExecutor, Power2CyclicConvolutionExecutor
+        - DCT系Executorインターフェース: GenericDCT1Executor, GenericDCT2Executor, GenericDCT3Executor, GenericDCT4Executor
+        - DCT系Executorインターフェース: GenericDST1Executor, GenericDST2Executor, GenericDST3Executor, GenericDST4Executor
+        - 定数を取りまとめるクラス: CyclicConvolutionTypes, DctDstTypes, DftTypes
 
 24:
 24.5.0: 内部モジュール部分のリファクタリング.
