@@ -3,7 +3,7 @@ develop/next-generation:
 
 25:
 25.0.0: Majorアップ(破壊的変更).
-    - 削除予定のインターフェースを削除
+    - 削除予定のAPIを削除
         - DFT/IDFT系Executorインターフェース: GenericDFTExecutor, GenericIDFTExecutor
         - CyclicConvolution系Executorインターフェース: GenericCyclicConvolutionExecutor, Power2CyclicConvolutionExecutor
         - DCT系Executorインターフェース: GenericDCT1Executor, GenericDCT2Executor, GenericDCT3Executor, GenericDCT4Executor
@@ -40,3 +40,4 @@ develop/next-generation:
 
 ----------------------------------
 version　19よりhistoryの記録を開始する.
+
