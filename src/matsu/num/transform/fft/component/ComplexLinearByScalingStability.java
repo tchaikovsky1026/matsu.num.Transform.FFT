@@ -4,8 +4,9 @@
  * This software is released under the MIT License.
  * http://opensource.org/licenses/mit-license.php
  */
+
 /*
- * 2024.10.1
+ * 2026.6.24
  */
 package matsu.num.transform.fft.component;
 
@@ -38,6 +39,11 @@ import matsu.num.transform.fft.validation.StructureAcceptance;
  */
 public abstract class ComplexLinearByScalingStability implements ComplexLinearTransform {
 
+    /**
+     * このクラス及びサブクラスで扱われるデータサイズの制約. <br>
+     * {@link ComplexLinearTransform} の基本制約がセットされているので,
+     * サブクラスで制約を追加してよい.
+     */
     protected final DataSizeContract dataSizeContract = new DataSizeContract();
 
     private final ArraysUtil arraysUtil;

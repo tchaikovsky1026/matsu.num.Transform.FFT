@@ -4,8 +4,9 @@
  * This software is released under the MIT License.
  * http://opensource.org/licenses/mit-license.php
  */
+
 /*
- * 2024.4.4
+ * 2026.6.24
  */
 package matsu.num.transform.fft.fftmodule;
 
@@ -31,6 +32,11 @@ public final class Power2CyclicConvolutionModule {
     private final InnerDFTExecutor power2FFT;
     private final FourierBasisComputer.Supplier computerSupplier;
 
+    /**
+     * 唯一のコンストラクタ.
+     * 
+     * @param computerSupplier フーリエ基底のコンピュータのサプライヤ 
+     */
     public Power2CyclicConvolutionModule(FourierBasisComputer.Supplier computerSupplier) {
         super();
         this.computerSupplier = Objects.requireNonNull(computerSupplier);

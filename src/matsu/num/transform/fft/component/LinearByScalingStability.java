@@ -4,8 +4,9 @@
  * This software is released under the MIT License.
  * http://opensource.org/licenses/mit-license.php
  */
+
 /*
- * 2024.10.26
+ * 2026.6.24
  */
 package matsu.num.transform.fft.component;
 
@@ -32,6 +33,11 @@ import matsu.num.transform.fft.validation.StructureAcceptance;
  */
 public abstract class LinearByScalingStability implements LinearTransform {
 
+    /**
+     * このクラス及びサブクラスで扱われるデータサイズの制約. <br>
+     * {@link LinearTransform} の基本制約がセットされているので,
+     * サブクラスで制約を追加してよい.
+     */
     protected final DataSizeContract dataSizeContract = new DataSizeContract();
 
     private final ArraysUtil arraysUtil;
