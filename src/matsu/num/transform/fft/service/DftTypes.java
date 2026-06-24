@@ -4,8 +4,9 @@
  * This software is released under the MIT License.
  * http://opensource.org/licenses/mit-license.php
  */
+
 /*
- * 2025.6.20
+ * 2026.6.24
  */
 package matsu.num.transform.fft.service;
 
@@ -21,6 +22,7 @@ import matsu.num.transform.fft.dto.ComplexNumberArrayDTO;
  * @author Matsuura Y.
  * @deprecated このクラスは v25以降に削除される. {@link DftExecutors} が全く同じ定数を提供する.
  */
+@SuppressWarnings("removal")
 @Deprecated(forRemoval = true)
 public final class DftTypes {
 
@@ -38,6 +40,7 @@ public final class DftTypes {
      * {@link DFTExecutor} と同一である.
      * </p>
      */
+    @Deprecated(forRemoval = true)
     public static final ExecutorType<matsu.num.transform.fft.GenericDFTExecutor> GENERIC_DFT_EXECUTOR;
 
     /**
@@ -49,6 +52,7 @@ public final class DftTypes {
      * {@link IDFTExecutor} と同一である.
      * </p>
      */
+    @Deprecated(forRemoval = true)
     public static final ExecutorType<matsu.num.transform.fft.GenericIDFTExecutor> GENERIC_IDFT_EXECUTOR;
 
     static {

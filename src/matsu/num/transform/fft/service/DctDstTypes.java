@@ -4,8 +4,9 @@
  * This software is released under the MIT License.
  * http://opensource.org/licenses/mit-license.php
  */
+
 /*
- * 2025.6.20
+ * 2026.6.24
  */
 package matsu.num.transform.fft.service;
 
@@ -32,6 +33,7 @@ import matsu.num.transform.fft.dctdst.impl.GenericDST4Executor;
  * @author Matsuura Y.
  * @deprecated このクラスは v25以降に削除される. {@link DctDstExecutors} が全く同じ定数を提供する.
  */
+@SuppressWarnings("removal")
 @Deprecated(forRemoval = true)
 public final class DctDstTypes {
 
@@ -49,6 +51,7 @@ public final class DctDstTypes {
      * {@link DCT1Executor} と同一である.
      * </p>
      */
+    @Deprecated(forRemoval = true)
     public static final ExecutorType<matsu.num.transform.fft.dctdst.GenericDCT1Executor> GENERIC_DCT1_EXECUTOR;
 
     /**
@@ -60,6 +63,7 @@ public final class DctDstTypes {
      * {@link DCT2Executor} と同一である.
      * </p>
      */
+    @Deprecated(forRemoval = true)
     public static final ExecutorType<matsu.num.transform.fft.dctdst.GenericDCT2Executor> GENERIC_DCT2_EXECUTOR;
 
     /**
@@ -71,6 +75,7 @@ public final class DctDstTypes {
      * {@link DCT3Executor} と同一である.
      * </p>
      */
+    @Deprecated(forRemoval = true)
     public static final ExecutorType<matsu.num.transform.fft.dctdst.GenericDCT3Executor> GENERIC_DCT3_EXECUTOR;
 
     /**
@@ -82,6 +87,7 @@ public final class DctDstTypes {
      * {@link DCT4Executor} と同一である.
      * </p>
      */
+    @Deprecated(forRemoval = true)
     public static final ExecutorType<matsu.num.transform.fft.dctdst.GenericDCT4Executor> GENERIC_DCT4_EXECUTOR;
 
     /**
@@ -93,6 +99,7 @@ public final class DctDstTypes {
      * {@link DST1Executor} と同一である.
      * </p>
      */
+    @Deprecated(forRemoval = true)
     public static final ExecutorType<matsu.num.transform.fft.dctdst.GenericDST1Executor> GENERIC_DST1_EXECUTOR;
 
     /**
@@ -104,6 +111,7 @@ public final class DctDstTypes {
      * {@link DST2Executor} と同一である.
      * </p>
      */
+    @Deprecated(forRemoval = true)
     public static final ExecutorType<matsu.num.transform.fft.dctdst.GenericDST2Executor> GENERIC_DST2_EXECUTOR;
 
     /**
@@ -115,6 +123,7 @@ public final class DctDstTypes {
      * {@link DST3Executor} と同一である.
      * </p>
      */
+    @Deprecated(forRemoval = true)
     public static final ExecutorType<matsu.num.transform.fft.dctdst.GenericDST3Executor> GENERIC_DST3_EXECUTOR;
 
     /**
@@ -126,6 +135,7 @@ public final class DctDstTypes {
      * {@link DST4Executor} と同一である.
      * </p>
      */
+    @Deprecated(forRemoval = true)
     public static final ExecutorType<matsu.num.transform.fft.dctdst.GenericDST4Executor> GENERIC_DST4_EXECUTOR;
 
     static {

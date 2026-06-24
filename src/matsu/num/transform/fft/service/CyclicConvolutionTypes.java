@@ -4,8 +4,9 @@
  * This software is released under the MIT License.
  * http://opensource.org/licenses/mit-license.php
  */
+
 /*
- * 2025.6.20
+ * 2026.6.24
  */
 package matsu.num.transform.fft.service;
 
@@ -20,6 +21,7 @@ import matsu.num.transform.fft.convolution.impl.Power2CyclicConvolutionExecutor;
  * @deprecated このクラスは v25以降に削除される. {@link CyclicConvolutionExecutors}
  *                 が全く同じ定数を提供する.
  */
+@SuppressWarnings("removal")
 @Deprecated(forRemoval = true)
 public final class CyclicConvolutionTypes {
 
@@ -37,6 +39,7 @@ public final class CyclicConvolutionTypes {
      * {@link CyclicConvolutionExecutor} と同一である.
      * </p>
      */
+    @Deprecated(forRemoval = true)
     public static final ExecutorType<
             matsu.num.transform.fft.convolution.GenericCyclicConvolutionExecutor> GENERIC_CYCLIC_CONVOLUTION_EXECUTOR;
 
@@ -50,6 +53,7 @@ public final class CyclicConvolutionTypes {
      * 2の累乗サイズでなければならない.
      * </p>
      */
+    @Deprecated(forRemoval = true)
     public static final ExecutorType<
             matsu.num.transform.fft.convolution.Power2CyclicConvolutionExecutor> POWER2_CYCLIC_CONVOLUTION_EXECUTOR;
 
